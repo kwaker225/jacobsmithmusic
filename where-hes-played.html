@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where He's Played — Jacob Smith Music</title>
+<meta name="description" content="A running list of the bars, breweries, and rooms Jacob Smith has played across mid-Michigan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --bg-soft:#111111; --bg-soft-2:#1A1A1A;
+    --red:#C4203C; --red-deep:#9A1830;
+    --white:#F5F5F5; --grey:#9A9A9A;
+    --line:rgba(255,255,255,0.12); --line-dot:rgba(255,255,255,0.25);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{background:#0A0A0A;}
+  body{margin:0; background:#0A0A0A; color:var(--white); font-family:'Arimo',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3{font-family:'Anton',sans-serif; font-weight:400; margin:0; text-transform:uppercase; letter-spacing:0.02em;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  header{padding:22px 0; border-bottom:1px solid var(--line); background:#0A0A0A;}
+  .nav-row{display:flex; align-items:center; justify-content:space-between;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Arimo',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white);}
+  .logo-bar{width:3px; height:22px; background:var(--red); flex-shrink:0;}
+  .back-link{font-family:'Arimo',sans-serif; font-size:0.8rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--grey); display:flex; align-items:center; gap:8px; transition:color .2s ease;}
+  .back-link:hover{color:var(--red);}
+
+  .hero{padding:80px 0 56px; border-bottom:1px solid var(--line); background:#0A0A0A;}
+  .section-label{font-family:'Arimo',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--red); display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .section-label::before{content:""; width:20px; height:2px; background:var(--red); display:inline-block; flex-shrink:0;}
+  .hero h1{font-size:clamp(2.8rem,8vw,5.5rem); color:var(--white); line-height:0.92; margin-bottom:18px;}
+  .hero p{color:var(--grey); font-size:1.05rem; max-width:560px; margin:0;}
+
+  .tally{display:flex; gap:48px; padding:48px 0; border-bottom:1px solid var(--line); flex-wrap:wrap; background:#0A0A0A;}
+  .tally-item .num{font-family:'Anton',sans-serif; font-size:3rem; color:var(--red); line-height:1;}
+  .tally-item .lab{font-family:'Arimo',sans-serif; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--grey); margin-top:4px;}
+
+  .group{padding:48px 0; border-bottom:1px solid var(--line); background:#0A0A0A;}
+  .group:last-of-type{border-bottom:none;}
+  .group-head{display:flex; align-items:baseline; gap:14px; margin-bottom:24px;}
+  .group-head h2{font-size:1.3rem; color:var(--white);}
+  .group-head .count{font-family:'Arimo',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.1em; color:var(--red);}
+
+  .venue-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line);}
+  .venue-card{
+    background:var(--bg-soft); padding:24px 26px;
+    text-decoration:none; color:var(--white); display:block;
+    border-left:3px solid transparent;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .venue-card:hover{border-left-color:var(--red); background:var(--bg-soft-2);}
+  .venue-card .vname{font-family:'Arimo',sans-serif; font-weight:700; font-size:1rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:4px;}
+  .venue-card .vcity{font-size:0.88rem; color:var(--grey);}
+  .venue-card .vmeta{display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:12px; border-top:1px solid var(--line);}
+  .venue-card .vrating{font-family:'Arimo',sans-serif; font-size:0.8rem; color:var(--red); font-weight:700;}
+  .venue-card .varrow{font-size:0.8rem; color:var(--grey);}
+  @media(max-width:640px){.venue-grid{grid-template-columns:1fr;}}
+
+  .map-cta{padding:56px 0; text-align:center; background:#0A0A0A;}
+  .map-cta p{color:var(--grey); margin-bottom:20px;}
+  .btn{font-family:'Arimo',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:14px 28px; display:inline-flex; align-items:center; gap:8px; transition:background .2s ease, border-color .2s ease;}
+  .btn-primary{background:var(--red); color:var(--white); border:1.5px solid var(--red);}
+  .btn-primary:hover{background:var(--red-deep); border-color:var(--red-deep);}
+  .btn-ghost{background:var(--bg); color:var(--white); border:1.5px solid rgba(255,255,255,0.3);}
+  .btn-ghost:hover{border-color:var(--white);}
+
+  footer{padding:40px 0 52px; border-top:1px solid var(--line); text-align:center; color:var(--grey); font-size:0.84rem;}
+  footer .fname{color:var(--white); font-weight:700; letter-spacing:0.08em;}
+  footer a{color:var(--red);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo"><span class="logo-bar"></span>Jacob Smith Music</a>
+    <a href="index.html" class="back-link">← Back to main site</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="section-label">The Road So Far</p>
+    <h1>Where He's<br>Played</h1>
+    <p>A running list of the bars, breweries, golf courses, and rooms Jacob has brought a guitar into across mid-Michigan.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="tally">
+    <div class="tally-item"><div class="num">11</div><div class="lab">Venues &amp; Counting</div></div>
+    <div class="tally-item"><div class="num">7</div><div class="lab">Towns Played</div></div>
+    <div class="tally-item"><div class="num">1</div><div class="lab">Guitar</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="group">
+    <div class="group-head"><h2>Bars, Grills &amp; Restaurants</h2><span class="count">5 venues</span></div>
+    <div class="venue-grid">
+      <a class="venue-card" href="https://www.jezebelssaloon.com" target="_blank" rel="noopener">
+        <div class="vname">Jezebels Saloon</div><div class="vcity">Brighton, MI</div>
+        <div class="vmeta"><span class="vrating">4.5 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+      <a class="venue-card" href="https://badbennyshighland.com" target="_blank" rel="noopener">
+        <div class="vname">Bad Benny's Pour House</div><div class="vcity">Highland Twp, MI</div>
+        <div class="vmeta"><span class="vrating">3.8 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+      <a class="venue-card" href="https://www.facebook.com/HallboyBBQ/" target="_blank" rel="noopener">
+        <div class="vname">Hallboy Barbeque</div><div class="vcity">Hartland, MI</div>
+        <div class="vmeta"><span class="vrating">4.3 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+      <a class="venue-card" href="https://www.sunnysipsbarandgrill.com" target="_blank" rel="noopener">
+        <div class="vname">SunnySips Bar &amp; Grill</div><div class="vcity">Howell, MI</div>
+        <div class="vmeta"><span class="vrating">4.5 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+      <a class="venue-card" href="https://www.williamstonroadhouse.com" target="_blank" rel="noopener">
+        <div class="vname">Williamston Roadhouse</div><div class="vcity">Williamston, MI</div>
+        <div class="vmeta"><span class="vrating">4.5 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h2>Breweries</h2><span class="count">1 venue</span></div>
+    <div class="venue-grid">
+      <a class="venue-card" href="https://fourcirclesbrewery.com" target="_blank" rel="noopener">
+        <div class="vname">Four Circles Brewery</div><div class="vcity">Brighton, MI</div>
+        <div class="vmeta"><span class="vrating">4.8 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h2>Golf Clubs</h2><span class="count">3 venues</span></div>
+    <div class="venue-grid">
+      <a class="venue-card" href="https://golfbyron.com" target="_blank" rel="noopener">
+        <div class="vname">Willow Brook Golf Course &amp; Restaurant</div><div class="vcity">Byron, MI</div>
+        <div class="vmeta"><span class="vrating">4.3 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+      <a class="venue-card" href="https://www.dunhamhills.com" target="_blank" rel="noopener">
+        <div class="vname">Dunham Hills Golf Club</div><div class="vcity">Hartland, MI</div>
+        <div class="vmeta"><span class="vrating">4.5 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+      <a class="venue-card" href="https://www.tyronehillsgolf.com" target="_blank" rel="noopener">
+        <div class="vname">Tyrone Hills Golf Club</div><div class="vcity">Fenton, MI</div>
+        <div class="vmeta"><span class="vrating">4.2 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-head"><h2>Other Venues</h2><span class="count">2 venues</span></div>
+    <div class="venue-grid">
+      <a class="venue-card" href="https://www.flintartfair.org/copy-of-2024-entertainment" target="_blank" rel="noopener">
+        <div class="vname">Flint Institute of Arts</div><div class="vcity">Flint, MI</div>
+        <div class="vmeta"><span class="vrating">4.8 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+      <a class="venue-card" href="https://www.facebook.com/hartland.ice.house/" target="_blank" rel="noopener">
+        <div class="vname">Hartland Ice House</div><div class="vcity">Hartland, MI</div>
+        <div class="vmeta"><span class="vrating">4.3 ★</span><span class="varrow">Visit →</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="map-cta">
+    <p>See all of these pinned on one map</p>
+    <a class="btn btn-primary" href="https://maps.app.goo.gl/dYadvbhZwNKowSmX8" target="_blank" rel="noopener">Open Full Map</a>
+    <a class="btn btn-ghost" href="index.html#contact" style="margin-left:12px;">Book the Next One</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="index.html">jacobsmithmusic.live</a>
+  </div>
+</footer>
+
+</body>
+</html>
