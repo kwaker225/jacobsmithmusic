@@ -18,7 +18,7 @@
   h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;margin:0;text-transform:uppercase;letter-spacing:0.02em;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
 
-  header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  header{position:fixed;top:40px;left:0;right:0;z-index:100;padding:18px 0;background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
   .nav-row{display:flex;align-items:center;justify-content:space-between;}
   .logo{display:flex;align-items:center;gap:10px;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.18em;text-transform:uppercase;}
   .logo-bar{width:3px;height:22px;background:var(--red);flex-shrink:0;}
@@ -112,25 +112,38 @@
 </head>
 <body>
 <!-- NEXT SHOW BANNER -->
-<div id="next-show-banner" style="background:var(--red,#C4203C);color:#fff;text-align:center;padding:10px 16px;font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:relative;z-index:200;">
-  <a href="#" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+<div id="next-show-banner" style="background:var(--red,#C4203C);color:#fff;text-align:center;padding:11px 16px;font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:300;">
+  <a href="#" target="_blank" rel="noopener" id="ns-link" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
     <span style="opacity:0.85;font-weight:400;letter-spacing:0.1em;">Next Show</span>
     <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
-    <span class="ns-date"></span>
+    <span class="ns-date" style="font-weight:700;"></span>
     <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
-    <span class="ns-venue"></span>
+    <span class="ns-venue" style="animation:ns-glow 2s ease-in-out infinite;"></span>
     <span class="ns-city" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.85;"></span>
     <span class="ns-time" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.75;"></span>
-    <span style="margin-left:4px;">→</span>
+    <span style="margin-left:4px;animation:ns-arrow 1.2s ease-in-out infinite;">→</span>
   </a>
 </div>
+<style>
+  @keyframes ns-glow{
+    0%,100%{text-shadow:0 0 0px rgba(255,255,255,0);}
+    50%{text-shadow:0 0 10px rgba(255,255,255,0.6),0 0 20px rgba(255,255,255,0.2);}
+  }
+  @keyframes ns-arrow{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(4px);}
+  }
+  /* Push header below banner */
+  #next-show-banner ~ header,
+  body > header { top: 40px !important; }
+</style>
 <script>
 (function(){
   var shows=[
     {date:"2026-06-26",display:"Jun 26",venue:"Dunham Hills Golf Club",city:"Hartland, MI",time:"5:00–9:00 PM",url:"https://www.dunhamhills.com/"},
     {date:"2026-07-17",display:"Jul 17",venue:"Willow Brook Golf Course & Restaurant",city:"Byron, MI",time:"6:00–10:00 PM",url:"https://golfbyron.com"},
     {date:"2026-07-22",display:"Jul 22",venue:"Williamston Roadhouse",city:"Williamston, MI",time:"7:00–10:00 PM",url:"https://www.williamstonroadhouse.com"},
-    {date:"2026-08-15",display:"Aug 15",venue:"Walled Lake Tavern",city:"Walled Lake, MI",time:"7:30–10:30 PM",url:"https://www.jezebelssaloon.com"},
+    {date:"2026-08-15",display:"Aug 15",venue:"Walled Lake Tavern",city:"Walled Lake, MI",time:"7:30–10:30 PM",url:"https://www.google.com/maps/search/?api=1&query=Walled+Lake+Tavern+Walled+Lake+MI"},
     {date:"2026-08-28",display:"Aug 28",venue:"Jezebels Saloon",city:"Brighton, MI",time:"8:00–11:00 PM",url:"https://www.jezebelssaloon.com"}
   ];
   var today=new Date(); today.setHours(0,0,0,0);
@@ -145,9 +158,10 @@
   b.querySelector('.ns-venue').textContent=next.venue;
   b.querySelector('.ns-city').textContent='· '+next.city;
   b.querySelector('.ns-time').textContent='· '+next.time;
-  b.querySelector('a').href=next.url;
+  document.getElementById('ns-link').href=next.url;
 })();
 </script>
+
 
 <header>
   <div class="wrap nav-row">
