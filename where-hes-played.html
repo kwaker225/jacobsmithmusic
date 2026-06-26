@@ -76,6 +76,43 @@
 </style>
 </head>
 <body>
+<!-- NEXT SHOW BANNER -->
+<div id="next-show-banner" style="background:var(--red,#C4203C);color:#fff;text-align:center;padding:10px 16px;font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:relative;z-index:200;">
+  <a href="#" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+    <span style="opacity:0.85;font-weight:400;letter-spacing:0.1em;">Next Show</span>
+    <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+    <span class="ns-date"></span>
+    <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+    <span class="ns-venue"></span>
+    <span class="ns-city" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.85;"></span>
+    <span class="ns-time" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.75;"></span>
+    <span style="margin-left:4px;">→</span>
+  </a>
+</div>
+<script>
+(function(){
+  var shows=[
+    {date:"2026-06-26",display:"Jun 26",venue:"Dunham Hills Golf Club",city:"Hartland, MI",time:"5:00–9:00 PM",url:"https://www.dunhamhills.com/"},
+    {date:"2026-07-17",display:"Jul 17",venue:"Willow Brook Golf Course & Restaurant",city:"Byron, MI",time:"6:00–10:00 PM",url:"https://golfbyron.com"},
+    {date:"2026-07-22",display:"Jul 22",venue:"Williamston Roadhouse",city:"Williamston, MI",time:"7:00–10:00 PM",url:"https://www.williamstonroadhouse.com"},
+    {date:"2026-08-15",display:"Aug 15",venue:"Walled Lake Tavern",city:"Walled Lake, MI",time:"7:30–10:30 PM",url:"https://www.jezebelssaloon.com"},
+    {date:"2026-08-28",display:"Aug 28",venue:"Jezebels Saloon",city:"Brighton, MI",time:"8:00–11:00 PM",url:"https://www.jezebelssaloon.com"}
+  ];
+  var today=new Date(); today.setHours(0,0,0,0);
+  var next=null;
+  for(var i=0;i<shows.length;i++){
+    var d=new Date(shows[i].date+'T00:00:00');
+    if(d>=today){next=shows[i];break;}
+  }
+  var b=document.getElementById('next-show-banner');
+  if(!next||!b){if(b)b.style.display='none';return;}
+  b.querySelector('.ns-date').textContent=next.display;
+  b.querySelector('.ns-venue').textContent=next.venue;
+  b.querySelector('.ns-city').textContent='· '+next.city;
+  b.querySelector('.ns-time').textContent='· '+next.time;
+  b.querySelector('a').href=next.url;
+})();
+</script>
 
 <header>
   <div class="wrap nav-row">
