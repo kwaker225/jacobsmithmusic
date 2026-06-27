@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Jacob Smith Music</title>
+<meta name="description" content="Get in touch with Jacob Smith — call, text, or email to book a show or ask a question.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0A0A0A;--bg-soft:#111111;--bg-soft-2:#1A1A1A;--red:#C4203C;--red-deep:#9A1830;--white:#F5F5F5;--grey:#9A9A9A;--line:rgba(255,255,255,0.12);--maxw:1080px;}
+  *{box-sizing:border-box;}
+  html{background:#0A0A0A;}
+  body{margin:0;background:#0A0A0A;color:var(--white);font-family:'Arimo',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;margin:0;text-transform:uppercase;letter-spacing:0.02em;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.18em;text-transform:uppercase;}
+  .logo-bar{width:3px;height:22px;background:var(--red);flex-shrink:0;}
+  nav.main-nav{display:flex;gap:32px;}
+  nav.main-nav a{font-family:'Arimo',sans-serif;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);transition:color .2s;}
+  nav.main-nav a:hover,nav.main-nav a.active{color:var(--white);}
+  .nav-cta{font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--bg);padding:9px 20px;transition:background .2s;}
+  .nav-cta:hover{background:var(--red);}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:4px;}
+  .menu-toggle svg{width:26px;height:26px;}
+  .mobile-drawer{position:fixed;inset:0;background:var(--bg);z-index:150;display:flex;flex-direction:column;padding:28px;transform:translateX(100%);transition:transform .3s ease;}
+  .mobile-drawer.open{transform:translateX(0);}
+  .mobile-drawer .drawer-top{display:flex;justify-content:flex-end;}
+  .mobile-drawer nav{display:flex;flex-direction:column;gap:28px;margin-top:56px;}
+  .mobile-drawer nav a{font-family:'Anton',sans-serif;font-size:2.2rem;text-transform:uppercase;letter-spacing:0.04em;}
+  .mobile-drawer nav a:hover{color:var(--red);}
+  @media(max-width:820px){nav.main-nav,.nav-cta{display:none;}.menu-toggle{display:block;}}
+
+  .page-hero{padding:160px 0 80px;border-bottom:1px solid var(--line);background:#0A0A0A;}
+  .section-label{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .section-label::before{content:"";width:20px;height:2px;background:var(--red);display:inline-block;flex-shrink:0;}
+  .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:24px;}
+  .page-hero p.lead{font-size:1.2rem;color:var(--grey);max-width:560px;}
+
+  .contact-section{padding:88px 0;background:#0A0A0A;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  @media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+
+  .contact-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;}
+  .contact-item{
+    display:flex;align-items:flex-start;gap:20px;
+    padding:28px 0;border-bottom:1px solid var(--line);
+  }
+  .contact-item:first-child{border-top:1px solid var(--line);}
+  .c-icon{color:var(--red);flex-shrink:0;margin-top:4px;}
+  .c-icon svg{width:20px;height:20px;}
+  .c-label{font-family:'Arimo',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey);display:block;margin-bottom:4px;}
+  .c-value{font-size:1.1rem;color:var(--white);}
+  .contact-item a:hover .c-value{color:var(--red);}
+
+  .socials-block{margin-top:48px;}
+  .socials-block h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--grey);margin-bottom:18px;}
+  .socials{display:flex;gap:12px;flex-wrap:wrap;}
+  .social-btn{display:flex;align-items:center;gap:10px;padding:12px 18px;border:1.5px solid var(--line);color:var(--white);font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:border-color .2s,background .2s;}
+  .social-btn:hover{border-color:var(--red);background:rgba(196,32,60,0.1);}
+  .social-btn svg{width:16px;height:16px;flex-shrink:0;}
+
+  .book-cta{background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);padding:40px;}
+  .book-cta h2{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:14px;}
+  .book-cta p{color:var(--grey);font-size:0.95rem;line-height:1.8;margin-bottom:28px;}
+  .btn{font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:14px 28px;display:inline-flex;align-items:center;gap:8px;transition:background .2s,border-color .2s;}
+  .btn-primary{background:var(--red);color:var(--white);border:1.5px solid var(--red);}
+  .btn-primary:hover{background:var(--red-deep);}
+  .btn-ghost{background:var(--bg);color:var(--white);border:1.5px solid rgba(255,255,255,0.3);}
+  .btn-ghost:hover{border-color:var(--white);}
+
+  .tip-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;border:1.5px solid var(--line);margin-top:16px;transition:border-color .2s;}
+  .tip-row:hover{border-color:var(--red);}
+  .tip-row .lab{font-weight:700;}
+  .tip-row .sub{font-size:0.82rem;color:var(--grey);display:block;margin-top:2px;}
+  .tip-arrow{color:var(--red);flex-shrink:0;}
+
+  footer{padding:40px 0 52px;border-top:1px solid var(--line);text-align:center;color:var(--grey);font-size:0.84rem;}
+  footer .fname{color:var(--white);font-weight:700;letter-spacing:0.08em;}
+  footer a{color:var(--red);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo"><span class="logo-bar"></span>Jacob Smith Music</a>
+    <nav class="main-nav">
+      <a href="index.html#shows">Shows</a>
+      <a href="about.html">About</a>
+      <a href="where-hes-played.html">Played</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <a href="book.html" class="nav-cta">Book Jacob</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-top">
+    <button class="menu-toggle" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="index.html#shows">Shows</a>
+    <a href="about.html">About</a>
+    <a href="where-hes-played.html">Played</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html">Book Jacob</a>
+  </nav>
+</div>
+
+<main style="background:#0A0A0A;">
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="section-label">Get In Touch</p>
+      <h1>Contact</h1>
+      <p class="lead">Call, text, or email — Jacob checks all three. For booking inquiries, the <a href="book.html" style="color:var(--red);border-bottom:1px solid var(--red);">booking page</a> has everything you need.</p>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <a href="tel:+18104230319" style="display:flex;gap:20px;align-items:flex-start;width:100%;">
+                <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.97.36 1.92.68 2.83a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.86.55 2.83.68A2 2 0 0 1 22 16.92z"/></svg></span>
+                <span><span class="c-label">Phone / Text</span><span class="c-value">(810) 423-0319</span></span>
+              </a>
+            </li>
+            <li class="contact-item">
+              <a href="mailto:jbsmithmusic98@gmail.com" style="display:flex;gap:20px;align-items:flex-start;width:100%;">
+                <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg></span>
+                <span><span class="c-label">Email</span><span class="c-value">jbsmithmusic98@gmail.com</span></span>
+              </a>
+            </li>
+            <li class="contact-item">
+              <span style="display:flex;gap:20px;align-items:flex-start;width:100%;">
+                <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <span><span class="c-label">Based In</span><span class="c-value">Milford, MI</span></span>
+              </span>
+            </li>
+          </ul>
+
+          <div class="socials-block">
+            <h3>Follow Along</h3>
+            <div class="socials">
+              <a class="social-btn" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.88h-2.34v7A10 10 0 0 0 22 12z"/></svg>
+                Facebook
+              </a>
+              <a class="social-btn" href="https://www.instagram.com/jbsmith2198" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+                Instagram
+              </a>
+              <a class="social-btn" href="https://www.youtube.com/@TheLilwaynester" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 8.5s-.2-1.6-.85-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5h0s-4.9 0-7.55.2c-.4.1-1.3.1-2.1 1-.65.7-.85 2.3-.85 2.3S1.3 10.4 1.3 12.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.85 2.3c.8.9 1.85.87 2.32.97C6.3 21 12 21 12 21s4.9 0 7.55-.2c.4-.1 1.3-.1 2.1-1 .65-.7.85-2.3.85-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8z"/><path d="M10 9.5v6l5-3z" fill="currentColor" stroke="none"/></svg>
+                YouTube
+              </a>
+              <a class="social-btn" href="https://linktr.ee/jbsmith2198" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12M12 12 5 7M12 12l7-5M12 12 5 17M12 12l7 5M12 2v3"/></svg>
+                Linktree
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="book-cta">
+            <h2>Want to Book a Show?</h2>
+            <p>Breweries, taprooms, restaurants, private events — Jacob plays well with noise, low light, and last-minute song requests. Head to the booking page for all the details.</p>
+            <a href="book.html" class="btn btn-primary">Go to Booking Page</a>
+          </div>
+          <a class="tip-row" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
+            <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo — @jbsmith2198</span></span>
+            <span class="tip-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; © <span id="yr"></span>
+  </div>
+</footer>
+<script>
+  document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.add('open'));
+  document.getElementById('drawerClose').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.remove('open'));
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
