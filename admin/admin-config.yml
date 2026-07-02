@@ -1,0 +1,63 @@
+backend:
+  name: github
+  repo: kwaker225/jacobsmithmusic
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "shows"
+    label: "Shows"
+    label_singular: "Show"
+    folder: "_data/shows"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Venue Name", name: "venue", widget: "string" }
+      - { label: "City", name: "city", widget: "string" }
+      - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD" }
+      - { label: "Day of Week", name: "day", widget: "string", hint: "e.g. Friday" }
+      - { label: "Time", name: "time", widget: "string", hint: "e.g. 6:00–10:00 PM" }
+      - { label: "Venue Website", name: "url", widget: "string", hint: "Link to venue website or Google Maps" }
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "_data/homepage.json"
+        fields:
+          - { label: "Hero Tagline", name: "tagline", widget: "string" }
+          - { label: "About Bio", name: "bio", widget: "text" }
+          - { label: "Shows Note", name: "shows_note", widget: "string" }
+
+      - label: "YouTube Videos"
+        name: "videos"
+        file: "_data/videos.json"
+        fields:
+          - label: "Videos"
+            name: "videos"
+            widget: "list"
+            fields:
+              - { label: "YouTube Video ID", name: "id", widget: "string", hint: "Just the ID from the YouTube URL e.g. RszS1Pvjybc" }
+              - { label: "Title", name: "title", widget: "string" }
+
+      - label: "Venues (Where He's Played)"
+        name: "venues"
+        file: "_data/venues.json"
+        fields:
+          - label: "Venue Categories"
+            name: "categories"
+            widget: "list"
+            fields:
+              - { label: "Category Name", name: "category", widget: "string" }
+              - label: "Venues"
+                name: "venues"
+                widget: "list"
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "City", name: "city", widget: "string" }
+                  - { label: "Website", name: "url", widget: "string" }
+                  - { label: "Rating", name: "rating", widget: "string" }
