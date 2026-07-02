@@ -109,6 +109,7 @@
   footer .fname{color:var(--white);font-weight:700;letter-spacing:0.08em;}
   footer a{color:var(--red);}
 </style>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 <!-- NEXT SHOW BANNER -->
@@ -141,6 +142,7 @@
 (function(){
   var shows=[
     {date:"2026-06-26",display:"Jun 26",venue:"Dunham Hills Golf Club",city:"Hartland, MI",time:"5:00–9:00 PM",url:"https://www.dunhamhills.com/"},
+    {date:"2026-07-03",display:"Jul 3",venue:"Lost Arrow Resort On the Water",city:"Gladwin, MI",time:"6:00–10:00 PM",url:"https://www.google.com/maps/search/?api=1&query=Lost+Arrow+Resort+Gladwin+MI"},
     {date:"2026-07-17",display:"Jul 17",venue:"Willow Brook Golf Course & Restaurant",city:"Byron, MI",time:"6:00–10:00 PM",url:"https://golfbyron.com"},
     {date:"2026-07-22",display:"Jul 22",venue:"Williamston Roadhouse",city:"Williamston, MI",time:"7:00–10:00 PM",url:"https://www.williamstonroadhouse.com"},
     {date:"2026-08-15",display:"Aug 15",venue:"Walled Lake Tavern",city:"Walled Lake, MI",time:"7:30–10:30 PM",url:"https://www.google.com/maps/search/?api=1&query=Walled+Lake+Tavern+Walled+Lake+MI"},
@@ -326,5 +328,16 @@
   document.getElementById('drawerClose').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.remove('open'));
   document.getElementById('yr').textContent=new Date().getFullYear();
 </script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>

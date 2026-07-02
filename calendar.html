@@ -112,6 +112,7 @@
   footer .fname{color:var(--white);font-weight:700;letter-spacing:0.08em;}
   footer a{color:var(--red);}
 </style>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 <!-- NEXT SHOW BANNER -->
@@ -226,6 +227,7 @@
   const EVENTS = [
     { date:"2026-06-19", venue:"SunnySips Bar & Grill", city:"Howell, MI", time:"7:30–9:30 PM", url:"https://www.google.com/maps/search/?api=1&query=SunnySips+Bar+%26+Grill+Howell+MI&query_place_id=ChIJM3tUbzdHI4gR9L3hJqc9RVE" },
     { date:"2026-06-26", venue:"Dunham Hills Golf Club", city:"Hartland, MI", time:"5:00–9:00 PM", url:"https://www.google.com/maps/search/?api=1&query=Dunham+Hills+Golf+Club+Hartland+MI&query_place_id=ChIJ9cz76zJcI4gR4PxWpXovnm4" },
+    { date:"2026-07-03", venue:"Lost Arrow Resort On the Water", city:"Gladwin, MI", time:"6:00–10:00 PM", url:"https://www.google.com/maps/search/?api=1&query=Lost+Arrow+Resort+Gladwin+MI" },
     { date:"2026-07-17", venue:"Willow Brook Golf Course & Restaurant", city:"Byron, MI", time:"6:00–10:00 PM", url:"https://www.google.com/maps/search/?api=1&query=Willow+Brook+Golf+Course+%26+Restaurant+Byron+MI&query_place_id=ChIJqSwP3d4SI4gRFTW9nckitNU" },
     { date:"2026-07-22", venue:"Williamston Roadhouse", city:"Williamston, MI", time:"7:00–10:00 PM", url:"https://www.google.com/maps/search/?api=1&query=Williamston+Roadhouse+Williamston+MI&query_place_id=ChIJq9kN3QYhI4gRfJHroNODoMM" },
     { date:"2026-08-15", venue:"Walled Lake Tavern", city:"Walled Lake, MI", time:"7:30–10:30 PM", url:"https://www.google.com/maps/search/?api=1&query=Walled+Lake+Tavern+Walled+Lake+MI&query_place_id=ChIJWf0-nTGlJIgRtpLcYrgJDRE" },
@@ -316,5 +318,16 @@
   document.getElementById('drawerClose').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.remove('open'));
   document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
