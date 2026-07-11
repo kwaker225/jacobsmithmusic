@@ -186,6 +186,10 @@
   .venue-info .address{font-size:0.88rem; color:var(--grey);}
   .venue-info a{text-decoration:none;}
   .venue-info a:hover h3{color:var(--red);}
+  .loading-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin:0 4px;animation:bounce 1.2s infinite;}
+  .loading-dot:nth-child(2){animation-delay:.2s;}
+  .loading-dot:nth-child(3){animation-delay:.4s;}
+  @keyframes bounce{0%,80%,100%{transform:scale(0);}40%{transform:scale(1);}}
   .shows-note{margin-top:24px; font-size:0.88rem; color:var(--grey);}
   .shows-note a{color:var(--red); border-bottom:1px solid var(--red);}
 
@@ -344,7 +348,7 @@
 </head>
 <body>
 <!-- NEXT SHOW BANNER -->
-<div id="next-show-banner" style="background:var(--red,#C4203C);color:#fff;text-align:center;padding:11px 16px;font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:300;">
+<div id="next-show-banner" style="display:none;background:var(--red,#C4203C);color:#fff;text-align:center;padding:11px 16px;font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:300;">
   <a href="#" target="_blank" rel="noopener" id="ns-link" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
     <span style="opacity:0.85;font-weight:400;letter-spacing:0.1em;">Next Show</span>
     <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
@@ -368,27 +372,54 @@
 </style>
 <script>
 (function(){
-  var shows=[
-    {date:"2026-06-26",display:"Jun 26",venue:"Dunham Hills Golf Club",city:"Hartland, MI",time:"5:00–9:00 PM",url:"https://www.dunhamhills.com/"},
-    {date:"2026-07-03",display:"Jul 3",venue:"Lost Arrow Resort On the Water",city:"Gladwin, MI",time:"6:00–10:00 PM",url:"https://www.google.com/maps/search/?api=1&query=Lost+Arrow+Resort+Gladwin+MI"},
-    {date:"2026-07-17",display:"Jul 17",venue:"Willow Brook Golf Course & Restaurant",city:"Byron, MI",time:"6:00–10:00 PM",url:"https://golfbyron.com"},
-    {date:"2026-07-22",display:"Jul 22",venue:"Williamston Roadhouse",city:"Williamston, MI",time:"7:00–10:00 PM",url:"https://www.williamstonroadhouse.com"},
-    {date:"2026-08-15",display:"Aug 15",venue:"Walled Lake Tavern",city:"Walled Lake, MI",time:"7:30–10:30 PM",url:"https://www.google.com/maps/search/?api=1&query=Walled+Lake+Tavern+Walled+Lake+MI"},
-    {date:"2026-08-28",display:"Aug 28",venue:"Jezebels Saloon",city:"Brighton, MI",time:"8:00–11:00 PM",url:"https://www.jezebelssaloon.com"}
-  ];
   var today=new Date(); today.setHours(0,0,0,0);
-  var next=null;
-  for(var i=0;i<shows.length;i++){
-    var d=new Date(shows[i].date+'T00:00:00');
-    if(d>=today){next=shows[i];break;}
+  var mapMonths=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function esc(str){return String(str==null?'':str).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function fillBanner(next){
+    var b=document.getElementById('next-show-banner');
+    if(!next||!b){if(b)b.style.display='none';return;}
+    b.querySelector('.ns-date').textContent=next.display;
+    b.querySelector('.ns-venue').textContent=next.venue;
+    b.querySelector('.ns-city').textContent=next.city?('· '+next.city):'';
+    b.querySelector('.ns-time').textContent=(next.time&&next.time!=='TBD')?('· '+next.time):'';
+    document.getElementById('ns-link').href=next.url||'#';
+    b.style.display='block';
+    if(window.bannerOffset) window.bannerOffset();
   }
-  var b=document.getElementById('next-show-banner');
-  if(!next||!b){if(b)b.style.display='none';return;}
-  b.querySelector('.ns-date').textContent=next.display;
-  b.querySelector('.ns-venue').textContent=next.venue;
-  b.querySelector('.ns-city').textContent='· '+next.city;
-  b.querySelector('.ns-time').textContent='· '+next.time;
-  document.getElementById('ns-link').href=next.url;
+
+  function fillList(shows){
+    var wrap=document.getElementById('show-list-wrap');
+    if(!wrap) return;
+    if(!shows.length){
+      wrap.innerHTML='<p class="shows-note" style="margin:0;">No upcoming shows posted right now - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for new dates.</p>';
+      return;
+    }
+    var html='<div class="show-list">';
+    shows.forEach(function(sh){
+      var pill='<div class="date-pill"><span class="day-label">'+esc(sh.day)+'</span>'+esc(sh.display)+' &nbsp;·&nbsp; '+esc(sh.time)+'</div>';
+      var name='<h3>'+esc(sh.venue)+'</h3>';
+      var venue='<div class="venue-info">'+(sh.url?('<a href="'+esc(sh.url)+'" target="_blank" rel="noopener">'+name+'</a>'):name)+'<p class="address">'+esc(sh.city)+'</p></div>';
+      html+='<div class="show-row">'+pill+venue+'</div>';
+    });
+    html+='</div>';
+    wrap.innerHTML=html;
+  }
+
+  fetch('/.netlify/functions/get-shows')
+    .then(function(r){return r.json();})
+    .then(function(shows){
+      if(!Array.isArray(shows)) shows=[];
+      var upcoming=shows.filter(function(sh){return sh.date && new Date(sh.date+'T00:00:00')>=today;});
+      fillBanner(upcoming[0]);
+      fillList(upcoming);
+    })
+    .catch(function(){
+      var wrap=document.getElementById('show-list-wrap');
+      if(wrap) wrap.innerHTML='<p class="shows-note" style="margin:0;">Couldn\'t load shows right now - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>';
+      var b=document.getElementById('next-show-banner'); if(b) b.style.display='none';
+    });
 })();
 </script>
 
@@ -467,80 +498,12 @@
       <p class="section-label reveal">Upcoming Gigs</p>
       <h2 class="section-title reveal">2026 Schedule</h2>
 
-      <div class="show-list">
-
-        <div class="show-row reveal" data-date="2026-06-19">
-          <div class="date-pill"><span class="day-label">Friday</span>Jun 19 &nbsp;·&nbsp; 7:30–9:30 PM</div>
-          <div class="venue-info">
-            <a href="https://www.google.com/maps/search/?api=1&query=SunnySips+Bar+%26+Grill+Howell+MI&query_place_id=ChIJM3tUbzdHI4gR9L3hJqc9RVE" target="_blank" rel="noopener">
-              <h3>SunnySips Bar &amp; Grill</h3>
-            </a>
-            <p class="address">Howell, MI</p>
-          </div>
+      <div id="show-list-wrap">
+        <div class="loading" style="text-align:center;padding:56px 0;color:var(--grey);">
+          <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
         </div>
-
-        <div class="show-row reveal" data-date="2026-06-26">
-          <div class="date-pill"><span class="day-label">Friday</span>Jun 26 &nbsp;·&nbsp; 5:00–9:00 PM</div>
-          <div class="venue-info">
-            <a href="https://www.google.com/maps/search/?api=1&query=Dunham+Hills+Golf+Club+Hartland+MI&query_place_id=ChIJ9cz76zJcI4gR4PxWpXovnm4" target="_blank" rel="noopener">
-              <h3>Dunham Hills Golf Club</h3>
-            </a>
-            <p class="address">Hartland, MI</p>
-          </div>
-        </div>
-
-        <div class="show-row reveal" data-date="2026-07-03">
-          <div class="date-pill"><span class="day-label">Friday</span>Jul 3 &nbsp;·&nbsp; 6:00–10:00 PM</div>
-          <div class="venue-info">
-            <a href="https://www.google.com/maps/search/?api=1&query=Lost+Arrow+Resort+Gladwin+MI" target="_blank" rel="noopener">
-              <h3>Lost Arrow Resort On the Water</h3>
-            </a>
-            <p class="address">Gladwin, MI</p>
-          </div>
-        </div>
-
-        <div class="show-row reveal" data-date="2026-07-17">
-          <div class="date-pill"><span class="day-label">Friday</span>Jul 17 &nbsp;·&nbsp; 6:00–10:00 PM</div>
-          <div class="venue-info">
-            <a href="https://www.google.com/maps/search/?api=1&query=Willow+Brook+Golf+Course+%26+Restaurant+Byron+MI&query_place_id=ChIJqSwP3d4SI4gRFTW9nckitNU" target="_blank" rel="noopener">
-              <h3>Willow Brook Golf Course &amp; Restaurant</h3>
-            </a>
-            <p class="address">Byron, MI</p>
-          </div>
-        </div>
-
-        <div class="show-row reveal" data-date="2026-07-22">
-          <div class="date-pill"><span class="day-label">Wednesday</span>Jul 22 &nbsp;·&nbsp; 7:00–10:00 PM</div>
-          <div class="venue-info">
-            <a href="https://www.google.com/maps/search/?api=1&query=Williamston+Roadhouse+Williamston+MI&query_place_id=ChIJq9kN3QYhI4gRfJHroNODoMM" target="_blank" rel="noopener">
-              <h3>Williamston Roadhouse</h3>
-            </a>
-            <p class="address">Williamston, MI</p>
-          </div>
-        </div>
-
-        <div class="show-row reveal" data-date="2026-08-15">
-          <div class="date-pill"><span class="day-label">Friday</span>Aug 15 &nbsp;·&nbsp; 7:30–10:30 PM</div>
-          <div class="venue-info">
-            <a href="https://www.google.com/maps/search/?api=1&query=Walled+Lake+Tavern+Walled+Lake+MI&query_place_id=ChIJWf0-nTGlJIgRtpLcYrgJDRE" target="_blank" rel="noopener">
-              <h3>Walled Lake Tavern</h3>
-            </a>
-            <p class="address">Walled Lake, MI</p>
-          </div>
-        </div>
-
-        <div class="show-row reveal" data-date="2026-08-28">
-          <div class="date-pill"><span class="day-label">Friday</span>Aug 28 &nbsp;·&nbsp; 8:00–11:00 PM</div>
-          <div class="venue-info">
-            <a href="https://www.google.com/maps/search/?api=1&query=Jezebels+Saloon+Brighton+MI&query_place_id=ChIJb_AHPp9PI4gRMxJhzc5rBO8" target="_blank" rel="noopener">
-              <h3>Jezebels Saloon</h3>
-            </a>
-            <p class="address">Brighton, MI</p>
-          </div>
-        </div>
-
       </div>
-      <p class="shows-note">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
+      <p class="shows-note" style="margin-top:24px;">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
     </div>
   </section>
 
@@ -551,7 +514,7 @@
       <h2 class="section-title reveal">Just Him &amp; the Guitar</h2>
       <div class="about-grid">
         <div class="reveal">
-          <p>Based in Milford, Michigan, Jacob Smith grew up in the small town of Byron, MI where music was always close by. He plays entirely acoustic - no backing tracks, no band, just a guitar and a room full of people. His sets move between original songs and covers that span rock, country, and folk, built for breweries, taprooms, and anywhere else people want music they can talk over, sing along to, or just sit with for a while.</p>
+          <p>Based in Milford, Michigan, Jacob Smith grew up in the small town of Byron, MI where music was always close by. He plays entirely acoustic - no backing tracks, no band, just a guitar and a room full of people. His sets move between original songs and covers that span rock, country, and folk, built for breweries, taprooms, and anywhere people gather for a good time and good music.</p>
           <div class="tag-list">
             <span class="tag">Originals &amp; Covers</span>
             <span class="tag">Rock / Country / Folk</span>
