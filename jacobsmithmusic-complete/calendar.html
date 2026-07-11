@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar - Jacob Smith Music</title>
+<meta name="description" content="Upcoming Jacob Smith Music show dates - updated automatically from Google Calendar.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0A0A0A;--bg-soft:#111111;--bg-soft-2:#1A1A1A;--red:#C4203C;--red-deep:#9A1830;--white:#F5F5F5;--grey:#9A9A9A;--line:rgba(255,255,255,0.12);--maxw:1080px;}
+  *{box-sizing:border-box;}
+  html{background:#0A0A0A;}
+  body{margin:0;background:#0A0A0A;color:var(--white);font-family:'Arimo',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;margin:0;text-transform:uppercase;letter-spacing:0.02em;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  header{position:fixed;top:44px;left:0;right:0;z-index:100;padding:18px 0;background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.18em;text-transform:uppercase;}
+  .logo-bar{width:3px;height:22px;background:var(--red);flex-shrink:0;}
+  nav.main-nav{display:flex;gap:32px;}
+  nav.main-nav a{font-family:'Arimo',sans-serif;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);transition:color .2s;}
+  nav.main-nav a:hover,nav.main-nav a.active{color:var(--white);}
+  .nav-cta{font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--bg);padding:9px 20px;transition:background .2s;}
+  .nav-cta:hover{background:var(--red);}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:4px;}
+  .menu-toggle svg{width:26px;height:26px;}
+  .mobile-drawer{position:fixed;inset:0;background:var(--bg);z-index:150;display:flex;flex-direction:column;padding:28px;transform:translateX(100%);transition:transform .3s ease;}
+  .mobile-drawer.open{transform:translateX(0);}
+  .mobile-drawer .drawer-top{display:flex;justify-content:flex-end;}
+  .mobile-drawer nav{display:flex;flex-direction:column;gap:28px;margin-top:56px;}
+  .mobile-drawer nav a{font-family:'Anton',sans-serif;font-size:2.2rem;text-transform:uppercase;letter-spacing:0.04em;}
+  .mobile-drawer nav a:hover{color:var(--red);}
+  @media(max-width:820px){nav.main-nav,.nav-cta{display:none;}.menu-toggle{display:block;}}
+
+  .page-hero{padding:180px 0 64px;border-bottom:1px solid var(--line);background:#0A0A0A;}
+  .section-label{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .section-label::before{content:"";width:20px;height:2px;background:var(--red);display:inline-block;flex-shrink:0;}
+  .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:20px;}
+  .page-hero p.lead{font-size:1.15rem;color:var(--grey);max-width:560px;}
+
+  /* ── SHOW LIST ── */
+  .cal-section{padding:64px 0 32px;background:#0A0A0A;}
+
+  /* Loading state */
+  .loading{text-align:center;padding:64px 0;color:var(--grey);}
+  .loading-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin:0 4px;animation:bounce 1.2s infinite;}
+  .loading-dot:nth-child(2){animation-delay:.2s;}
+  .loading-dot:nth-child(3){animation-delay:.4s;}
+  @keyframes bounce{0%,80%,100%{transform:scale(0);}40%{transform:scale(1);}}
+
+  /* Show rows */
+  .show-list{width:100%;}
+  .show-row{
+    display:grid;grid-template-columns:220px 1fr;
+    align-items:center;gap:28px;padding:22px 0;
+    border-bottom:1px dashed rgba(255,255,255,0.15);
+  }
+  .show-row:first-child{border-top:1px dashed rgba(255,255,255,0.15);}
+  .date-pill{
+    background:var(--red);color:var(--white);
+    font-family:'Arimo',sans-serif;font-weight:700;
+    font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;
+    padding:12px 18px;text-align:center;border-radius:4px;line-height:1.5;
+  }
+  .date-pill .day-label{display:block;font-size:0.7rem;opacity:0.8;margin-bottom:2px;}
+  .venue-info h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+  .venue-info .address{font-size:0.88rem;color:var(--grey);}
+  .venue-info a:hover h3{color:var(--red);}
+  .no-shows{padding:48px 0;color:var(--grey);font-size:1rem;}
+  @media(max-width:620px){
+    .show-row{grid-template-columns:1fr;gap:12px;}
+    .date-pill{text-align:left;}
+  }
+
+  /* ── PAST SHOWS ── */
+  .past-section{padding:48px 0 96px;background:#0A0A0A;}
+  .past-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;cursor:pointer;color:var(--white);font-family:'Arimo',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;}
+  .past-toggle:hover{color:var(--red);}
+  .past-toggle .pt-label{display:flex;align-items:center;gap:12px;}
+  .past-toggle .pt-count{color:var(--red);font-size:0.78rem;}
+  .past-toggle .pt-arrow{transition:transform .3s ease;color:var(--grey);}
+  .past-toggle.open .pt-arrow{transform:rotate(180deg);}
+  .past-list{display:none;padding-top:24px;}
+  .past-list.open{display:block;}
+  .past-row{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:20px;padding:16px 0;border-bottom:1px dashed rgba(255,255,255,0.1);opacity:0.5;}
+  .past-row:first-child{border-top:1px dashed rgba(255,255,255,0.1);}
+  .past-pill{background:transparent;border:1.5px solid rgba(255,255,255,0.15);color:var(--grey);font-family:'Arimo',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 14px;text-align:center;line-height:1.5;border-radius:4px;}
+  .past-pill .day-label{display:block;font-size:0.65rem;opacity:0.7;margin-bottom:2px;}
+  .past-venue h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);margin-bottom:4px;text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);}
+  .past-venue .address{font-size:0.85rem;color:rgba(154,154,154,0.6);}
+  @media(max-width:620px){.past-row{grid-template-columns:1fr;gap:8px;}}
+
+  footer{padding:40px 0 52px;border-top:1px solid var(--line);text-align:center;color:var(--grey);font-size:0.84rem;background:#0A0A0A;}
+  footer .fname{color:var(--white);font-weight:700;letter-spacing:0.08em;}
+  footer a{color:var(--red);}
+</style>
+</head>
+<body>
+
+<!-- NEXT SHOW BANNER -->
+<div id="next-show-banner" style="display:none;background:#C4203C;color:#fff;text-align:center;padding:11px 16px;font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:300;">
+  <a href="#" target="_blank" rel="noopener" id="ns-link" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+    <span style="opacity:0.85;font-weight:400;">Next Show</span>
+    <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+    <span class="ns-date"></span>
+    <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+    <span class="ns-venue" style="animation:ns-glow 2s ease-in-out infinite;"></span>
+    <span class="ns-city" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.85;"></span>
+    <span class="ns-time" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.75;"></span>
+    <span style="margin-left:4px;animation:ns-arrow 1.2s ease-in-out infinite;">→</span>
+  </a>
+</div>
+<style>
+  @keyframes ns-glow{0%,100%{text-shadow:none;}50%{text-shadow:0 0 10px rgba(255,255,255,0.6);}}
+  @keyframes ns-arrow{0%,100%{transform:translateX(0);}50%{transform:translateX(4px);}}
+</style>
+
+<style>@media(max-width:640px){#next-show-banner .ns-time,#next-show-banner .ns-city{display:none;}}</style>
+<script>
+(function(){
+  function bannerOffset(){
+    var b=document.getElementById('next-show-banner');
+    var h=b?b.offsetHeight:0;
+    var hdr=document.querySelector('header');
+    if(hdr){
+      if(getComputedStyle(hdr).position==='fixed'){hdr.style.setProperty('top',h+'px','important');}
+      else{document.body.style.paddingTop=h+'px';}
+    }
+  }
+  window.bannerOffset=bannerOffset;
+  window.addEventListener('resize',bannerOffset);
+  window.addEventListener('load',bannerOffset);
+  bannerOffset();
+})();
+</script>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo"><span class="logo-bar"></span>Jacob Smith Music</a>
+    <nav class="main-nav">
+      <a href="index.html#shows">Shows</a>
+      <a href="calendar.html" class="active">Calendar</a>
+      <a href="about.html">About</a>
+      <a href="where-hes-played.html">Played</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a href="book.html" class="nav-cta">Book Jacob</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-top">
+    <button class="menu-toggle" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="index.html#shows">Shows</a>
+    <a href="calendar.html">Calendar</a>
+    <a href="about.html">About</a>
+    <a href="where-hes-played.html">Played</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html">Book Jacob</a>
+  </nav>
+</div>
+
+<main style="background:#0A0A0A;">
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="section-label">Mark Your Calendar</p>
+      <h1>Show<br>Calendar</h1>
+      <p class="lead">Every upcoming gig, pulled live from Google Calendar. Tap any show for venue info.</p>
+    </div>
+  </section>
+
+  <section class="cal-section">
+    <div class="wrap">
+      <p class="section-label">Upcoming Shows</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:40px;">2026 Schedule</h2>
+      <div id="show-list-wrap">
+        <div class="loading">
+          <span class="loading-dot"></span>
+          <span class="loading-dot"></span>
+          <span class="loading-dot"></span>
+        </div>
+      </div>
+      <p style="margin-top:24px;font-size:0.85rem;color:var(--grey);">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" style="color:var(--red);border-bottom:1px solid var(--red);">follow on Facebook</a> for the latest.</p>
+    </div>
+  </section>
+
+  <!-- PAST SHOWS -->
+  <section class="past-section">
+    <div class="wrap">
+      <button class="past-toggle" id="pastToggle">
+        <span class="pt-label">Past Shows <span class="pt-count" id="pastCount"></span></span>
+        <span class="pt-arrow">▼</span>
+      </button>
+      <div class="past-list" id="pastList"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; © <span id="yr"></span>
+  </div>
+</footer>
+
+<script>
+  // Past shows (manually maintained)
+  const PAST_SHOWS = [
+    { date:"2026-06-19", display:"Jun 19", day:"Friday", venue:"SunnySips Bar & Grill", city:"Howell, MI", time:"7:30–9:30 PM" },
+    { date:"2026-06-26", display:"Jun 26", day:"Friday", venue:"Dunham Hills Golf Club", city:"Hartland, MI", time:"5:00–9:00 PM" },
+    { date:"2026-07-03", display:"Jul 3", day:"Friday", venue:"Lost Arrow Resort On the Water", city:"Gladwin, MI", time:"6:00–10:00 PM" },
+  ];
+
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  // Fetch upcoming shows from Netlify Function
+  async function loadShows() {
+    const wrap = document.getElementById('show-list-wrap');
+    try {
+      const res = await fetch('/.netlify/functions/get-shows');
+      const shows = await res.json();
+
+      if (!shows.length) {
+        wrap.innerHTML = '<p class="no-shows">No upcoming shows at the moment - check back soon!</p>';
+        return;
+      }
+
+      // Update banner
+      const next = shows[0];
+      const b = document.getElementById('next-show-banner');
+      if (next && b) {
+        document.querySelector('.ns-date').textContent = next.display;
+        document.querySelector('.ns-venue').textContent = next.venue;
+        document.querySelector('.ns-city').textContent = '· ' + next.city;
+        document.querySelector('.ns-time').textContent = next.time !== 'TBD' ? '· ' + next.time : '';
+        document.getElementById('ns-link').href = next.url || '#';
+        b.style.display = 'block';
+        if (window.bannerOffset) window.bannerOffset();
+      }
+
+      // Render show list
+      const list = document.createElement('div');
+      list.className = 'show-list';
+      shows.forEach(show => {
+        const row = document.createElement('div');
+        row.className = 'show-row';
+        row.innerHTML = `
+          <div class="date-pill">
+            <span class="day-label">${show.day}</span>
+            ${show.display} &nbsp;·&nbsp; ${show.time}
+          </div>
+          <div class="venue-info">
+            ${show.url ? `<a href="${show.url}" target="_blank" rel="noopener">` : ''}
+            <h3>${show.venue}</h3>
+            ${show.url ? '</a>' : ''}
+            <p class="address">${show.city}</p>
+          </div>`;
+        list.appendChild(row);
+      });
+      wrap.innerHTML = '';
+      wrap.appendChild(list);
+
+    } catch(err) {
+      wrap.innerHTML = '<p class="no-shows">Couldn\'t load shows right now - check back soon!</p>';
+    }
+  }
+
+  loadShows();
+
+  // Past shows
+  const pastList = document.getElementById('pastList');
+  const pastCount = document.getElementById('pastCount');
+  const allPast = PAST_SHOWS.filter(s => new Date(s.date+'T00:00:00') < today);
+  pastCount.textContent = allPast.length + ' show' + (allPast.length===1?'':'s');
+  [...allPast].reverse().forEach(s => {
+    const row = document.createElement('div');
+    row.className = 'past-row';
+    row.innerHTML = `<div class="past-pill"><span class="day-label">${s.day}</span>${s.display} · ${s.time}</div><div class="past-venue"><h3>${s.venue}</h3><p class="address">${s.city}</p></div>`;
+    pastList.appendChild(row);
+  });
+  document.getElementById('pastToggle').addEventListener('click', function() {
+    this.classList.toggle('open');
+    pastList.classList.toggle('open');
+  });
+
+  // Nav
+  document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.add('open'));
+  document.getElementById('drawerClose').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.remove('open'));
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
