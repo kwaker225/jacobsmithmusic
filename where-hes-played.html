@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Where He's Played — Jacob Smith Music</title>
+<title>Where He's Played - Jacob Smith Music</title>
 <meta name="description" content="A running list of the bars, breweries, and rooms Jacob Smith has played across mid-Michigan.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,9 +99,6 @@
     0%,100%{transform:translateX(0);}
     50%{transform:translateX(4px);}
   }
-  /* Push header below banner */
-  #next-show-banner ~ header,
-  body > header { top: 40px !important; }
 </style>
 <script>
 (function(){
@@ -129,6 +126,25 @@
 })();
 </script>
 
+
+<style>@media(max-width:640px){#next-show-banner .ns-time,#next-show-banner .ns-city{display:none;}}</style>
+<script>
+(function(){
+  function bannerOffset(){
+    var b=document.getElementById('next-show-banner');
+    var h=b?b.offsetHeight:0;
+    var hdr=document.querySelector('header');
+    if(hdr){
+      if(getComputedStyle(hdr).position==='fixed'){hdr.style.setProperty('top',h+'px','important');}
+      else{document.body.style.paddingTop=h+'px';}
+    }
+  }
+  window.bannerOffset=bannerOffset;
+  window.addEventListener('resize',bannerOffset);
+  window.addEventListener('load',bannerOffset);
+  bannerOffset();
+})();
+</script>
 
 <header>
   <div class="wrap nav-row">

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jacob Smith Music - LIVE Music in Michigan</title>
-<meta name="description" content="Jacob Smith plays LIVE acoustic music across Michigan — original songs and covers spanning rock, country, and folk. Based in Milford, MI. Book him for your venue.">
+<meta name="description" content="Jacob Smith plays LIVE acoustic music across Michigan - original songs and covers spanning rock, country, and folk. Based in Milford, MI. Book him for your venue.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -365,9 +365,6 @@
     0%,100%{transform:translateX(0);}
     50%{transform:translateX(4px);}
   }
-  /* Push header below banner */
-  #next-show-banner ~ header,
-  body > header { top: 40px !important; }
 </style>
 <script>
 (function(){
@@ -395,6 +392,25 @@
 })();
 </script>
 
+
+<style>@media(max-width:640px){#next-show-banner .ns-time,#next-show-banner .ns-city{display:none;}}</style>
+<script>
+(function(){
+  function bannerOffset(){
+    var b=document.getElementById('next-show-banner');
+    var h=b?b.offsetHeight:0;
+    var hdr=document.querySelector('header');
+    if(hdr){
+      if(getComputedStyle(hdr).position==='fixed'){hdr.style.setProperty('top',h+'px','important');}
+      else{document.body.style.paddingTop=h+'px';}
+    }
+  }
+  window.bannerOffset=bannerOffset;
+  window.addEventListener('resize',bannerOffset);
+  window.addEventListener('load',bannerOffset);
+  bannerOffset();
+})();
+</script>
 
 <header id="site-header">
   <div class="wrap nav-row">
@@ -437,7 +453,7 @@
     <div class="wrap hero-content">
       <p class="hero-label">Milford, Michigan</p>
       <h1>Jacob<br>Smith</h1>
-      <p class="hero-sub">Live Acoustic Music — Rock, Country, Folk &amp; Everything In Between</p>
+      <p class="hero-sub">Live Acoustic Music - Rock, Country, Folk &amp; Everything In Between</p>
       <div class="hero-ctas">
         <a href="#shows" class="btn btn-primary">Upcoming Gigs</a>
         <a href="book.html" class="btn btn-ghost">Book a Show</a>
@@ -524,7 +540,7 @@
         </div>
 
       </div>
-      <p class="shows-note">Dates may shift — <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
+      <p class="shows-note">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
     </div>
   </section>
 
@@ -535,7 +551,7 @@
       <h2 class="section-title reveal">Just Him &amp; the Guitar</h2>
       <div class="about-grid">
         <div class="reveal">
-          <p>Based in Milford, Michigan, Jacob Smith grew up in the small town of Byron, MI where music was always close by. He plays entirely acoustic — no backing tracks, no band, just a guitar and a room full of people. His sets move between original songs and covers that span rock, country, and folk, built for breweries, taprooms, and anywhere else people want music they can talk over, sing along to, or just sit with for a while.</p>
+          <p>Based in Milford, Michigan, Jacob Smith grew up in the small town of Byron, MI where music was always close by. He plays entirely acoustic - no backing tracks, no band, just a guitar and a room full of people. His sets move between original songs and covers that span rock, country, and folk, built for breweries, taprooms, and anywhere else people want music they can talk over, sing along to, or just sit with for a while.</p>
           <div class="tag-list">
             <span class="tag">Originals &amp; Covers</span>
             <span class="tag">Rock / Country / Folk</span>
@@ -544,8 +560,8 @@
           </div>
         </div>
         <div class="pull-quote reveal">
-          Solo acoustic — one guitar, every genre I can fit on it.
-          <cite>— Jacob Smith</cite>
+          Solo acoustic - one guitar, every genre I can fit on it.
+          <cite>- Jacob Smith</cite>
         </div>
       </div>
     </div>
@@ -634,7 +650,7 @@
         <div class="reveal">
           <div class="booking-card">
             <h3>Have a room that needs a guitar?</h3>
-            <p>Breweries, taprooms, restaurants, private events — Jacob plays well with noise, low light, and last-minute song requests. Call, text, or email to check availability.</p>
+            <p>Breweries, taprooms, restaurants, private events - Jacob plays well with noise, low light, and last-minute song requests. Call, text, or email to check availability.</p>
             <a href="tel:+18104230319" class="btn btn-primary" style="display:inline-flex;">Call or Text Now</a>
             <a href="https://www.gigsalad.com/jacob_smith_music_milford/contact" target="_blank" rel="noopener" class="btn" style="display:inline-flex;margin-top:10px;border:1.5px solid rgba(255,255,255,0.25);color:var(--white);background:transparent;gap:10px;">
               <img src="https://www.gigsalad.com/favicon.ico" alt="" width="16" height="16" style="border-radius:2px;">
@@ -642,7 +658,7 @@
             </a>
           </div>
           <a class="tip-row" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
-            <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo — @jbsmith2198</span></span>
+            <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo - @jbsmith2198</span></span>
             <span class="tip-arrow">→</span>
           </a>
         </div>
@@ -681,7 +697,7 @@
                 <div style="font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--grey); margin-top:3px;">Services Listed</div>
               </div>
             </div>
-            <p style="color:var(--grey); font-size:0.9rem; line-height:1.8; margin-bottom:24px;">Acoustic covers spanning classic rock, 90s favorites, country, indie, and modern hits — all delivered with a gritty voice and a guitar. Professional sound, a wide-ranging setlist, and just enough humor to keep things interesting.</p>
+            <p style="color:var(--grey); font-size:0.9rem; line-height:1.8; margin-bottom:24px;">Acoustic covers spanning classic rock, 90s favorites, country, indie, and modern hits - all delivered with a gritty voice and a guitar. Professional sound, a wide-ranging setlist, and just enough humor to keep things interesting.</p>
             <div style="display:flex; flex-direction:column; gap:10px;">
               <a href="https://www.gigsalad.com/jacob_smith_music_milford/contact" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; display:flex; gap:10px;">
                 <img src="https://www.gigsalad.com/favicon.ico" alt="" width="16" height="16" style="border-radius:2px;">

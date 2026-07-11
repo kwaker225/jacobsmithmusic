@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Jacob Smith Music</title>
-<meta name="description" content="Get in touch with Jacob Smith — call, text, or email to book a show or ask a question.">
+<title>Contact - Jacob Smith Music</title>
+<meta name="description" content="Get in touch with Jacob Smith - call, text, or email to book a show or ask a question.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,9 +110,6 @@
     0%,100%{transform:translateX(0);}
     50%{transform:translateX(4px);}
   }
-  /* Push header below banner */
-  #next-show-banner ~ header,
-  body > header { top: 40px !important; }
 </style>
 <script>
 (function(){
@@ -140,6 +137,25 @@
 })();
 </script>
 
+
+<style>@media(max-width:640px){#next-show-banner .ns-time,#next-show-banner .ns-city{display:none;}}</style>
+<script>
+(function(){
+  function bannerOffset(){
+    var b=document.getElementById('next-show-banner');
+    var h=b?b.offsetHeight:0;
+    var hdr=document.querySelector('header');
+    if(hdr){
+      if(getComputedStyle(hdr).position==='fixed'){hdr.style.setProperty('top',h+'px','important');}
+      else{document.body.style.paddingTop=h+'px';}
+    }
+  }
+  window.bannerOffset=bannerOffset;
+  window.addEventListener('resize',bannerOffset);
+  window.addEventListener('load',bannerOffset);
+  bannerOffset();
+})();
+</script>
 
 <header>
   <div class="wrap nav-row">
@@ -179,7 +195,7 @@
     <div class="wrap">
       <p class="section-label">Get In Touch</p>
       <h1>Contact</h1>
-      <p class="lead">Call, text, or email — Jacob checks all three. For booking inquiries, the <a href="book.html" style="color:var(--red);border-bottom:1px solid var(--red);">booking page</a> has everything you need.</p>
+      <p class="lead">Call, text, or email - Jacob checks all three. For booking inquiries, the <a href="book.html" style="color:var(--red);border-bottom:1px solid var(--red);">booking page</a> has everything you need.</p>
     </div>
   </section>
 
@@ -238,11 +254,11 @@
         <div>
           <div class="book-cta">
             <h2>Want to Book a Show?</h2>
-            <p>Breweries, taprooms, restaurants, private events — Jacob plays well with noise, low light, and last-minute song requests. Head to the booking page for all the details.</p>
+            <p>Breweries, taprooms, restaurants, private events - Jacob plays well with noise, low light, and last-minute song requests. Head to the booking page for all the details.</p>
             <a href="book.html" class="btn btn-primary">Go to Booking Page</a>
           </div>
           <a class="tip-row" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
-            <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo — @jbsmith2198</span></span>
+            <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo - @jbsmith2198</span></span>
             <span class="tip-arrow">→</span>
           </a>
         </div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Jacob Smith Music</title>
+<title>About - Jacob Smith Music</title>
 <meta name="description" content="Learn about Jacob Smith, solo acoustic musician based in Milford, Michigan.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,9 +99,6 @@
     0%,100%{transform:translateX(0);}
     50%{transform:translateX(4px);}
   }
-  /* Push header below banner */
-  #next-show-banner ~ header,
-  body > header { top: 40px !important; }
 </style>
 <script>
 (function(){
@@ -129,6 +126,25 @@
 })();
 </script>
 
+
+<style>@media(max-width:640px){#next-show-banner .ns-time,#next-show-banner .ns-city{display:none;}}</style>
+<script>
+(function(){
+  function bannerOffset(){
+    var b=document.getElementById('next-show-banner');
+    var h=b?b.offsetHeight:0;
+    var hdr=document.querySelector('header');
+    if(hdr){
+      if(getComputedStyle(hdr).position==='fixed'){hdr.style.setProperty('top',h+'px','important');}
+      else{document.body.style.paddingTop=h+'px';}
+    }
+  }
+  window.bannerOffset=bannerOffset;
+  window.addEventListener('resize',bannerOffset);
+  window.addEventListener('load',bannerOffset);
+  bannerOffset();
+})();
+</script>
 
 <header>
   <div class="wrap nav-row">
@@ -168,7 +184,7 @@
     <div class="wrap">
       <p class="section-label">The Artist</p>
       <h1>Just Him &amp;<br>The Guitar</h1>
-      <p class="lead">Solo acoustic musician based in Milford, Michigan — playing original songs and covers across rock, country, folk, and everything in between.</p>
+      <p class="lead">Solo acoustic musician based in Milford, Michigan - playing original songs and covers across rock, country, folk, and everything in between.</p>
     </div>
   </section>
 
@@ -176,9 +192,9 @@
     <div class="wrap">
       <div class="bio-grid">
         <div>
-          <p>Jacob Smith grew up in Byron, MI — a small town where music had a way of finding people early. He picked up a guitar and never really put it down. Now based in Milford, Michigan, he plays entirely acoustic — no backing tracks, no band, just a guitar and a room full of people.</p>
-          <p>His live performances are built for the rooms he plays — breweries, taprooms, golf courses, restaurants — spaces where people gather and music is the backdrop that ties it all together. He reads a room instinctively, shifting between crowd favorites and deep cuts, originals and covers, keeping energy up without ever losing the thread.</p>
-          <p>Growing up surrounded by classic rock, country, and folk gave him a wide range to pull from — and he pulls from all of it. If you've got a space and a crowd, he's got a guitar and a setlist.</p>
+          <p>Jacob Smith grew up in Byron, MI - a small town where music had a way of finding people early. He picked up a guitar and never really put it down. Now based in Milford, Michigan, he plays entirely acoustic - no backing tracks, no band, just a guitar and a room full of people.</p>
+          <p>His live performances are built for the rooms he plays - breweries, taprooms, golf courses, restaurants - spaces where people gather and music is the backdrop that ties it all together. He reads a room instinctively, shifting between crowd favorites and deep cuts, originals and covers, keeping energy up without ever losing the thread.</p>
+          <p>Growing up surrounded by classic rock, country, and folk gave him a wide range to pull from - and he pulls from all of it. If you've got a space and a crowd, he's got a guitar and a setlist.</p>
           <div class="tag-list">
             <span class="tag">Originals &amp; Covers</span>
             <span class="tag">Rock / Country / Folk</span>
@@ -189,8 +205,8 @@
         </div>
         <div>
           <div class="pull-quote">
-            Solo acoustic — one guitar, every genre I can fit on it.
-            <cite>— Jacob Smith</cite>
+            Solo acoustic - one guitar, every genre I can fit on it.
+            <cite>- Jacob Smith</cite>
           </div>
           <div style="display:flex;gap:14px;flex-wrap:wrap;">
             <a href="book.html" class="btn btn-primary">Book a Show</a>
