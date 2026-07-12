@@ -389,15 +389,20 @@
     if(window.bannerOffset) window.bannerOffset();
   }
 
+  var GIGS_PREVIEW_COUNT=3;
+
   function fillList(shows){
     var wrap=document.getElementById('show-list-wrap');
+    var more=document.getElementById('show-list-more');
     if(!wrap) return;
     if(!shows.length){
       wrap.innerHTML='<p class="shows-note" style="margin:0;">No upcoming shows posted right now - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for new dates.</p>';
+      if(more) more.style.display='none';
       return;
     }
+    var preview=shows.slice(0,GIGS_PREVIEW_COUNT);
     var html='<div class="show-list">';
-    shows.forEach(function(sh){
+    preview.forEach(function(sh){
       var pill='<div class="date-pill"><span class="day-label">'+esc(sh.day)+'</span>'+esc(sh.display)+' &nbsp;·&nbsp; '+esc(sh.time)+'</div>';
       var name='<h3>'+esc(sh.venue)+'</h3>';
       var venue='<div class="venue-info">'+(sh.url?('<a href="'+esc(sh.url)+'" target="_blank" rel="noopener">'+name+'</a>'):name)+'<p class="address">'+esc(sh.city)+'</p></div>';
@@ -405,6 +410,7 @@
     });
     html+='</div>';
     wrap.innerHTML=html;
+    if(more) more.style.display=(shows.length>GIGS_PREVIEW_COUNT)?'block':'none';
   }
 
   fetch('/.netlify/functions/get-shows')
@@ -502,6 +508,9 @@
         <div class="loading" style="text-align:center;padding:56px 0;color:var(--grey);">
           <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
         </div>
+      </div>
+      <div id="show-list-more" style="margin-top:32px; display:none;">
+        <a href="calendar.html" class="btn btn-primary">View All Upcoming Gigs</a>
       </div>
       <p class="shows-note" style="margin-top:24px;">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
     </div>
