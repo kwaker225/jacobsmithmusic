@@ -193,27 +193,6 @@
   .shows-note{margin-top:24px; font-size:0.88rem; color:var(--grey);}
   .shows-note a{color:var(--red); border-bottom:1px solid var(--red);}
 
-  /* ── GIGS TOGGLE (collapsed by default) ── */
-  .gigs-toggle{
-    display:flex; align-items:center; justify-content:space-between; gap:20px;
-    width:100%; background:none; border:none; cursor:pointer; text-align:left;
-    padding:0; color:inherit; font-family:inherit;
-  }
-  .gigs-toggle-title{
-    font-size:clamp(2.4rem,6vw,4.2rem); color:var(--white); margin:0;
-    transition:color .2s ease;
-  }
-  .gigs-count{
-    font-family:'Arimo',sans-serif; font-size:1rem; font-weight:700;
-    letter-spacing:0.06em; text-transform:none; color:var(--red);
-    margin-left:14px; vertical-align:middle;
-  }
-  .gigs-arrow{font-size:1.6rem; color:var(--grey); transition:transform .3s ease; flex-shrink:0;}
-  .gigs-toggle:hover .gigs-toggle-title{color:var(--red);}
-  .gigs-toggle.open .gigs-arrow{transform:rotate(180deg);}
-  .gigs-panel{display:none; margin-top:40px;}
-  .gigs-panel.open{display:block;}
-
   /* ── PAST SHOWS ── */
   .show-row.past{opacity:0.38;}
   .show-row.past .date-pill{background:transparent; border:1.5px solid rgba(255,255,255,0.15); color:var(--grey);}
@@ -407,17 +386,20 @@
     if(window.bannerOffset) window.bannerOffset();
   }
 
+  var GIGS_PREVIEW_COUNT=3;
+
   function fillList(shows){
     var wrap=document.getElementById('show-list-wrap');
-    var count=document.getElementById('gigsCount');
-    if(count) count.textContent=shows.length?(' · '+shows.length+' show'+(shows.length===1?'':'s')):'';
+    var more=document.getElementById('show-list-more');
     if(!wrap) return;
     if(!shows.length){
       wrap.innerHTML='<p class="shows-note" style="margin:0;">No upcoming shows posted right now - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for new dates.</p>';
+      if(more) more.style.display='none';
       return;
     }
+    var preview=shows.slice(0,GIGS_PREVIEW_COUNT);
     var html='<div class="show-list">';
-    shows.forEach(function(sh){
+    preview.forEach(function(sh){
       var pill='<div class="date-pill"><span class="day-label">'+esc(sh.day)+'</span>'+esc(sh.display)+' &nbsp;·&nbsp; '+esc(sh.time)+'</div>';
       var name='<h3>'+esc(sh.venue)+'</h3>';
       var venue='<div class="venue-info">'+(sh.url?('<a href="'+esc(sh.url)+'" target="_blank" rel="noopener">'+name+'</a>'):name)+'<p class="address">'+esc(sh.city)+'</p></div>';
@@ -425,6 +407,7 @@
     });
     html+='</div>';
     wrap.innerHTML=html;
+    if(more) more.style.display=(shows.length>GIGS_PREVIEW_COUNT)?'block':'none';
   }
 
   fetch('/.netlify/functions/get-shows')
@@ -516,19 +499,17 @@
   <section class="shows-section" id="shows">
     <div class="wrap">
       <p class="section-label reveal">Upcoming Gigs</p>
-      <button class="gigs-toggle reveal" id="gigsToggle" aria-expanded="false" aria-controls="gigsPanel">
-        <h2 class="gigs-toggle-title">2026 Schedule<span class="gigs-count" id="gigsCount"></span></h2>
-        <span class="gigs-arrow" aria-hidden="true">&#9660;</span>
-      </button>
+      <h2 class="section-title reveal">2026 Schedule</h2>
 
-      <div class="gigs-panel" id="gigsPanel">
-        <div id="show-list-wrap">
-          <div class="loading" style="text-align:center;padding:56px 0;color:var(--grey);">
-            <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
-          </div>
+      <div id="show-list-wrap">
+        <div class="loading" style="text-align:center;padding:56px 0;color:var(--grey);">
+          <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
         </div>
-        <p class="shows-note" style="margin-top:24px;">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
       </div>
+      <div id="show-list-more" style="margin-top:32px; display:none;">
+        <a href="calendar.html" class="btn btn-primary">View All Upcoming Gigs</a>
+      </div>
+      <p class="shows-note" style="margin-top:24px;">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
     </div>
   </section>
 
@@ -762,25 +743,6 @@
   });
 
   document.getElementById('yr').textContent = new Date().getFullYear();
-
-  // Upcoming Gigs collapse/expand
-  const gigsToggle = document.getElementById('gigsToggle');
-  const gigsPanel = document.getElementById('gigsPanel');
-  function openGigsPanel(){
-    if(!gigsToggle||!gigsPanel) return;
-    gigsToggle.classList.add('open');
-    gigsPanel.classList.add('open');
-    gigsToggle.setAttribute('aria-expanded','true');
-  }
-  if(gigsToggle && gigsPanel){
-    gigsToggle.addEventListener('click', () => {
-      const open = gigsToggle.classList.toggle('open');
-      gigsPanel.classList.toggle('open', open);
-      gigsToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    if(location.hash === '#shows') openGigsPanel();
-    document.querySelectorAll('a[href="#shows"]').forEach(a => a.addEventListener('click', openGigsPanel));
-  }
 </script>
 
 <script>
