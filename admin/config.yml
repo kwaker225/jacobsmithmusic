@@ -44,6 +44,18 @@ collections:
               - { label: "YouTube Video ID", name: "id", widget: "string", hint: "Just the ID from the YouTube URL e.g. RszS1Pvjybc" }
               - { label: "Title", name: "title", widget: "string" }
 
+      - label: "Facebook Posts"
+        name: "facebook_posts"
+        file: "_data/facebook-posts.json"
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            fields:
+              - { label: "Photo", name: "image", widget: "image" }
+              - { label: "Caption", name: "caption", widget: "string" }
+              - { label: "Link to Post", name: "link", widget: "string", hint: "Paste the Facebook post URL" }
+
       - label: "Venues (Where He's Played)"
         name: "venues"
         file: "_data/venues.json"
