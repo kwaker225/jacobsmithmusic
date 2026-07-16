@@ -43,8 +43,8 @@
   .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:20px;}
   .page-hero p.lead{font-size:1.15rem;color:var(--grey);max-width:560px;}
 
-  /* ── SHOW LIST ── */
-  .cal-section{padding:64px 0 32px;background:#0A0A0A;}
+  /* ── CALENDAR ── */
+  .cal-section{padding:64px 0 96px;background:#0A0A0A;}
 
   /* Loading state */
   .loading{text-align:center;padding:64px 0;color:var(--grey);}
@@ -52,44 +52,48 @@
   .loading-dot:nth-child(2){animation-delay:.2s;}
   .loading-dot:nth-child(3){animation-delay:.4s;}
   @keyframes bounce{0%,80%,100%{transform:scale(0);}40%{transform:scale(1);}}
-
-  /* Show cards */
-  .show-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;}
-  .show-card{
-    display:flex;flex-direction:column;gap:16px;
-    background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;
-    padding:28px 24px;transition:border-color .2s ease, transform .2s ease;
-  }
-  a.show-card{cursor:pointer;}
-  .show-card:hover{border-color:var(--red);transform:translateY(-4px);}
-  .show-card .card-date{display:flex;align-items:baseline;gap:10px;}
-  .show-card .day-num{font-family:'Anton',sans-serif;font-size:2.6rem;line-height:0.85;color:var(--red);}
-  .show-card .month-day{display:flex;flex-direction:column;}
-  .show-card .month-lbl{font-family:'Arimo',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);}
-  .show-card .weekday-lbl{font-family:'Arimo',sans-serif;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);}
-  .show-card h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
-  .show-card .address{font-size:0.85rem;color:var(--grey);}
-  .show-card:hover h3{color:var(--red);}
-  .show-card .card-time{font-size:0.8rem;color:var(--grey);margin-top:auto;padding-top:14px;border-top:1px dashed rgba(255,255,255,0.15);}
   .no-shows{padding:48px 0;color:var(--grey);font-size:1rem;}
 
-  /* ── PAST SHOWS ── */
-  .past-section{padding:48px 0 96px;background:#0A0A0A;}
-  .past-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;cursor:pointer;color:var(--white);font-family:'Arimo',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;}
-  .past-toggle:hover{color:var(--red);}
-  .past-toggle .pt-label{display:flex;align-items:center;gap:12px;}
-  .past-toggle .pt-count{color:var(--red);font-size:0.78rem;}
-  .past-toggle .pt-arrow{transition:transform .3s ease;color:var(--grey);}
-  .past-toggle.open .pt-arrow{transform:rotate(180deg);}
-  .past-list{display:none;padding-top:24px;}
-  .past-list.open{display:block;}
-  .past-row{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:20px;padding:16px 0;border-bottom:1px dashed rgba(255,255,255,0.1);opacity:0.5;}
-  .past-row:first-child{border-top:1px dashed rgba(255,255,255,0.1);}
-  .past-pill{background:transparent;border:1.5px solid rgba(255,255,255,0.15);color:var(--grey);font-family:'Arimo',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 14px;text-align:center;line-height:1.5;border-radius:4px;}
-  .past-pill .day-label{display:block;font-size:0.65rem;opacity:0.7;margin-bottom:2px;}
-  .past-venue h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);margin-bottom:4px;text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);}
-  .past-venue .address{font-size:0.85rem;color:rgba(154,154,154,0.6);}
-  @media(max-width:620px){.past-row{grid-template-columns:1fr;gap:8px;}}
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+  .cal-nav h2{font-size:clamp(1.5rem,4vw,2.2rem);color:var(--white);}
+  .cal-nav-btns{display:flex;align-items:center;gap:8px;}
+  .cal-nav-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--line);background:transparent;color:var(--white);cursor:pointer;transition:border-color .2s ease,background .2s ease;font-family:'Arimo',sans-serif;}
+  .cal-nav-btn svg{width:18px;height:18px;}
+  .cal-nav-btn:hover{border-color:var(--red);background:rgba(196,32,60,0.12);}
+  .cal-today-btn{height:40px;padding:0 16px;border:1.5px solid var(--line);background:transparent;color:var(--grey);cursor:pointer;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;transition:border-color .2s ease,color .2s ease;}
+  .cal-today-btn:hover{border-color:var(--red);color:var(--white);}
+
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .cal-weekday{background:var(--bg-soft);padding:10px 4px;text-align:center;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
+  .cal-day{background:#0A0A0A;min-height:92px;padding:7px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;border:none;color:var(--white);font-family:'Arimo',sans-serif;width:100%;}
+  button.cal-day{cursor:default;}
+  .cal-day.pad{opacity:0.3;}
+  .cal-day .day-num{font-weight:700;font-size:0.8rem;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;}
+  .cal-day.today .day-num{background:var(--red);color:#fff;}
+  .cal-day.past{opacity:0.45;}
+  .cal-day.has-event{cursor:pointer;}
+  .cal-day.has-event:hover{background:rgba(196,32,60,0.1);}
+  .cal-day.selected{box-shadow:inset 0 0 0 2px var(--red);background:rgba(196,32,60,0.08);}
+  .day-event{font-size:0.66rem;font-weight:700;letter-spacing:0.01em;background:var(--red-pill,#B01E36);color:#fff;padding:3px 6px;border-radius:3px;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;line-height:1.3;}
+  .cal-day.past .day-event{background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--grey);}
+  .day-event.more{background:transparent;color:var(--grey);font-weight:400;}
+  @media(max-width:620px){
+    .cal-day{min-height:64px;padding:5px;}
+    .cal-weekday{font-size:0.58rem;padding:8px 2px;}
+    .day-event{font-size:0;padding:0;width:8px;height:8px;border-radius:50%;}
+  }
+
+  .cal-detail{margin-top:28px;background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);padding:28px 24px;}
+  .cal-detail .cd-empty{color:var(--grey);font-size:0.95rem;}
+  .cal-detail .cd-show{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;}
+  .cal-detail .cd-show + .cd-show{margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.12);}
+  .cal-detail .cd-date{background:var(--red-pill,#B01E36);color:#fff;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 16px;text-align:center;border-radius:4px;line-height:1.5;white-space:nowrap;}
+  .cal-detail .cd-date .cd-day-label{display:block;font-size:0.66rem;opacity:0.8;margin-bottom:2px;}
+  .cal-detail h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+  .cal-detail h3 a{color:inherit;}
+  .cal-detail h3 a:hover{color:var(--red);}
+  .cal-detail .cd-meta{font-size:0.88rem;color:var(--grey);}
+  @media(max-width:480px){.cal-detail .cd-show{grid-template-columns:1fr;gap:10px;}.cal-detail .cd-date{text-align:left;}}
 
   footer{padding:40px 0 52px;border-top:1px solid var(--line);text-align:center;color:var(--grey);font-size:0.84rem;background:#0A0A0A;}
   footer .fname{color:var(--white);font-weight:700;letter-spacing:0.08em;}
@@ -139,7 +143,7 @@
   <div class="wrap nav-row">
     <a href="index.html" class="logo"><span class="logo-bar"></span>Jacob Smith Music</a>
     <nav class="main-nav">
-      <a href="index.html#shows">Shows</a>
+      <a href="index.html">Home</a>
       <a href="calendar.html" class="active">Calendar</a>
       <a href="about.html">About</a>
       <a href="where-hes-played.html">Played</a>
@@ -159,7 +163,7 @@
     </button>
   </div>
   <nav>
-    <a href="index.html#shows">Shows</a>
+    <a href="index.html">Home</a>
     <a href="calendar.html">Calendar</a>
     <a href="about.html">About</a>
     <a href="where-hes-played.html">Played</a>
@@ -173,33 +177,20 @@
     <div class="wrap">
       <p class="section-label">Mark Your Calendar</p>
       <h1>Upcoming<br>Shows</h1>
-      <p class="lead">Catch Jacob live. Tap any date for venue details.</p>
+      <p class="lead">Catch Jacob live. Browse the month and tap any highlighted date for venue details.</p>
     </div>
   </section>
 
   <section class="cal-section">
     <div class="wrap">
       <p class="section-label">On the Books</p>
-      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:40px;">2026 Schedule</h2>
-      <div id="show-list-wrap">
+      <div id="cal-wrap">
         <div class="loading">
           <span class="loading-dot"></span>
           <span class="loading-dot"></span>
           <span class="loading-dot"></span>
         </div>
       </div>
-      <p style="margin-top:24px;font-size:0.85rem;color:var(--grey);">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" style="color:var(--red);border-bottom:1px solid var(--red);">follow on Facebook</a> for the latest.</p>
-    </div>
-  </section>
-
-  <!-- PAST SHOWS -->
-  <section class="past-section">
-    <div class="wrap">
-      <button class="past-toggle" id="pastToggle">
-        <span class="pt-label">Past Shows <span class="pt-count" id="pastCount"></span></span>
-        <span class="pt-arrow">▼</span>
-      </button>
-      <div class="past-list" id="pastList"></div>
     </div>
   </section>
 </main>
@@ -211,88 +202,181 @@
 </footer>
 
 <script>
-  // Past shows (manually maintained)
+  // Past shows (manually maintained - the live feed only returns future events)
   const PAST_SHOWS = [
     { date:"2026-06-19", display:"Jun 19", day:"Friday", venue:"SunnySips Bar & Grill", city:"Howell, MI", time:"7:30–9:30 PM" },
     { date:"2026-06-26", display:"Jun 26", day:"Friday", venue:"Dunham Hills Golf Club", city:"Hartland, MI", time:"5:00–9:00 PM" },
     { date:"2026-07-03", display:"Jul 3", day:"Friday", venue:"Lost Arrow Resort On the Water", city:"Gladwin, MI", time:"6:00–10:00 PM" },
   ];
 
-  const today = new Date(); today.setHours(0,0,0,0);
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const WEEKDAY_LABELS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-  // Fetch upcoming shows from Netlify Function
+  const today = new Date(); today.setHours(0,0,0,0);
+  const ymd = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  const esc = str => String(str==null?'':str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const todayStr = ymd(today);
+
+  const calWrap = document.getElementById('cal-wrap');
+  let showsByDate = {};
+  let calYear = today.getFullYear();
+  let calMonth = today.getMonth();
+  let selectedDate = null;
+
+  // Fetch upcoming shows from Netlify Function and build the interactive month view
   async function loadShows() {
-    const wrap = document.getElementById('show-list-wrap');
+    let upcoming = [];
     try {
       const res = await fetch('/.netlify/functions/get-shows');
-      const shows = await res.json();
-
-      if (!shows.length) {
-        wrap.innerHTML = '<p class="no-shows">No upcoming shows at the moment - check back soon!</p>';
-        return;
-      }
-
-      // Update banner
-      const next = shows[0];
-      const b = document.getElementById('next-show-banner');
-      if (next && b) {
-        document.querySelector('.ns-date').textContent = next.display;
-        document.querySelector('.ns-venue').textContent = next.venue;
-        document.querySelector('.ns-city').textContent = '· ' + next.city;
-        document.querySelector('.ns-time').textContent = next.time !== 'TBD' ? '· ' + next.time : '';
-        document.getElementById('ns-link').href = next.url || '#';
-        b.style.display = 'block';
-        if (window.bannerOffset) window.bannerOffset();
-      }
-
-      // Render show grid
-      const grid = document.createElement('div');
-      grid.className = 'show-grid';
-      shows.forEach(show => {
-        const [monthLbl, dayNum] = show.display.split(' ');
-        const card = document.createElement(show.url ? 'a' : 'div');
-        card.className = 'show-card';
-        if (show.url) { card.href = show.url; card.target = '_blank'; card.rel = 'noopener'; }
-        card.innerHTML = `
-          <div class="card-date">
-            <span class="day-num">${dayNum}</span>
-            <span class="month-day">
-              <span class="month-lbl">${monthLbl}</span>
-              <span class="weekday-lbl">${show.day}</span>
-            </span>
-          </div>
-          <div>
-            <h3>${show.venue}</h3>
-            <p class="address">${show.city}</p>
-          </div>
-          <p class="card-time">${show.time !== 'TBD' ? show.time : 'Time TBD'}</p>`;
-        grid.appendChild(card);
-      });
-      wrap.innerHTML = '';
-      wrap.appendChild(grid);
-
-    } catch(err) {
-      wrap.innerHTML = '<p class="no-shows">Couldn\'t load shows right now - check back soon!</p>';
+      upcoming = await res.json();
+      if (!Array.isArray(upcoming)) upcoming = [];
+    } catch (err) {
+      upcoming = [];
     }
+
+    // Update banner
+    const next = upcoming[0];
+    const b = document.getElementById('next-show-banner');
+    if (next && b) {
+      document.querySelector('.ns-date').textContent = next.display;
+      document.querySelector('.ns-venue').textContent = next.venue;
+      document.querySelector('.ns-city').textContent = '· ' + next.city;
+      document.querySelector('.ns-time').textContent = next.time !== 'TBD' ? '· ' + next.time : '';
+      document.getElementById('ns-link').href = next.url || '#';
+      b.style.display = 'block';
+      if (window.bannerOffset) window.bannerOffset();
+    }
+
+    showsByDate = {};
+    [...PAST_SHOWS, ...upcoming].forEach(s => {
+      if (!s.date) return;
+      (showsByDate[s.date] = showsByDate[s.date] || []).push(s);
+    });
+
+    buildCalendarShell();
+
+    // Land on the month of the next upcoming show and pre-select it
+    if (next && next.date) {
+      const nd = new Date(next.date + 'T00:00:00');
+      calYear = nd.getFullYear();
+      calMonth = nd.getMonth();
+      selectedDate = next.date;
+    }
+    renderMonth();
+  }
+
+  function buildCalendarShell() {
+    calWrap.innerHTML = `
+      <div class="cal-nav">
+        <h2 id="cal-month-label"></h2>
+        <div class="cal-nav-btns">
+          <button class="cal-today-btn" id="cal-today" type="button">Today</button>
+          <button class="cal-nav-btn" id="cal-prev" type="button" aria-label="Previous month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="cal-nav-btn" id="cal-next" type="button" aria-label="Next month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="cal-grid" id="cal-grid" role="grid"></div>
+      <div class="cal-detail" id="cal-detail"></div>
+    `;
+    document.getElementById('cal-prev').addEventListener('click', () => changeMonth(-1));
+    document.getElementById('cal-next').addEventListener('click', () => changeMonth(1));
+    document.getElementById('cal-today').addEventListener('click', () => {
+      calYear = today.getFullYear();
+      calMonth = today.getMonth();
+      selectedDate = showsByDate[todayStr] ? todayStr : selectedDate;
+      renderMonth();
+    });
+    document.getElementById('cal-grid').addEventListener('click', e => {
+      const cell = e.target.closest('[data-date]');
+      if (!cell || !showsByDate[cell.dataset.date]) return;
+      selectedDate = cell.dataset.date;
+      document.querySelectorAll('.cal-day.selected').forEach(el => el.classList.remove('selected'));
+      cell.classList.add('selected');
+      renderDetail();
+      if (window.innerWidth < 760) document.getElementById('cal-detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+
+  function changeMonth(delta) {
+    calMonth += delta;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderMonth();
+  }
+
+  function renderMonth() {
+    document.getElementById('cal-month-label').textContent = MONTH_NAMES[calMonth] + ' ' + calYear;
+
+    const startOffset = new Date(calYear, calMonth, 1).getDay();
+    const gridStart = new Date(calYear, calMonth, 1 - startOffset);
+
+    let html = WEEKDAY_LABELS.map(w => `<div class="cal-weekday">${w}</div>`).join('');
+
+    for (let i = 0; i < 42; i++) {
+      const cellDate = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate() + i);
+      const dateStr = ymd(cellDate);
+      const inMonth = cellDate.getMonth() === calMonth;
+      const dayShows = showsByDate[dateStr] || [];
+      const hasEvent = dayShows.length > 0;
+
+      const classes = ['cal-day'];
+      if (!inMonth) classes.push('pad');
+      if (dateStr === todayStr) classes.push('today');
+      if (cellDate < today) classes.push('past');
+      if (hasEvent) classes.push('has-event');
+      if (hasEvent && dateStr === selectedDate) classes.push('selected');
+
+      let eventsHtml = '';
+      if (hasEvent) {
+        const shown = dayShows.slice(0, 2);
+        eventsHtml = shown.map(s => `<span class="day-event">${esc(s.venue)}</span>`).join('');
+        if (dayShows.length > shown.length) {
+          eventsHtml += `<span class="day-event more">+${dayShows.length - shown.length} more</span>`;
+        }
+      }
+
+      const tag = hasEvent ? 'button' : 'div';
+      html += `<${tag} class="${classes.join(' ')}" data-date="${dateStr}"${hasEvent ? ' type="button"' : ''}>
+        <span class="day-num">${cellDate.getDate()}</span>
+        ${eventsHtml}
+      </${tag}>`;
+    }
+
+    document.getElementById('cal-grid').innerHTML = html;
+    renderDetail();
+  }
+
+  function renderDetail() {
+    const detail = document.getElementById('cal-detail');
+    const dayShows = selectedDate ? (showsByDate[selectedDate] || []) : [];
+
+    if (!dayShows.length) {
+      detail.innerHTML = '<p class="cd-empty">Tap a highlighted date on the calendar to see show details.</p>';
+      return;
+    }
+
+    detail.innerHTML = dayShows.map(s => {
+      const nameHtml = s.url
+        ? `<h3><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.venue)}</a></h3>`
+        : `<h3>${esc(s.venue)}</h3>`;
+      const metaParts = [];
+      if (s.city) metaParts.push(esc(s.city));
+      metaParts.push(s.time && s.time !== 'TBD' ? esc(s.time) : 'Time TBD');
+      return `<div class="cd-show">
+        <div class="cd-date"><span class="cd-day-label">${esc(s.day)}</span>${esc(s.display)}</div>
+        <div>
+          ${nameHtml}
+          <p class="cd-meta">${metaParts.join(' · ')}</p>
+        </div>
+      </div>`;
+    }).join('');
   }
 
   loadShows();
-
-  // Past shows
-  const pastList = document.getElementById('pastList');
-  const pastCount = document.getElementById('pastCount');
-  const allPast = PAST_SHOWS.filter(s => new Date(s.date+'T00:00:00') < today);
-  pastCount.textContent = allPast.length + ' show' + (allPast.length===1?'':'s');
-  [...allPast].reverse().forEach(s => {
-    const row = document.createElement('div');
-    row.className = 'past-row';
-    row.innerHTML = `<div class="past-pill"><span class="day-label">${s.day}</span>${s.display} · ${s.time}</div><div class="past-venue"><h3>${s.venue}</h3><p class="address">${s.city}</p></div>`;
-    pastList.appendChild(row);
-  });
-  document.getElementById('pastToggle').addEventListener('click', function() {
-    this.classList.toggle('open');
-    pastList.classList.toggle('open');
-  });
 
   // Nav
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.add('open'));
