@@ -397,7 +397,7 @@
       return;
     }
     var html='<div class="show-list">';
-    shows.forEach(function(sh){
+    shows.slice(0,3).forEach(function(sh){
       var pill='<div class="date-pill"><span class="day-label">'+esc(sh.day)+'</span>'+esc(sh.display)+' &nbsp;·&nbsp; '+esc(sh.time)+'</div>';
       var name='<h3>'+esc(sh.venue)+'</h3>';
       var venue='<div class="venue-info">'+(sh.url?('<a href="'+esc(sh.url)+'" target="_blank" rel="noopener">'+name+'</a>'):name)+'<p class="address">'+esc(sh.city)+'</p></div>';
@@ -502,6 +502,9 @@
         <div class="loading" style="text-align:center;padding:56px 0;color:var(--grey);">
           <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
         </div>
+      </div>
+      <div class="reveal" style="margin-top:28px;">
+        <a href="calendar.html" class="btn btn-ghost">View Full Calendar →</a>
       </div>
       <p class="shows-note" style="margin-top:24px;">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
     </div>

@@ -75,8 +75,10 @@
   .cal-day.has-event:hover{background:rgba(196,32,60,0.1);}
   .cal-day.selected{box-shadow:inset 0 0 0 2px var(--red);background:rgba(196,32,60,0.08);}
   .day-event{font-size:0.66rem;font-weight:700;letter-spacing:0.01em;background:var(--red-pill,#B01E36);color:#fff;padding:3px 6px;border-radius:3px;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;line-height:1.3;}
-  .cal-day.past .day-event{background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--grey);}
   .day-event.more{background:transparent;color:var(--grey);font-weight:400;}
+  .day-dots{display:flex;flex-wrap:wrap;align-items:center;gap:4px;}
+  .day-dot{width:6px;height:6px;border-radius:50%;background:var(--grey);flex-shrink:0;}
+  .day-dot-count{font-size:0.6rem;color:var(--grey);}
   @media(max-width:620px){
     .cal-day{min-height:64px;padding:5px;}
     .cal-weekday{font-size:0.58rem;padding:8px 2px;}
@@ -322,16 +324,23 @@
       const inMonth = cellDate.getMonth() === calMonth;
       const dayShows = showsByDate[dateStr] || [];
       const hasEvent = dayShows.length > 0;
+      const isPast = cellDate < today;
 
       const classes = ['cal-day'];
       if (!inMonth) classes.push('pad');
       if (dateStr === todayStr) classes.push('today');
-      if (cellDate < today) classes.push('past');
+      if (isPast) classes.push('past');
       if (hasEvent) classes.push('has-event');
       if (hasEvent && dateStr === selectedDate) classes.push('selected');
 
       let eventsHtml = '';
-      if (hasEvent) {
+      if (hasEvent && isPast) {
+        // Past dates: greyed-out dots (one per show) so the count is visible at a glance
+        const shownDots = Math.min(dayShows.length, 5);
+        eventsHtml = '<span class="day-dots">' + '<span class="day-dot"></span>'.repeat(shownDots)
+          + (dayShows.length > shownDots ? `<span class="day-dot-count">+${dayShows.length - shownDots}</span>` : '')
+          + '</span>';
+      } else if (hasEvent) {
         const shown = dayShows.slice(0, 2);
         eventsHtml = shown.map(s => `<span class="day-event">${esc(s.venue)}</span>`).join('');
         if (dayShows.length > shown.length) {
@@ -340,7 +349,8 @@
       }
 
       const tag = hasEvent ? 'button' : 'div';
-      html += `<${tag} class="${classes.join(' ')}" data-date="${dateStr}"${hasEvent ? ' type="button"' : ''}>
+      const titleAttr = hasEvent && isPast ? ` title="${esc(dayShows.map(s => s.venue).join(', '))}"` : '';
+      html += `<${tag} class="${classes.join(' ')}" data-date="${dateStr}"${hasEvent ? ' type="button"' : ''}${titleAttr}>
         <span class="day-num">${cellDate.getDate()}</span>
         ${eventsHtml}
       </${tag}>`;
