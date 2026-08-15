@@ -228,6 +228,14 @@
   }
   @media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
 
+  /* ── GALLERY ── */
+  .gallery-grid{display:grid; grid-template-columns:1fr 1.4fr; gap:16px;}
+  .gallery-item{display:block; overflow:hidden; border:1px solid var(--line); background:var(--bg-soft-2);}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; aspect-ratio:3/4; display:block; transition:transform .4s ease, opacity .2s ease;}
+  .gallery-item:nth-child(2) img{aspect-ratio:16/9;}
+  .gallery-item:hover img{transform:scale(1.04); opacity:0.9;}
+  @media(max-width:700px){.gallery-grid{grid-template-columns:1fr;}}
+
   /* ── CONTACT ── */
   /* ── VENUE MARQUEE ── */
   .marquee-section{
@@ -389,15 +397,20 @@
     if(window.bannerOffset) window.bannerOffset();
   }
 
+  var GIGS_PREVIEW_COUNT=3;
+
   function fillList(shows){
     var wrap=document.getElementById('show-list-wrap');
+    var more=document.getElementById('show-list-more');
     if(!wrap) return;
     if(!shows.length){
       wrap.innerHTML='<p class="shows-note" style="margin:0;">No upcoming shows posted right now - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for new dates.</p>';
+      if(more) more.style.display='none';
       return;
     }
+    var preview=shows.slice(0,GIGS_PREVIEW_COUNT);
     var html='<div class="show-list">';
-    shows.forEach(function(sh){
+    preview.forEach(function(sh){
       var pill='<div class="date-pill"><span class="day-label">'+esc(sh.day)+'</span>'+esc(sh.display)+' &nbsp;·&nbsp; '+esc(sh.time)+'</div>';
       var name='<h3>'+esc(sh.venue)+'</h3>';
       var venue='<div class="venue-info">'+(sh.url?('<a href="'+esc(sh.url)+'" target="_blank" rel="noopener">'+name+'</a>'):name)+'<p class="address">'+esc(sh.city)+'</p></div>';
@@ -405,6 +418,7 @@
     });
     html+='</div>';
     wrap.innerHTML=html;
+    if(more) more.style.display=(shows.length>GIGS_PREVIEW_COUNT)?'block':'none';
   }
 
   fetch('/.netlify/functions/get-shows')
@@ -503,6 +517,9 @@
           <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
         </div>
       </div>
+      <div id="show-list-more" style="margin-top:32px; display:none;">
+        <a href="calendar.html" class="btn btn-primary">View All Upcoming Gigs</a>
+      </div>
       <p class="shows-note" style="margin-top:24px;">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
     </div>
   </section>
@@ -522,10 +539,29 @@
             <span class="tag">Solo Act</span>
           </div>
         </div>
-        <div class="pull-quote reveal">
-          Solo acoustic - one guitar, every genre I can fit on it.
-          <cite>- Jacob Smith</cite>
+        <div class="reveal">
+          <img src="images/jacob-tent-front.jpg" alt="Jacob Smith playing guitar and singing at an outdoor show" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto 24px;border:1px solid var(--line);border-top:3px solid var(--red);" loading="lazy" width="1100" height="1608">
+          <div class="pull-quote" style="margin-bottom:0;">
+            Solo acoustic - one guitar.
+            <cite>- Jacob Smith</cite>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="content-section" style="padding:0 0 88px;background:var(--bg);">
+    <div class="wrap">
+      <p class="section-label reveal">On Stage</p>
+      <h2 class="section-title reveal">Around The Room</h2>
+      <div class="gallery-grid reveal">
+        <a class="gallery-item" href="images/jacob-tent-side.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-tent-side.jpg" alt="Jacob Smith performing acoustic guitar under a tent at an outdoor event" loading="lazy" width="1100" height="1467">
+        </a>
+        <a class="gallery-item" href="images/jacob-venue-colorful.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-venue-colorful.jpg" alt="Jacob Smith performing indoors under colorful stage lighting" loading="lazy" width="1600" height="900">
+        </a>
       </div>
     </div>
   </section>
@@ -599,7 +635,7 @@
             <a class="social-btn" href="https://www.instagram.com/jbsmith2198" target="_blank" rel="noopener" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
             </a>
-            <a class="social-btn" href="https://www.youtube.com/@TheLilwaynester" target="_blank" rel="noopener" aria-label="YouTube">
+            <a class="social-btn" href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener" aria-label="YouTube">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 8.5s-.2-1.6-.85-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5h0s-4.9 0-7.55.2c-.4.1-1.3.1-2.1 1-.65.7-.85 2.3-.85 2.3S1.3 10.4 1.3 12.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.85 2.3c.8.9 1.85.87 2.32.97C6.3 21 12 21 12 21s4.9 0 7.55-.2c.4-.1 1.3-.1 2.1-1 .65-.7.85-2.3.85-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8z"/><path d="M10 9.5v6l5-3z" fill="currentColor" stroke="none"/></svg>
             </a>
             <a class="social-btn" href="https://linktr.ee/jbsmith2198" target="_blank" rel="noopener" aria-label="Linktree">
