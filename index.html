@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jacob Smith Music - LIVE Music in Michigan</title>
 <meta name="description" content="Jacob Smith plays LIVE acoustic music across Michigan - original songs and covers spanning rock, country, and folk. Based in Milford, MI. Book him for your venue.">
+<link rel="canonical" href="https://jacobsmithmusic.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jacob Smith Music">
+<meta property="og:title" content="Jacob Smith Music - LIVE Music in Michigan">
+<meta property="og:description" content="Jacob Smith plays LIVE acoustic music across Michigan - original songs and covers spanning rock, country, and folk. Based in Milford, MI. Book him for your venue.">
+<meta property="og:url" content="https://jacobsmithmusic.netlify.app/">
+<meta property="og:image" content="https://jacobsmithmusic.netlify.app/images/jacob-smith-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jacob Smith Music - LIVE Music in Michigan">
+<meta name="twitter:description" content="Jacob Smith plays LIVE acoustic music across Michigan - original songs and covers spanning rock, country, and folk. Based in Milford, MI. Book him for your venue.">
+<meta name="twitter:image" content="https://jacobsmithmusic.netlify.app/images/jacob-smith-og.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,8 +87,13 @@
     min-height:100vh;
     display:flex; align-items:flex-end;
     padding:0 0 70px;
-    position:relative; overflow:hidden;
+    position:relative; z-index:0; overflow:hidden;
     background:var(--bg);
+  }
+  .hero-photo{
+    position:absolute; inset:0; z-index:-1;
+    background-size:cover; background-position:center 32%;
+    filter:grayscale(0.2) brightness(0.5) contrast(1.08);
   }
   .hero::before{
     content:"";
@@ -86,6 +104,7 @@
       #7A0F20 30%,
       #2E050C 50%,
       #0A0A0A 70%);
+    opacity:0.72;
     z-index:0;
   }
   .hero::after{
@@ -227,6 +246,14 @@
     letter-spacing:0.14em; color:var(--grey); margin-top:18px; font-style:normal;
   }
   @media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ── GALLERY ── */
+  .gallery-grid{display:grid; grid-template-columns:1fr 1fr 1.4fr; gap:16px;}
+  .gallery-item{display:block; overflow:hidden; border:1px solid var(--line); background:var(--bg-soft-2);}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; aspect-ratio:3/4; display:block; transition:transform .4s ease, opacity .2s ease;}
+  .gallery-item:nth-child(3) img{aspect-ratio:4/3;}
+  .gallery-item:hover img{transform:scale(1.04); opacity:0.9;}
+  @media(max-width:760px){.gallery-grid{grid-template-columns:1fr 1fr;} .gallery-item:nth-child(3){grid-column:1/-1;}}
 
   /* ── CONTACT ── */
   /* ── VENUE MARQUEE ── */
@@ -486,6 +513,7 @@
 
   <!-- HERO -->
   <section class="hero" id="top">
+    <div class="hero-photo" style="background-image:url('images/jacob-columbia-street-wide.jpg');" role="img" aria-label="Jacob Smith performing acoustic guitar on Columbia Street in Detroit"></div>
     <div class="rosette" aria-hidden="true"></div>
     <div class="wrap hero-content">
       <p class="hero-label">Milford, Michigan</p>
@@ -531,10 +559,32 @@
             <span class="tag">Solo Act</span>
           </div>
         </div>
-        <div class="pull-quote reveal">
-          Solo acoustic - one guitar, every genre I can fit on it.
-          <cite>- Jacob Smith</cite>
+        <div class="reveal">
+          <img src="images/jacob-studio-portrait.jpg" alt="Jacob Smith holding an acoustic guitar at the mic" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto 24px;border:1px solid var(--line);border-top:3px solid var(--red);" loading="lazy" width="896" height="1195">
+          <div class="pull-quote" style="margin-bottom:0;">
+            Solo acoustic - one guitar, every genre I can fit on it.
+            <cite>- Jacob Smith</cite>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="content-section" style="padding:0 0 88px;background:var(--bg);">
+    <div class="wrap">
+      <p class="section-label reveal">On Stage</p>
+      <h2 class="section-title reveal">Around The Room</h2>
+      <div class="gallery-grid reveal">
+        <a class="gallery-item" href="images/jacob-busking-detroit.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-busking-detroit.jpg" alt="Jacob Smith performing acoustic guitar outdoors in downtown Detroit" loading="lazy" width="1200" height="2133">
+        </a>
+        <a class="gallery-item" href="images/jacob-columbia-street-night.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-columbia-street-night.jpg" alt="Jacob Smith playing a night show on Columbia Street in Detroit" loading="lazy" width="1200" height="1600">
+        </a>
+        <a class="gallery-item" href="images/jacob-columbia-street-wide.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-columbia-street-wide.jpg" alt="Jacob Smith performing under string lights on Columbia Street in Detroit" loading="lazy" width="1920" height="1440">
+        </a>
       </div>
     </div>
   </section>
@@ -726,10 +776,16 @@
                     <iframe src="https://www.youtube.com/embed/xnbv6eQiKSU" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                   </div>
                 </div>
+                <div class="short-slide">
+                  <div class="short-frame">
+                    <iframe src="https://www.youtube.com/embed/pTZhISI6ZPw" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                  </div>
+                </div>
               </div>
               <div class="shorts-dots">
                 <span class="short-dot active" data-idx="0"></span>
                 <span class="short-dot" data-idx="1"></span>
+                <span class="short-dot" data-idx="2"></span>
               </div>
               <div class="shorts-nav">
                 <button class="short-prev" aria-label="Previous">&#8592;</button>
