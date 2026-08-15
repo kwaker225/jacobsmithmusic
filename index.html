@@ -90,11 +90,6 @@
     position:relative; z-index:0; overflow:hidden;
     background:var(--bg);
   }
-  .hero-photo{
-    position:absolute; inset:0; z-index:-1;
-    background-size:cover; background-position:center 32%;
-    filter:grayscale(0.2) brightness(0.5) contrast(1.08);
-  }
   .hero::before{
     content:"";
     position:absolute; inset:-10%;
@@ -104,7 +99,6 @@
       #7A0F20 30%,
       #2E050C 50%,
       #0A0A0A 70%);
-    opacity:0.72;
     z-index:0;
   }
   .hero::after{
@@ -520,7 +514,6 @@
 
   <!-- HERO -->
   <section class="hero" id="top">
-    <div class="hero-photo" style="background-image:url('images/jacob-columbia-street-wide.jpg');" role="img" aria-label="Jacob Smith performing acoustic guitar on Columbia Street in Detroit"></div>
     <div class="rosette" aria-hidden="true"></div>
     <div class="wrap hero-content">
       <p class="hero-label">Milford, Michigan</p>
