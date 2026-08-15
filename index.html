@@ -228,6 +228,14 @@
   }
   @media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
 
+  /* ── GALLERY ── */
+  .gallery-grid{display:grid; grid-template-columns:1fr 1.4fr; gap:16px;}
+  .gallery-item{display:block; overflow:hidden; border:1px solid var(--line); background:var(--bg-soft-2);}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; aspect-ratio:3/4; display:block; transition:transform .4s ease, opacity .2s ease;}
+  .gallery-item:nth-child(2) img{aspect-ratio:16/9;}
+  .gallery-item:hover img{transform:scale(1.04); opacity:0.9;}
+  @media(max-width:700px){.gallery-grid{grid-template-columns:1fr;}}
+
   /* ── CONTACT ── */
   /* ── VENUE MARQUEE ── */
   .marquee-section{
@@ -531,10 +539,29 @@
             <span class="tag">Solo Act</span>
           </div>
         </div>
-        <div class="pull-quote reveal">
-          Solo acoustic - one guitar, every genre I can fit on it.
-          <cite>- Jacob Smith</cite>
+        <div class="reveal">
+          <img src="images/jacob-tent-front.jpg" alt="Jacob Smith playing guitar and singing at an outdoor show" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto 24px;border:1px solid var(--line);border-top:3px solid var(--red);" loading="lazy" width="1100" height="1608">
+          <div class="pull-quote" style="margin-bottom:0;">
+            Solo acoustic - one guitar, every genre I can fit on it.
+            <cite>- Jacob Smith</cite>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="content-section" style="padding:0 0 88px;background:var(--bg);">
+    <div class="wrap">
+      <p class="section-label reveal">On Stage</p>
+      <h2 class="section-title reveal">Around The Room</h2>
+      <div class="gallery-grid reveal">
+        <a class="gallery-item" href="images/jacob-tent-side.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-tent-side.jpg" alt="Jacob Smith performing acoustic guitar under a tent at an outdoor event" loading="lazy" width="1100" height="1467">
+        </a>
+        <a class="gallery-item" href="images/jacob-venue-colorful.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-venue-colorful.jpg" alt="Jacob Smith performing indoors under colorful stage lighting" loading="lazy" width="1600" height="900">
+        </a>
       </div>
     </div>
   </section>
