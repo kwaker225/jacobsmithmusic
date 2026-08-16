@@ -335,6 +335,23 @@
   .short-prev,.short-next{background:var(--bg-soft-2); border:1.5px solid var(--line); color:var(--white); padding:10px 20px; cursor:pointer; font-family:'Arimo',sans-serif; font-weight:700; font-size:1rem; transition:border-color .2s, background .2s;}
   .short-prev:hover,.short-next:hover{border-color:var(--red); background:rgba(196,32,60,0.12);}
 
+  /* ── FACEBOOK PHOTO CAROUSEL ── */
+  .fb-carousel{position:relative; overflow:hidden; border:1px solid var(--line); background:#000;}
+  .fb-carousel-track{display:flex; transition:transform .35s ease;}
+  .fb-carousel-slide{min-width:100%; position:relative; aspect-ratio:4/3; display:block;}
+  .fb-carousel-slide img{width:100%; height:100%; object-fit:cover; display:block;}
+  .fb-carousel-slide .fb-cap{
+    position:absolute; left:0; right:0; bottom:0; padding:14px 16px;
+    background:linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+    font-size:0.82rem; color:var(--white);
+  }
+  .fb-carousel-dots{display:flex; justify-content:center; gap:8px; padding:12px 0; background:var(--bg-soft);}
+  .fb-carousel-dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:background .2s; border:none; padding:0;}
+  .fb-carousel-dot.active{background:var(--red);}
+  .fb-carousel-nav{position:absolute; top:50%; left:0; right:0; display:flex; justify-content:space-between; transform:translateY(-50%); padding:0 10px; pointer-events:none;}
+  .fb-carousel-prev,.fb-carousel-next{pointer-events:auto; background:rgba(10,10,10,0.6); border:1px solid rgba(255,255,255,0.25); color:var(--white); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1rem; transition:border-color .2s, background .2s;}
+  .fb-carousel-prev:hover,.fb-carousel-next:hover{border-color:var(--red); background:rgba(196,32,60,0.5);}
+
   /* ── VENMO ROW ── */
   .tip-row{
     display:flex; align-items:center; justify-content:space-between; gap:16px;
@@ -559,8 +576,8 @@
         <a class="gallery-item" href="images/jacob-tent-side.jpg" target="_blank" rel="noopener">
           <img src="images/jacob-tent-side.jpg" alt="Jacob Smith performing acoustic guitar under a tent at an outdoor event" loading="lazy" width="1100" height="1467">
         </a>
-        <a class="gallery-item" href="images/jacob-neon-taproom.jpg" target="_blank" rel="noopener">
-          <img src="images/jacob-neon-taproom.jpg" alt="Jacob Smith performing at a taproom with a neon sign backdrop" loading="lazy" width="832" height="1280">
+        <a class="gallery-item" href="images/jacob-willowbrook-purple.jpg" target="_blank" rel="noopener">
+          <img src="images/jacob-willowbrook-purple.jpg" alt="Jacob Smith performing at Willow Brook Golf Course under colorful stage lighting" loading="lazy" width="900" height="1600">
         </a>
         <a class="gallery-item" href="images/jacob-guitar-detail.jpg" target="_blank" rel="noopener">
           <img src="images/jacob-guitar-detail.jpg" alt="Close-up of Jacob Smith playing acoustic guitar" loading="lazy" width="784" height="1372">
@@ -716,18 +733,28 @@
         <div class="reveal">
           <p class="section-label">Latest Updates</p>
 
-          <!-- DESKTOP: Facebook feed -->
+          <!-- DESKTOP: Facebook photo carousel -->
           <div class="fb-desktop-only">
             <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem); color:var(--white); margin-bottom:24px;">Follow on Facebook</h2>
-            <div style="border:1px solid var(--line); overflow:hidden; background:#0A0A0A; line-height:0;">
-              <iframe
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fjacobsmithmusic&tabs=timeline&width=500&height=580&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false"
-                width="100%" height="580"
-                style="border:none; overflow:hidden; display:block;"
-                scrolling="no" frameborder="0" allowfullscreen="true"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                loading="lazy" title="Jacob Smith Music on Facebook">
-              </iframe>
+            <div class="fb-carousel" id="fbCarousel">
+              <div class="fb-carousel-track">
+                <a class="fb-carousel-slide" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">
+                  <img src="images/jacob-neon-taproom.jpg" alt="Jacob Smith performing at a taproom with a neon sign backdrop" loading="lazy">
+                  <span class="fb-cap">Live at the taproom</span>
+                </a>
+                <a class="fb-carousel-slide" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">
+                  <img src="images/jacob-deck-show.jpg" alt="Jacob Smith performing acoustic guitar on a backyard deck under string lights" loading="lazy">
+                  <span class="fb-cap">Backyard show under the lights</span>
+                </a>
+              </div>
+              <div class="fb-carousel-nav">
+                <button class="fb-carousel-prev" aria-label="Previous photo">&#8592;</button>
+                <button class="fb-carousel-next" aria-label="Next photo">&#8594;</button>
+              </div>
+            </div>
+            <div class="fb-carousel-dots">
+              <button class="fb-carousel-dot active" data-idx="0" aria-label="Photo 1"></button>
+              <button class="fb-carousel-dot" data-idx="1" aria-label="Photo 2"></button>
             </div>
             <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
               <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1; justify-content:center; display:flex; gap:8px;">
@@ -820,6 +847,22 @@
   document.querySelector('.short-next')?.addEventListener('click', () => goTo((cur+1) % dots.length));
   document.querySelector('.short-prev')?.addEventListener('click', () => goTo((cur-1+dots.length) % dots.length));
   dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
+
+  // Facebook photo carousel
+  const fbCarousel = document.getElementById('fbCarousel');
+  if(fbCarousel){
+    const fbTrack = fbCarousel.querySelector('.fb-carousel-track');
+    const fbDots = document.querySelectorAll('.fb-carousel-dot');
+    let fbCur = 0;
+    function fbGoTo(idx){
+      fbCur = (idx + fbDots.length) % fbDots.length;
+      fbTrack.style.transform = `translateX(-${fbCur * 100}%)`;
+      fbDots.forEach((d,i) => d.classList.toggle('active', i===fbCur));
+    }
+    fbCarousel.querySelector('.fb-carousel-next')?.addEventListener('click', () => fbGoTo(fbCur+1));
+    fbCarousel.querySelector('.fb-carousel-prev')?.addEventListener('click', () => fbGoTo(fbCur-1));
+    fbDots.forEach(d => d.addEventListener('click', () => fbGoTo(+d.dataset.idx)));
+  }
 
   // Auto-grey past shows
   const today = new Date(); today.setHours(0,0,0,0);
