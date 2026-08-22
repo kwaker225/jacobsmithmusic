@@ -98,17 +98,16 @@
   /* ── UPCOMING GIGS LIST ── */
   .gig-list-section{padding:0 0 96px;background:#0A0A0A;}
   .gig-list-section h2{font-size:clamp(1.5rem,4vw,2.2rem);color:var(--white);margin-bottom:24px;}
-  .gig-list{display:flex;flex-direction:column;}
-  .gig-item{display:grid;grid-template-columns:110px 1fr;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line);}
-  .gig-item:first-child{border-top:1px solid var(--line);}
-  .gig-date{background:var(--red-pill,#B01E36);color:#fff;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 12px;text-align:center;border-radius:4px;line-height:1.5;}
-  .gig-date .gd-day-label{display:block;font-size:0.64rem;opacity:0.8;margin-bottom:2px;}
+  .gig-list{display:flex;flex-direction:column;gap:20px;}
+  .gig-item{background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);}
+  .gig-date{background:var(--red-pill,#B01E36);color:#fff;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;padding:12px 20px;line-height:1.5;}
+  .gig-date .gd-day-label{display:block;font-size:0.7rem;opacity:0.8;margin-bottom:2px;}
+  .gig-info{padding:18px 20px 22px;}
   .gig-info h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
   .gig-info h3 a{color:inherit;}
   .gig-info h3 a:hover{color:var(--red);}
   .gig-info .gig-meta{font-size:0.88rem;color:var(--grey);}
   .gig-list .gig-empty{color:var(--grey);font-size:0.95rem;padding:24px 0;}
-  @media(max-width:480px){.gig-item{grid-template-columns:1fr;gap:10px;}.gig-date{text-align:left;width:fit-content;}}
 
   footer{padding:40px 0 52px;border-top:1px solid var(--line);text-align:center;color:var(--grey);font-size:0.84rem;background:#0A0A0A;}
   footer .fname{color:var(--white);font-weight:700;letter-spacing:0.08em;}
