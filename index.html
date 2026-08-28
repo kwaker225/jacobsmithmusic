@@ -80,23 +80,19 @@
   @media(max-width:640px){.hero{min-height:auto; padding:190px 0 50px;}}
   .hero::before{
     content:"";
-    position:absolute; inset:-10%;
-    background: radial-gradient(circle at 50% 38%,
-      #FF2A4A 0%,
-      #C4203C 14%,
-      #7A0F20 30%,
-      #2E050C 50%,
-      #0A0A0A 70%);
+    position:absolute; inset:0;
+    background:url('images/jacob-guitar-detail.jpg') center 35%/cover no-repeat;
+    filter:grayscale(0.15) contrast(1.05);
     z-index:0;
   }
   .hero::after{
     content:"";
     position:absolute; inset:0;
-    background: radial-gradient(circle at 50% 40%,
-      rgba(10,10,10,0.2) 0%,
-      rgba(10,10,10,0.55) 40%,
-      rgba(10,10,10,0.85) 70%,
-      #0A0A0A 100%);
+    background: radial-gradient(circle at 50% 38%,
+      rgba(196,32,60,0.6) 0%,
+      rgba(122,15,32,0.68) 30%,
+      rgba(10,10,10,0.8) 62%,
+      rgba(10,10,10,0.94) 100%);
     z-index:1;
   }
   .rosette{
