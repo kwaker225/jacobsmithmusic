@@ -24,6 +24,7 @@
     --navy:#26314A;
     --sun:#F3DE9E;
     --steel:#4B6F92;
+    --gold:#E8B94A;
     --maxw:1080px;
   }
   *{box-sizing:border-box;}
@@ -369,6 +370,28 @@
   .tip-row .lab{font-weight:700; font-size:0.95rem;}
   .tip-row .sub{font-size:0.82rem; color:var(--grey); margin-top:2px; display:block;}
   .tip-arrow{color:var(--red); font-size:1rem; flex-shrink:0;}
+
+  /* ── FOLLOW BAND ── */
+  .follow-band{background:var(--navy); padding:72px 0; text-align:center;}
+  .follow-band .section-label{justify-content:center; color:var(--gold);}
+  .follow-band .section-label::before{background:var(--gold);}
+  .follow-band h2{color:var(--bg-soft); font-size:clamp(2rem,5vw,3rem); margin-bottom:32px;}
+  .follow-band .btn-outline{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Nunito',sans-serif; font-size:0.82rem; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--bg-soft);
+    border:1.5px solid rgba(247,239,225,0.35); border-radius:999px;
+    padding:14px 30px; margin-bottom:40px; transition:border-color .2s ease, background .2s ease;
+  }
+  .follow-band .btn-outline:hover{border-color:var(--gold); background:rgba(232,185,74,0.1);}
+  .follow-links{display:flex; flex-wrap:wrap; justify-content:center; gap:36px 48px;}
+  .follow-links a{
+    font-family:'Fraunces',serif; font-weight:600; font-size:1.3rem;
+    color:var(--bg-soft); transition:color .2s ease;
+  }
+  .follow-links a:hover{color:var(--gold);}
+  .follow-links a.accent{color:var(--gold);}
+  .follow-links a.accent:hover{color:var(--bg-soft);}
 
   /* ── FOOTER ── */
   footer{padding:40px 0 52px; border-top:1px solid var(--line); text-align:center; color:var(--grey); font-size:0.84rem;}
@@ -821,6 +844,21 @@
           </div>
 
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLLOW BAND -->
+  <section class="follow-band">
+    <div class="wrap">
+      <p class="section-label reveal">Stay In The Loop</p>
+      <h2 class="reveal">Keep Up With Jacob</h2>
+      <a href="calendar.html" class="btn-outline reveal">Upcoming Gigs</a>
+      <div class="follow-links reveal">
+        <a class="accent" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/jbsmith2198" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">Venmo</a>
+        <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
   </section>
