@@ -71,12 +71,13 @@
 
   /* ── HERO ── */
   .hero{
-    min-height:100vh;
+    min-height:72vh;
     display:flex; align-items:flex-end;
-    padding:0 0 70px;
+    padding:120px 0 60px;
     position:relative; overflow:hidden;
     background:var(--bg);
   }
+  @media(max-width:640px){.hero{min-height:auto; padding:190px 0 50px;}}
   .hero::before{
     content:"";
     position:absolute; inset:-10%;
@@ -131,6 +132,41 @@
     max-width:520px;
   }
   .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  .hero-photo{
+    display:block; position:relative;
+    width:min(240px,58vw); margin:36px auto 0;
+    border:3px solid var(--red);
+    box-shadow:0 20px 40px rgba(0,0,0,0.55), 0 0 44px rgba(196,32,60,0.3);
+    transform:rotate(-3deg);
+    transition:transform .35s ease;
+  }
+  .hero-photo:hover{transform:rotate(0deg) scale(1.03);}
+  .hero-photo img{
+    display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover;
+    filter:grayscale(0.2) contrast(1.1) saturate(1.05);
+  }
+  .hero-photo::before{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(196,32,60,0.14), rgba(10,10,10,0.42));
+    mix-blend-mode:multiply; pointer-events:none;
+  }
+  .hero-photo .tag{
+    position:absolute; top:-14px; left:-16px; z-index:1;
+    background:var(--red); color:#fff;
+    font-family:'Arimo',sans-serif; font-weight:700; font-size:0.68rem;
+    letter-spacing:0.12em; text-transform:uppercase;
+    padding:6px 12px; transform:rotate(-5deg);
+    box-shadow:0 4px 10px rgba(0,0,0,0.45);
+  }
+  @media(min-width:900px){
+    .hero-photo{
+      position:absolute; top:50%; right:0; margin:0;
+      transform:translateY(-52%) rotate(-3deg);
+      width:min(29vw,320px); z-index:2;
+    }
+    .hero-photo:hover{transform:translateY(-52%) rotate(0deg) scale(1.03);}
+  }
   .btn{
     font-family:'Arimo',sans-serif; font-size:0.82rem; font-weight:700;
     letter-spacing:0.14em; text-transform:uppercase;
@@ -364,6 +400,28 @@
   .tip-row .sub{font-size:0.82rem; color:var(--grey); margin-top:2px; display:block;}
   .tip-arrow{color:var(--red); font-size:1rem; flex-shrink:0;}
 
+  /* ── FOLLOW BAND ── */
+  .follow-band{background:var(--bg-soft); padding:72px 0; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .follow-band .section-label{justify-content:center;}
+  .follow-band h2{color:var(--white); margin-bottom:32px;}
+  .follow-band .btn-outline{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Arimo',sans-serif; font-size:0.82rem; font-weight:700;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--white);
+    border:1.5px solid var(--red); padding:14px 30px; margin-bottom:40px;
+    transition:background .2s ease;
+  }
+  .follow-band .btn-outline:hover{background:var(--red);}
+  .follow-links{display:flex; flex-wrap:wrap; justify-content:center; gap:36px 48px;}
+  .follow-links a{
+    font-family:'Anton',sans-serif; font-weight:400; font-size:1.3rem;
+    text-transform:uppercase; letter-spacing:0.02em; color:var(--white);
+    transition:color .2s ease;
+  }
+  .follow-links a:hover{color:var(--red);}
+  .follow-links a.accent{color:var(--red);}
+  .follow-links a.accent:hover{color:var(--white);}
+
   /* ── FOOTER ── */
   footer{padding:40px 0 52px; border-top:1px solid var(--line); text-align:center; color:var(--grey); font-size:0.84rem;}
   footer .fname{color:var(--white); font-weight:700; letter-spacing:0.08em;}
@@ -520,6 +578,10 @@
         <a href="#shows" class="btn btn-primary">Upcoming Gigs</a>
         <a href="book.html" class="btn btn-ghost">Book a Show</a>
       </div>
+      <figure class="hero-photo">
+        <span class="tag">Live</span>
+        <img src="images/jacob-tent-side.jpg" alt="Jacob Smith singing and playing acoustic guitar under a tent at an outdoor show" loading="eager" width="1100" height="1467">
+      </figure>
     </div>
   </section>
 
@@ -806,6 +868,21 @@
           </div>
 
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLLOW BAND -->
+  <section class="follow-band">
+    <div class="wrap">
+      <p class="section-label reveal">Stay In The Loop</p>
+      <h2 class="reveal">Keep Up With Jacob</h2>
+      <a href="calendar.html" class="btn-outline reveal">Upcoming Gigs</a>
+      <div class="follow-links reveal">
+        <a class="accent" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/jbsmith2198" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">Venmo</a>
+        <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
   </section>
