@@ -402,14 +402,25 @@
   .follow-band{background:var(--bg-soft); padding:72px 0; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .follow-band .section-label{justify-content:center;}
   .follow-band h2{color:var(--white); margin-bottom:32px;}
+  @keyframes gig-rock{
+    0%, 78%, 100%{transform:translateY(0) rotate(0deg);}
+    82%{transform:translateY(-5px) rotate(-4deg);}
+    86%{transform:translateY(0) rotate(4deg);}
+    90%{transform:translateY(-3px) rotate(-2deg);}
+    94%{transform:translateY(0) rotate(0deg);}
+  }
   .follow-band .btn-outline{
     display:inline-flex; align-items:center; gap:8px;
     font-family:'Arimo',sans-serif; font-size:0.82rem; font-weight:700;
     letter-spacing:0.14em; text-transform:uppercase; color:var(--white);
     border:1.5px solid var(--red); padding:14px 30px; margin-bottom:40px;
     transition:background .2s ease;
+    animation:gig-rock 3.6s ease-in-out infinite;
   }
-  .follow-band .btn-outline:hover{background:var(--red);}
+  .follow-band .btn-outline:hover{background:var(--red); animation-play-state:paused;}
+  @media(prefers-reduced-motion: reduce){
+    .follow-band .btn-outline{animation:none;}
+  }
   .follow-links{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:36px 48px;}
   .follow-links a{
     font-family:'Anton',sans-serif; font-weight:400; font-size:1.3rem;
