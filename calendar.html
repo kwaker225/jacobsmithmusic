@@ -5,46 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calendar - Jacob Smith Music</title>
 <meta name="description" content="Upcoming Jacob Smith Music show dates - updated automatically from Google Calendar.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23D98A6C'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23F7EFE1'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%2326314A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0A0A0A;--bg-soft:#111111;--bg-soft-2:#1A1A1A;--red:#C4203C;--red-deep:#9A1830;--white:#F5F5F5;--grey:#9A9A9A;--line:rgba(255,255,255,0.12);--maxw:1080px;}
+  :root{--bg:#D98A6C;--bg-soft:#F7EFE1;--bg-soft-2:#EFE0C8;--red:#DE7C55;--red-deep:#C25F3B;--white:#26314A;--grey:#5C6A86;--line:rgba(38,49,74,0.15);--maxw:1080px;}
   *{box-sizing:border-box;}
-  html{background:#0A0A0A;}
-  body{margin:0;background:#0A0A0A;color:var(--white);font-family:'Arimo',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  html{background:#D98A6C;}
+  body{margin:0;background:#D98A6C;color:var(--white);font-family:'Nunito',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
   a{color:inherit;text-decoration:none;}
-  h1,h2,h3{font-family:'Anton',sans-serif;font-weight:400;margin:0;text-transform:uppercase;letter-spacing:0.02em;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:700;margin:0;text-transform:none;letter-spacing:-0.01em;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
 
-  header{position:fixed;top:44px;left:0;right:0;z-index:100;padding:18px 0;background:rgba(10,10,10,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  header{position:fixed;top:44px;left:0;right:0;z-index:100;padding:18px 0;background:rgba(247,239,225,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
   .nav-row{display:flex;align-items:center;justify-content:space-between;}
-  .logo{display:flex;align-items:center;gap:10px;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.18em;text-transform:uppercase;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.18em;text-transform:uppercase;}
   .logo-bar{width:3px;height:22px;background:var(--red);flex-shrink:0;}
   nav.main-nav{display:flex;gap:32px;}
-  nav.main-nav a{font-family:'Arimo',sans-serif;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);transition:color .2s;}
+  nav.main-nav a{font-family:'Nunito',sans-serif;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);transition:color .2s;}
   nav.main-nav a:hover,nav.main-nav a.active{color:var(--white);}
-  .nav-cta{font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--bg);padding:9px 20px;transition:background .2s;}
-  .nav-cta:hover{background:var(--red);}
+  .nav-cta{font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--red);padding:10px 22px;border-radius:999px;box-shadow:0 4px 0 rgba(38,49,74,0.25);transition:background .2s;}
+  .nav-cta:hover{background:var(--red-deep);}
   .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:4px;}
   .menu-toggle svg{width:26px;height:26px;}
   .mobile-drawer{position:fixed;inset:0;background:var(--bg);z-index:150;display:flex;flex-direction:column;padding:28px;transform:translateX(100%);transition:transform .3s ease;}
   .mobile-drawer.open{transform:translateX(0);}
   .mobile-drawer .drawer-top{display:flex;justify-content:flex-end;}
   .mobile-drawer nav{display:flex;flex-direction:column;gap:28px;margin-top:56px;}
-  .mobile-drawer nav a{font-family:'Anton',sans-serif;font-size:2.2rem;text-transform:uppercase;letter-spacing:0.04em;}
-  .mobile-drawer nav a:hover{color:var(--red);}
+  .mobile-drawer nav a{font-family:'Fraunces',serif;font-size:2.2rem;text-transform:uppercase;letter-spacing:0.04em;}
+  .mobile-drawer nav a:hover{color:var(--red-deep);}
   @media(max-width:820px){nav.main-nav,.nav-cta{display:none;}.menu-toggle{display:block;}}
 
-  .page-hero{padding:180px 0 64px;border-bottom:1px solid var(--line);background:#0A0A0A;}
-  .section-label{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .page-hero{padding:180px 0 64px;border-bottom:1px solid var(--line);background:#D98A6C;}
+  .section-label{font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red-deep);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
   .section-label::before{content:"";width:20px;height:2px;background:var(--red);display:inline-block;flex-shrink:0;}
   .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:20px;}
   .page-hero p.lead{font-size:1.15rem;color:var(--grey);max-width:560px;}
 
   /* ── CALENDAR ── */
-  .cal-section{padding:64px 0 96px;background:#0A0A0A;}
+  .cal-section{padding:64px 0 96px;background:#D98A6C;}
 
   /* Loading state */
   .loading{text-align:center;padding:64px 0;color:var(--grey);}
@@ -57,25 +57,25 @@
   .cal-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
   .cal-nav h2{font-size:clamp(1.5rem,4vw,2.2rem);color:var(--white);}
   .cal-nav-btns{display:flex;align-items:center;gap:8px;}
-  .cal-nav-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--line);background:transparent;color:var(--white);cursor:pointer;transition:border-color .2s ease,background .2s ease;font-family:'Arimo',sans-serif;}
+  .cal-nav-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--line);background:transparent;color:var(--white);cursor:pointer;transition:border-color .2s ease,background .2s ease;font-family:'Nunito',sans-serif;}
   .cal-nav-btn svg{width:18px;height:18px;}
-  .cal-nav-btn:hover{border-color:var(--red);background:rgba(196,32,60,0.12);}
-  .cal-today-btn{height:40px;padding:0 16px;border:1.5px solid var(--line);background:transparent;color:var(--grey);cursor:pointer;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;transition:border-color .2s ease,color .2s ease;}
+  .cal-nav-btn:hover{border-color:var(--red);background:rgba(222,124,85,0.16);}
+  .cal-today-btn{height:40px;padding:0 16px;border:1.5px solid var(--line);background:transparent;color:var(--grey);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;transition:border-color .2s ease,color .2s ease;}
   .cal-today-btn:hover{border-color:var(--red);color:var(--white);}
 
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-  .cal-weekday{background:var(--bg-soft);padding:10px 4px;text-align:center;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
-  .cal-day{background:#0A0A0A;min-height:92px;padding:7px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;border:none;color:var(--white);font-family:'Arimo',sans-serif;width:100%;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .cal-weekday{background:var(--bg-soft);padding:10px 4px;text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);}
+  .cal-day{background:#D98A6C;min-height:92px;padding:7px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;border:none;color:var(--white);font-family:'Nunito',sans-serif;width:100%;}
   button.cal-day{cursor:default;}
   .cal-day.pad{opacity:0.3;}
   .cal-day .day-num{font-weight:700;font-size:0.8rem;width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;}
   .cal-day.today .day-num{background:var(--red);color:#fff;}
   .cal-day.past{opacity:0.45;}
   .cal-day.has-event{cursor:pointer;}
-  .cal-day.has-event:hover{background:rgba(196,32,60,0.1);}
-  .cal-day.selected{box-shadow:inset 0 0 0 2px var(--red);background:rgba(196,32,60,0.08);}
-  .day-event{font-size:0.66rem;font-weight:700;letter-spacing:0.01em;background:var(--red-pill,#B01E36);color:#fff;padding:3px 6px;border-radius:3px;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;line-height:1.3;}
-  .cal-day.past .day-event{background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--grey);}
+  .cal-day.has-event:hover{background:rgba(222,124,85,0.13);}
+  .cal-day.selected{box-shadow:inset 0 0 0 2px var(--red);background:rgba(222,124,85,0.1);}
+  .day-event{font-size:0.66rem;font-weight:700;letter-spacing:0.01em;background:var(--red-pill,#C25F3B);color:#fff;padding:3px 6px;border-radius:3px;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;line-height:1.3;}
+  .cal-day.past .day-event{background:transparent;border:1px solid rgba(38,49,74,0.22);color:var(--grey);}
   .day-event.more{background:transparent;color:var(--grey);font-weight:400;}
   @media(max-width:620px){
     .cal-day{min-height:64px;padding:5px;}
@@ -83,46 +83,46 @@
     .day-event{font-size:0;padding:0;width:8px;height:8px;border-radius:50%;}
   }
 
-  .cal-detail{margin-top:28px;background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);padding:28px 24px;}
+  .cal-detail{margin-top:28px;background:var(--bg-soft);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 24px rgba(38,49,74,0.1);padding:28px 24px;}
   .cal-detail .cd-empty{color:var(--grey);font-size:0.95rem;}
   .cal-detail .cd-show{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;}
-  .cal-detail .cd-show + .cd-show{margin-top:20px;padding-top:20px;border-top:1px dashed rgba(255,255,255,0.12);}
-  .cal-detail .cd-date{background:var(--red-pill,#B01E36);color:#fff;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 16px;text-align:center;border-radius:4px;line-height:1.5;white-space:nowrap;}
+  .cal-detail .cd-show + .cd-show{margin-top:20px;padding-top:20px;border-top:1px dashed rgba(38,49,74,0.15);}
+  .cal-detail .cd-date{background:var(--red-pill,#C25F3B);color:#fff;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;padding:10px 16px;text-align:center;border-radius:10px;line-height:1.5;white-space:nowrap;}
   .cal-detail .cd-date .cd-day-label{display:block;font-size:0.66rem;opacity:0.8;margin-bottom:2px;}
-  .cal-detail h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+  .cal-detail h3{font-family:'Nunito',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
   .cal-detail h3 a{color:inherit;}
   .cal-detail h3 a:hover{color:var(--red);}
   .cal-detail .cd-meta{font-size:0.88rem;color:var(--grey);}
   @media(max-width:480px){.cal-detail .cd-show{grid-template-columns:1fr;gap:10px;}.cal-detail .cd-date{text-align:left;}}
 
   /* ── UPCOMING GIGS LIST ── */
-  .gig-list-section{padding:0 0 96px;background:#0A0A0A;}
+  .gig-list-section{padding:0 0 96px;background:#D98A6C;}
   .gig-list-section h2{font-size:clamp(1.5rem,4vw,2.2rem);color:var(--white);margin-bottom:24px;}
   .gig-list{display:flex;flex-direction:column;gap:20px;}
-  .gig-item{background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);}
-  .gig-date{background:var(--red-pill,#B01E36);color:#fff;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;padding:12px 20px;line-height:1.5;}
+  .gig-item{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 20px rgba(38,49,74,0.08);overflow:hidden;}
+  .gig-date{background:var(--red-pill,#C25F3B);color:#fff;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;padding:12px 20px;line-height:1.5;}
   .gig-date .gd-day-label{display:block;font-size:0.7rem;opacity:0.8;margin-bottom:2px;}
   .gig-info{padding:18px 20px 22px;}
-  .gig-info h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
+  .gig-info h3{font-family:'Nunito',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:4px;}
   .gig-info h3 a{color:inherit;}
   .gig-info h3 a:hover{color:var(--red);}
   .gig-info .gig-meta{font-size:0.88rem;color:var(--grey);}
   .gig-list .gig-empty{color:var(--grey);font-size:0.95rem;padding:24px 0;}
 
-  footer{padding:40px 0 52px;border-top:1px solid var(--line);text-align:center;color:var(--grey);font-size:0.84rem;background:#0A0A0A;}
+  footer{padding:40px 0 52px;border-top:1px solid var(--line);text-align:center;color:var(--grey);font-size:0.84rem;background:#D98A6C;}
   footer .fname{color:var(--white);font-weight:700;letter-spacing:0.08em;}
-  footer a{color:var(--red);}
+  footer a{color:var(--red-deep);}
 </style>
 </head>
 <body>
 
 <!-- NEXT SHOW BANNER -->
-<div id="next-show-banner" style="display:none;background:#C4203C;color:#fff;text-align:center;padding:11px 16px;font-family:'Arimo',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:300;">
-  <a href="#" target="_blank" rel="noopener" id="ns-link" style="color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
+<div id="next-show-banner" style="display:none;background:#26314A;color:#F7EFE1;text-align:center;padding:11px 16px;font-family:'Nunito',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:300;">
+  <a href="#" target="_blank" rel="noopener" id="ns-link" style="color:#F7EFE1;text-decoration:none;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;">
     <span style="opacity:0.85;font-weight:400;">Next Show</span>
-    <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+    <span style="width:1px;height:14px;background:rgba(38,49,74,0.4);display:inline-block;"></span>
     <span class="ns-date"></span>
-    <span style="width:1px;height:14px;background:rgba(255,255,255,0.4);display:inline-block;"></span>
+    <span style="width:1px;height:14px;background:rgba(38,49,74,0.4);display:inline-block;"></span>
     <span class="ns-venue" style="animation:ns-glow 2s ease-in-out infinite;"></span>
     <span class="ns-city" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.85;"></span>
     <span class="ns-time" style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.75;"></span>
@@ -130,7 +130,7 @@
   </a>
 </div>
 <style>
-  @keyframes ns-glow{0%,100%{text-shadow:none;}50%{text-shadow:0 0 10px rgba(255,255,255,0.6);}}
+  @keyframes ns-glow{0%,100%{text-shadow:none;}50%{text-shadow:0 0 10px rgba(247,239,225,0.7);}}
   @keyframes ns-arrow{0%,100%{transform:translateX(0);}50%{transform:translateX(4px);}}
 </style>
 
@@ -186,7 +186,7 @@
   </nav>
 </div>
 
-<main style="background:#0A0A0A;">
+<main style="background:#D98A6C;">
   <section class="page-hero">
     <div class="wrap">
       <p class="section-label">Mark Your Calendar</p>
