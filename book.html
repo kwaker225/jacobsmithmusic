@@ -86,6 +86,15 @@
   .what-item h3{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
   .what-item p{font-size:0.9rem;color:var(--grey);margin:0;}
 
+  /* ── HOW IT WORKS ── */
+  .steps-section{padding:0 0 96px;background:#D98A6C;}
+  .steps-list{margin-top:36px;}
+  .step{display:flex;gap:22px;align-items:flex-start;padding:28px 0;border-top:1px solid var(--line);}
+  .step:last-child{border-bottom:1px solid var(--line);}
+  .step-num{width:40px;height:40px;border-radius:50%;background:var(--white);color:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;flex-shrink:0;}
+  .step h3{font-size:1.3rem;margin-bottom:6px;}
+  .step p{color:var(--grey);font-size:0.98rem;line-height:1.7;max-width:520px;margin:0;}
+
   .contact-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 28px rgba(38,49,74,0.1);padding:40px;position:sticky;top:100px;}
   .contact-card h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:8px;}
   .contact-card .sub{color:var(--grey);font-size:0.92rem;margin-bottom:32px;}
@@ -274,6 +283,28 @@
               Message on Facebook
             </a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="steps-section">
+    <div class="wrap">
+      <p class="section-label">How It Works</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);max-width:560px;">From a Text to a Show</h2>
+      <div class="steps-list">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div><h3>Reach Out</h3><p>Call, text, or message with your venue, date, and what you're looking for - background music or a full-room set.</p></div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div><h3>Jacob Responds</h3><p>He personally checks the date and replies within 24 hours with availability and next steps - no forms, no runaround.</p></div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div><h3>Show Up &amp; Play</h3><p>Just a guitar and Jacob - no PA, no band rider, no setup headaches. He shows up ready to play.</p></div>
         </div>
       </div>
     </div>
