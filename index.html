@@ -176,7 +176,6 @@
 
   @media(max-width:640px){
     .framed-photo{max-width:190px !important;}
-    .shows-grid .framed-photo{max-width:170px !important; margin-top:0;}
     .framed-photo-wide{max-width:340px !important;}
     .photo-stack{max-width:230px !important;}
     .photo-stack .stack-back{max-width:180px !important;}
@@ -196,6 +195,14 @@
 
   /* ── SECTION BASE ── */
   section{padding:88px 0;}
+  .gallery-section{padding:0 0 88px; background:var(--bg);}
+  .watch-section{padding:88px 0; background:#111111; border-top:1px solid var(--line);}
+  @media(max-width:640px){
+    section{padding:52px 0;}
+    .follow-band{padding:48px 0 !important;}
+    .gallery-section{padding:0 0 52px !important;}
+    .watch-section{padding:52px 0 !important;}
+  }
   .section-label{
     font-family:'Arimo',sans-serif; font-size:0.78rem; font-weight:700;
     letter-spacing:0.22em; text-transform:uppercase; color:var(--red);
@@ -206,64 +213,6 @@
 
   .reveal{opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1; transform:translateY(0);}
-
-  /* ── SHOWS ── */
-  .shows-section{background:var(--bg);}
-  .shows-grid{display:grid; grid-template-columns:1fr; gap:48px; align-items:start;}
-  @media(min-width:821px){
-    .shows-grid{grid-template-columns:260px 1fr;}
-    .shows-grid .framed-photo{order:-1;}
-  }
-  .shows-grid .framed-photo{margin-top:8px;}
-  .show-list{width:100%;}
-  .show-row{
-    display:grid;
-    grid-template-columns:200px 1fr;
-    align-items:center;
-    gap:28px;
-    padding:22px 0;
-    border-bottom:1px dashed var(--line-dot);
-  }
-  .show-row:first-child{border-top:1px dashed var(--line-dot);}
-  .date-pill{
-    background:var(--bg-soft-2);
-    color:var(--white);
-    border:1.5px solid var(--line);
-    border-left:4px solid var(--red);
-    font-family:'Arimo',sans-serif; font-weight:700;
-    font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase;
-    padding:12px 18px; text-align:center;
-    border-radius:4px;
-    line-height:1.5;
-  }
-  .date-pill .day-label{display:block; font-size:0.7rem; color:var(--red); opacity:1; margin-bottom:2px;}
-  .venue-info{}
-  .venue-info h3{
-    font-family:'Arimo',sans-serif; font-weight:700;
-    font-size:1rem; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--white); margin-bottom:4px;
-  }
-  .venue-info .address{font-size:0.88rem; color:var(--grey);}
-  .venue-info a{text-decoration:none;}
-  .venue-info a:hover h3{color:var(--red);}
-  .loading-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin:0 4px;animation:bounce 1.2s infinite;}
-  .loading-dot:nth-child(2){animation-delay:.2s;}
-  .loading-dot:nth-child(3){animation-delay:.4s;}
-  @keyframes bounce{0%,80%,100%{transform:scale(0);}40%{transform:scale(1);}}
-  .shows-note{margin-top:24px; font-size:0.88rem; color:var(--grey);}
-  .shows-note a{color:var(--red); border-bottom:1px solid var(--red);}
-
-  /* ── PAST SHOWS ── */
-  .show-row.past{opacity:0.38;}
-  .show-row.past .date-pill{background:transparent; border:1.5px solid rgba(255,255,255,0.15); border-left:4px solid rgba(255,255,255,0.15); color:var(--grey);}
-  .show-row.past .venue-info h3{text-decoration:line-through; text-decoration-color:rgba(255,255,255,0.3); color:var(--grey);}
-  .show-row.past .address{color:rgba(154,154,154,0.6);}
-  .show-row.past .date-pill .day-label{color:var(--grey); opacity:0.6;}
-
-  @media(max-width:620px){
-    .show-row{grid-template-columns:1fr; gap:12px;}
-    .date-pill{text-align:left;}
-  }
 
   /* ── ABOUT ── */
   .about-section{background:var(--bg-soft);}
@@ -537,41 +486,14 @@
     if(window.bannerOffset) window.bannerOffset();
   }
 
-  var GIGS_PREVIEW_COUNT=1;
-
-  function fillList(shows){
-    var wrap=document.getElementById('show-list-wrap');
-    var more=document.getElementById('show-list-more');
-    if(!wrap) return;
-    if(!shows.length){
-      wrap.innerHTML='<p class="shows-note" style="margin:0;">No upcoming shows posted right now - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for new dates.</p>';
-      if(more) more.style.display='none';
-      return;
-    }
-    var preview=shows.slice(0,GIGS_PREVIEW_COUNT);
-    var html='<div class="show-list">';
-    preview.forEach(function(sh){
-      var pill='<div class="date-pill"><span class="day-label">'+esc(sh.day)+'</span>'+esc(sh.display)+' &nbsp;·&nbsp; '+esc(sh.time)+'</div>';
-      var name='<h3>'+esc(sh.venue)+'</h3>';
-      var venue='<div class="venue-info">'+(sh.url?('<a href="'+esc(sh.url)+'" target="_blank" rel="noopener">'+name+'</a>'):name)+'<p class="address">'+esc(sh.city)+'</p></div>';
-      html+='<div class="show-row">'+pill+venue+'</div>';
-    });
-    html+='</div>';
-    wrap.innerHTML=html;
-    if(more) more.style.display='block';
-  }
-
   fetch('/.netlify/functions/get-shows')
     .then(function(r){return r.json();})
     .then(function(shows){
       if(!Array.isArray(shows)) shows=[];
       var upcoming=shows.filter(function(sh){return sh.date && new Date(sh.date+'T00:00:00')>=today;});
       fillBanner(upcoming[0]);
-      fillList(upcoming);
     })
     .catch(function(){
-      var wrap=document.getElementById('show-list-wrap');
-      if(wrap) wrap.innerHTML='<p class="shows-note" style="margin:0;">Couldn\'t load shows right now - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>';
       var b=document.getElementById('next-show-banner'); if(b) b.style.display='none';
     });
 })();
@@ -660,32 +582,6 @@
     </div>
   </section>
 
-  <!-- SHOWS -->
-  <section class="shows-section" id="shows">
-    <div class="wrap">
-      <p class="section-label reveal">Upcoming Gigs</p>
-      <h2 class="section-title reveal">Catch Him Live</h2>
-
-      <div class="shows-grid">
-        <div class="reveal">
-          <div id="show-list-wrap">
-            <div class="loading" style="text-align:center;padding:56px 0;color:var(--grey);">
-              <span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span>
-            </div>
-          </div>
-          <div id="show-list-more" style="margin-top:32px; display:none;">
-            <a href="calendar.html" class="btn btn-primary">View All Upcoming Gigs</a>
-          </div>
-          <p class="shows-note" style="margin-top:24px;">Dates may shift - <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">follow on Facebook</a> for the latest.</p>
-        </div>
-        <figure class="framed-photo tilt-right reveal">
-          <span class="tag">Setlist</span>
-          <img src="images/jacob-guitar-detail.jpg" alt="Close-up of Jacob Smith playing acoustic guitar" loading="lazy" width="784" height="1372">
-        </figure>
-      </div>
-    </div>
-  </section>
-
   <!-- ABOUT -->
   <section class="about-section" id="about">
     <div class="wrap">
@@ -722,7 +618,7 @@
   </section>
 
   <!-- GALLERY -->
-  <section class="content-section" style="padding:0 0 88px;background:var(--bg);">
+  <section class="content-section gallery-section">
     <div class="wrap">
       <p class="section-label reveal">On Stage</p>
       <h2 class="section-title reveal">Around The Room</h2>
@@ -840,7 +736,7 @@
   </section>
 
   <!-- FACEBOOK/SHORTS -->
-  <section style="padding:88px 0; background:#111111; border-top:1px solid var(--line);">
+  <section class="watch-section">
     <div class="wrap">
       <div class="watch-grid">
 
