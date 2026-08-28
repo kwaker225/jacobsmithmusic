@@ -433,7 +433,18 @@
   .follow-links a:hover{color:var(--red);}
   .follow-links a.accent{color:var(--red);}
   .follow-links a.accent:hover{color:var(--white);}
-  .venmo-item{display:flex; flex-direction:column; align-items:center; gap:4px;}
+  .venmo-item{display:flex; flex-direction:column; align-items:center; gap:8px;}
+  .venmo-link{
+    display:inline-flex; align-items:center; gap:5px;
+    font-family:'Arimo',sans-serif !important; font-weight:800 !important;
+    font-size:1rem !important; text-transform:uppercase; letter-spacing:0.04em;
+    background:#3D95CE; color:#fff !important;
+    padding:9px 18px; border-radius:5px;
+    box-shadow:0 8px 20px rgba(61,149,206,0.35);
+    transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .venmo-link:hover{background:#2D7BAE; color:#fff !important; transform:translateY(-2px); box-shadow:0 10px 24px rgba(61,149,206,0.5);}
+  .venmo-dollar{font-weight:900;}
   .venmo-item .venmo-note{
     font-family:'Arimo',sans-serif; font-weight:400; font-size:0.72rem;
     letter-spacing:0.04em; text-transform:none; color:var(--grey);
@@ -604,7 +615,7 @@
         <a class="accent" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.instagram.com/jbsmithmusic" target="_blank" rel="noopener">Instagram</a>
         <div class="venmo-item">
-          <a href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">Venmo</a>
+          <a class="venmo-link" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener"><span class="venmo-dollar">$</span> Venmo</a>
           <span class="venmo-note">Leave Jacob a tip</span>
         </div>
         <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
