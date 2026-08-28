@@ -136,7 +136,6 @@
     text-transform:uppercase; color:var(--grey); margin-bottom:36px;
     max-width:520px;
   }
-  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
 
   /* ── FRAMED PHOTO (reused per-section) ── */
   .framed-photo{
@@ -425,7 +424,7 @@
     transition:background .2s ease;
   }
   .follow-band .btn-outline:hover{background:var(--red);}
-  .follow-links{display:flex; flex-wrap:wrap; justify-content:center; gap:36px 48px;}
+  .follow-links{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:36px 48px;}
   .follow-links a{
     font-family:'Anton',sans-serif; font-weight:400; font-size:1.3rem;
     text-transform:uppercase; letter-spacing:0.02em; color:var(--white);
@@ -434,6 +433,11 @@
   .follow-links a:hover{color:var(--red);}
   .follow-links a.accent{color:var(--red);}
   .follow-links a.accent:hover{color:var(--white);}
+  .venmo-item{display:flex; flex-direction:column; align-items:center; gap:4px;}
+  .venmo-item .venmo-note{
+    font-family:'Arimo',sans-serif; font-weight:400; font-size:0.72rem;
+    letter-spacing:0.04em; text-transform:none; color:var(--grey);
+  }
 
   /* ── FOOTER ── */
   footer{padding:40px 0 52px; border-top:1px solid var(--line); text-align:center; color:var(--grey); font-size:0.84rem;}
@@ -587,10 +591,6 @@
       <p class="hero-label">Milford, Michigan</p>
       <h1>Jacob<br>Smith</h1>
       <p class="hero-sub">Live Acoustic Music - Rock, Country, Folk &amp; Everything In Between</p>
-      <div class="hero-ctas">
-        <a href="#shows" class="btn btn-primary">Upcoming Gigs</a>
-        <a href="book.html" class="btn btn-ghost">Book a Show</a>
-      </div>
     </div>
   </section>
 
@@ -603,7 +603,10 @@
       <div class="follow-links reveal">
         <a class="accent" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.instagram.com/jbsmithmusic" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">Venmo</a>
+        <div class="venmo-item">
+          <a href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">Venmo</a>
+          <span class="venmo-note">Leave Jacob a tip</span>
+        </div>
         <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
