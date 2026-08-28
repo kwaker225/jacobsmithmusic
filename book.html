@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#D98A6C;--bg-soft:#F7EFE1;--bg-soft-2:#EFE0C8;--red:#DE7C55;--red-deep:#C25F3B;--white:#26314A;--grey:#5C6A86;--line:rgba(38,49,74,0.15);--maxw:1080px;}
+  :root{--bg:#D98A6C;--bg-soft:#F7EFE1;--bg-soft-2:#EFE0C8;--red:#DE7C55;--red-deep:#C25F3B;--white:#26314A;--grey:#5C6A86;--line:rgba(38,49,74,0.15);--green:#5F8556;--maxw:1080px;}
   *{box-sizing:border-box;}
   html{background:#D98A6C;}
   body{margin:0;background:#D98A6C;color:var(--white);font-family:'Nunito',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
@@ -41,6 +41,54 @@
   .section-label::before{content:"";width:20px;height:2px;background:var(--red);display:inline-block;flex-shrink:0;}
   .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:24px;}
   .page-hero p.lead{font-size:1.2rem;color:var(--grey);max-width:580px;}
+
+  /* ── CHECK YOUR DATE ── */
+  .avail-section{padding:0 0 88px;background:#D98A6C;}
+  .avail-intro{color:var(--grey);max-width:580px;margin-bottom:28px;font-size:1rem;}
+  .avail-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 28px rgba(38,49,74,0.1);padding:32px;}
+  .avail-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+  .avail-nav h3{font-size:1.3rem;color:var(--white);}
+  .avail-nav-btn{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,background .2s;}
+  .avail-nav-btn svg{width:16px;height:16px;}
+  .avail-nav-btn:hover{border-color:var(--red);background:rgba(222,124,85,0.13);}
+  .avail-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .avail-weekday{text-align:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.64rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--grey);padding-bottom:8px;}
+  .avail-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.82rem;color:var(--white);background:transparent;border:1.5px solid var(--line);padding:0;}
+  .avail-day.pad{visibility:hidden;}
+  .avail-day.past{opacity:0.3;}
+  .avail-day.available{border-color:rgba(95,133,86,0.4);cursor:pointer;transition:background .15s,border-color .15s;}
+  .avail-day.available:hover{background:rgba(95,133,86,0.15);border-color:var(--green);}
+  .avail-day.booked{border-color:rgba(194,95,59,0.35);color:var(--grey);cursor:not-allowed;}
+  .avail-day .dot{width:5px;height:5px;border-radius:50%;}
+  .avail-day.available .dot{background:var(--green);}
+  .avail-day.booked .dot{background:var(--red-deep);}
+  .avail-legend{display:flex;gap:24px;margin-top:22px;flex-wrap:wrap;}
+  .avail-legend span{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--grey);}
+  .avail-legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .avail-legend .dot.avail{background:var(--green);}
+  .avail-legend .dot.booked{background:var(--red-deep);}
+  .avail-note{margin-top:20px;font-size:0.8rem;color:var(--grey);}
+
+  /* ── BOOKING FORM ── */
+  .request-section{padding:0 0 88px;background:var(--bg-soft);}
+  .request-intro{color:var(--grey);max-width:580px;margin-bottom:28px;}
+  .booking-form{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 28px rgba(38,49,74,0.08);padding:40px;max-width:680px;}
+  .booking-form .hp-field{position:absolute;left:-9999px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:560px){.form-row{grid-template-columns:1fr;}}
+  .booking-form label{display:block;font-family:'Nunito',sans-serif;font-weight:700;font-size:0.82rem;color:var(--white);margin-bottom:20px;}
+  .booking-form input,.booking-form select,.booking-form textarea{
+    display:block;width:100%;margin-top:8px;padding:12px 14px;
+    font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:400;color:var(--white);
+    background:var(--bg-soft-2);border:1.5px solid var(--line);border-radius:10px;
+  }
+  .booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{outline:2px solid var(--red);outline-offset:1px;}
+  .booking-form textarea{resize:vertical;font-family:'Nunito',sans-serif;}
+  .booking-form button[type="submit"]{width:auto;padding:14px 32px;margin-top:4px;}
+  .form-note{margin-top:18px;font-size:0.82rem;color:var(--grey);}
+  .form-success{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 28px rgba(38,49,74,0.08);padding:40px;max-width:680px;text-align:center;}
+  .form-success h3{font-size:1.6rem;margin-bottom:10px;}
+  .form-success p{color:var(--grey);margin:0;}
 
   .book-section{padding:88px 0;background:#D98A6C;}
 
@@ -229,7 +277,88 @@
     <div class="wrap">
       <p class="section-label">Booking</p>
       <h1>Book a<br>Show</h1>
-      <p class="lead">Jacob plays breweries, taprooms, restaurants, golf courses, and private events across mid-Michigan. Call, text, or email to check availability and rates.</p>
+      <p class="lead">Jacob plays breweries, taprooms, restaurants, golf courses, and private events across mid-Michigan. Check the calendar below, send a request, or reach out directly.</p>
+    </div>
+  </section>
+
+  <!-- CHECK YOUR DATE -->
+  <section class="avail-section">
+    <div class="wrap">
+      <p class="section-label">Check Your Date</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">See If Jacob's Free</h2>
+      <p class="avail-intro">Browse the calendar below - dates with a show already on the books are marked. Tap an open date to drop it into the request form.</p>
+      <div class="avail-card">
+        <div class="avail-nav">
+          <button class="avail-nav-btn" id="avail-prev" type="button" aria-label="Previous month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <h3 id="avail-month-label"></h3>
+          <button class="avail-nav-btn" id="avail-next" type="button" aria-label="Next month">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="avail-grid" id="avail-grid"></div>
+        <div class="avail-legend">
+          <span><i class="dot avail"></i> Appears open</span>
+          <span><i class="dot booked"></i> Already booked</span>
+        </div>
+        <p class="avail-note">This reflects Jacob's booked shows, pulled from the same calendar as the <a href="calendar.html" style="color:var(--red-deep);border-bottom:1px solid var(--red-deep);">shows page</a> - it's a good starting point, not a guarantee. He'll confirm when he replies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING REQUEST FORM -->
+  <section class="request-section" id="request">
+    <div class="wrap">
+      <p class="section-label">Tell Jacob About It</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">Send a Booking Request</h2>
+      <p class="request-intro">A few quick details are enough to start. Jacob personally reviews every request and replies within 24 hours.</p>
+
+      <form name="booking-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="bookingForm" class="booking-form">
+        <input type="hidden" name="form-name" value="booking-request">
+        <p class="hp-field"><label>Leave this field blank: <input name="bot-field"></label></p>
+
+        <div class="form-row">
+          <label>Your Name*
+            <input type="text" name="name" required>
+          </label>
+          <label>Phone or Email*
+            <input type="text" name="contact" required placeholder="Best way to reach you">
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>Event Type
+            <select name="event_type">
+              <option>Brewery / Taproom</option>
+              <option>Restaurant / Bar</option>
+              <option>Golf Course / Country Club</option>
+              <option>Private Party</option>
+              <option>Corporate Event</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Preferred Date
+            <input type="date" name="preferred_date" id="preferredDateInput">
+          </label>
+        </div>
+
+        <label>Venue / City*
+          <input type="text" name="venue" required placeholder="Venue name and city">
+        </label>
+
+        <label>Anything else Jacob should know?
+          <textarea name="message" rows="4" placeholder="Set length, indoor/outdoor, timing, budget - whatever's useful."></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-primary">Send Request</button>
+        <p class="form-note">No spam, no mailing list - this goes straight to Jacob.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess" style="display:none;">
+        <h3>Got it!</h3>
+        <p>Thanks - Jacob will review your date and get back to you within 24 hours.</p>
+      </div>
     </div>
   </section>
 
@@ -264,8 +393,8 @@
 
         <div>
           <div class="contact-card">
-            <h2>Let's Make it Happen</h2>
-            <p class="sub">Reach out directly - Jacob responds fast. Tell him your venue, date, and what you're looking for.</p>
+            <h2>Prefer to Talk Directly?</h2>
+            <p class="sub">Skip the form and reach out straight away - Jacob responds fast.</p>
 
             <a class="cta-link" href="tel:+18104230319">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.97.36 1.92.68 2.83a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.86.55 2.83.68A2 2 0 0 1 22 16.92z"/></svg>
@@ -375,6 +504,100 @@
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.add('open'));
   document.getElementById('drawerClose').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.remove('open'));
   document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // ── Check Your Date - availability calendar ──
+  (function(){
+    var availGrid = document.getElementById('avail-grid');
+    var monthLabel = document.getElementById('avail-month-label');
+    if(!availGrid) return;
+
+    var MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var WEEKDAY_LABELS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var today = new Date(); today.setHours(0,0,0,0);
+    var ymd = function(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+    var bookedDates = {};
+    var calYear = today.getFullYear();
+    var calMonth = today.getMonth();
+
+    function renderMonth(){
+      monthLabel.textContent = MONTH_NAMES[calMonth]+' '+calYear;
+      var startOffset = new Date(calYear, calMonth, 1).getDay();
+      var gridStart = new Date(calYear, calMonth, 1 - startOffset);
+      var html = WEEKDAY_LABELS.map(function(w){ return '<div class="avail-weekday">'+w+'</div>'; }).join('');
+
+      for(var i=0;i<42;i++){
+        var cellDate = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate()+i);
+        var dateStr = ymd(cellDate);
+        var inMonth = cellDate.getMonth()===calMonth;
+        var isPast = cellDate < today;
+        var isBooked = !!bookedDates[dateStr];
+        var classes = ['avail-day'];
+        var isAvailable = inMonth && !isPast && !isBooked;
+        if(!inMonth){ classes.push('pad'); }
+        else if(isPast){ classes.push('past'); }
+        else if(isBooked){ classes.push('booked'); }
+        else{ classes.push('available'); }
+
+        var dot = (inMonth && !isPast) ? '<span class="dot '+(isBooked?'booked':'avail')+'"></span>' : '';
+        var tag = isAvailable ? 'button' : 'div';
+        html += '<'+tag+' class="'+classes.join(' ')+'" data-date="'+dateStr+'"'+(tag==='button'?' type="button"':'')+'>'+cellDate.getDate()+dot+'</'+tag+'>';
+      }
+      availGrid.innerHTML = html;
+    }
+
+    function changeMonth(delta){
+      calMonth += delta;
+      if(calMonth<0){ calMonth=11; calYear--; }
+      if(calMonth>11){ calMonth=0; calYear++; }
+      renderMonth();
+    }
+
+    document.getElementById('avail-prev').addEventListener('click', function(){ changeMonth(-1); });
+    document.getElementById('avail-next').addEventListener('click', function(){ changeMonth(1); });
+
+    availGrid.addEventListener('click', function(e){
+      var cell = e.target.closest('.avail-day.available');
+      if(!cell) return;
+      var input = document.getElementById('preferredDateInput');
+      if(input) input.value = cell.dataset.date;
+      var request = document.getElementById('request');
+      if(request) request.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+
+    fetch('/.netlify/functions/get-shows')
+      .then(function(r){ return r.json(); })
+      .then(function(shows){
+        if(!Array.isArray(shows)) shows=[];
+        shows.forEach(function(s){ if(s.date) bookedDates[s.date]=true; });
+      })
+      .catch(function(){})
+      .then(renderMonth);
+  })();
+
+  // ── Booking request form (Netlify Forms) ──
+  (function(){
+    var form = document.getElementById('bookingForm');
+    var success = document.getElementById('formSuccess');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var params = [];
+      new FormData(form).forEach(function(value, key){
+        params.push(encodeURIComponent(key)+'='+encodeURIComponent(value));
+      });
+      fetch('/', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
+        body: params.join('&')
+      }).then(function(){
+        form.style.display='none';
+        success.style.display='block';
+        success.scrollIntoView({ behavior:'smooth', block:'start' });
+      }).catch(function(){
+        alert("Something went wrong sending that - call or text Jacob directly instead: (810) 423-0319");
+      });
+    });
+  })();
 </script>
   <script>
     if (window.netlifyIdentity) {
