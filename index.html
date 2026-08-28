@@ -137,12 +137,14 @@
     max-width:520px;
   }
 
-  /* ── FRAMED PHOTO (reused per-section) ── */
+  /* ── FRAMED PHOTO (polaroid-style, reused per-section) ── */
   .framed-photo{
     display:block; position:relative;
     width:100%; max-width:320px; margin:0 auto;
-    border:3px solid var(--red);
-    box-shadow:0 20px 40px rgba(0,0,0,0.5), 0 0 40px rgba(196,32,60,0.25);
+    background:#F7F4EE;
+    padding:12px 12px 32px;
+    border-radius:8px;
+    box-shadow:0 22px 44px rgba(0,0,0,0.55), 0 6px 16px rgba(0,0,0,0.35);
     transform:rotate(-3deg);
     transition:transform .35s ease;
   }
@@ -150,27 +152,35 @@
   .framed-photo:hover{transform:rotate(0deg) scale(1.03);}
   .framed-photo img{
     display:block; width:100%; height:auto;
-    filter:grayscale(0.2) contrast(1.1) saturate(1.05);
-  }
-  .framed-photo::before{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(196,32,60,0.12), rgba(10,10,10,0.4));
-    mix-blend-mode:multiply; pointer-events:none;
+    border-radius:4px;
+    filter:contrast(1.05) saturate(1.08);
   }
   .framed-photo .tag{
-    position:absolute; top:-14px; left:-16px; z-index:1;
+    position:absolute; top:-14px; left:-16px; z-index:2;
     background:var(--red); color:#fff;
     font-family:'Arimo',sans-serif; font-weight:700; font-size:0.68rem;
     letter-spacing:0.12em; text-transform:uppercase;
-    padding:6px 12px; transform:rotate(-5deg);
+    padding:6px 12px; border-radius:3px; transform:rotate(-5deg);
     box-shadow:0 4px 10px rgba(0,0,0,0.45);
   }
   .framed-photo.tilt-right .tag{left:auto; right:-16px; transform:rotate(5deg);}
+
+  /* ── PHOTO STACK (two overlapping polaroids) ── */
+  .photo-stack{position:relative; max-width:320px; margin:0 auto 32px;}
+  .photo-stack .framed-photo{margin:0 auto;}
+  .photo-stack .stack-back{max-width:250px;}
+  .photo-stack .stack-front{
+    position:absolute; left:-18px; bottom:-22px; z-index:3;
+    max-width:150px;
+  }
 
   @media(max-width:640px){
     .framed-photo{max-width:190px !important;}
     .shows-grid .framed-photo{max-width:170px !important; margin-top:0;}
     .framed-photo-wide{max-width:340px !important;}
+    .photo-stack{max-width:230px !important;}
+    .photo-stack .stack-back{max-width:180px !important;}
+    .photo-stack .stack-front{max-width:112px !important; left:-14px; bottom:-16px;}
   }
 
   .btn{
@@ -665,10 +675,15 @@
           </div>
         </div>
         <div class="reveal">
-          <figure class="framed-photo" style="max-width:320px; margin-bottom:32px;">
-            <span class="tag">About Jacob</span>
-            <img src="images/jacob-willowbrook-purple.jpg" alt="Jacob Smith performing at Willow Brook Golf Course under colorful stage lighting" loading="lazy" width="900" height="1600">
-          </figure>
+          <div class="photo-stack">
+            <figure class="framed-photo stack-back">
+              <span class="tag">About Jacob</span>
+              <img src="images/jacob-willowbrook-purple.jpg" alt="Jacob Smith performing at Willow Brook Golf Course under colorful stage lighting" loading="lazy" width="900" height="1600">
+            </figure>
+            <figure class="framed-photo tilt-right stack-front">
+              <img src="images/jacob-tent-side.jpg" alt="Jacob Smith performing live at an outdoor tent show" loading="lazy" width="1100" height="1467">
+            </figure>
+          </div>
           <div class="pull-quote" style="margin-bottom:0;">
             Solo acoustic - one guitar.
             <cite>- Jacob Smith</cite>
