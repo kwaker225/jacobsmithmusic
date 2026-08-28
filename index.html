@@ -535,7 +535,7 @@
     if(window.bannerOffset) window.bannerOffset();
   }
 
-  var GIGS_PREVIEW_COUNT=3;
+  var GIGS_PREVIEW_COUNT=1;
 
   function fillList(shows){
     var wrap=document.getElementById('show-list-wrap');
@@ -556,7 +556,7 @@
     });
     html+='</div>';
     wrap.innerHTML=html;
-    if(more) more.style.display=(shows.length>GIGS_PREVIEW_COUNT)?'block':'none';
+    if(more) more.style.display='block';
   }
 
   fetch('/.netlify/functions/get-shows')
@@ -662,7 +662,7 @@
   <section class="shows-section" id="shows">
     <div class="wrap">
       <p class="section-label reveal">Upcoming Gigs</p>
-      <h2 class="section-title reveal">2026 Schedule</h2>
+      <h2 class="section-title reveal">Catch Him Live</h2>
 
       <div class="shows-grid">
         <div class="reveal">
