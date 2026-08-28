@@ -77,7 +77,7 @@
     position:relative; overflow:hidden;
     background:var(--bg);
   }
-  @media(max-width:640px){.hero{min-height:auto; padding:190px 0 50px;}}
+  @media(max-width:640px){.hero{min-height:auto; padding:152px 0 40px;}}
   .hero::before{
     content:"";
     position:absolute; inset:0;
@@ -94,6 +94,15 @@
       rgba(10,10,10,0.8) 62%,
       rgba(10,10,10,0.94) 100%);
     z-index:1;
+  }
+  @media(max-width:640px){
+    .hero::after{
+      background: radial-gradient(circle at 50% 38%,
+        rgba(196,32,60,0.78) 0%,
+        rgba(154,24,48,0.8) 30%,
+        rgba(10,10,10,0.85) 62%,
+        rgba(10,10,10,0.96) 100%);
+    }
   }
   .rosette{
     position:absolute; top:50%; left:50%;
@@ -584,6 +593,21 @@
     </div>
   </section>
 
+  <!-- FOLLOW BAND -->
+  <section class="follow-band">
+    <div class="wrap">
+      <p class="section-label reveal">Stay In The Loop</p>
+      <h2 class="reveal">Keep Up With Jacob</h2>
+      <a href="calendar.html" class="btn-outline reveal">Upcoming Gigs</a>
+      <div class="follow-links reveal">
+        <a class="accent" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/jbsmithmusic" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">Venmo</a>
+        <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </section>
+
   <!-- SHOWS -->
   <section class="shows-section" id="shows">
     <div class="wrap">
@@ -861,21 +885,6 @@
           </div>
 
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOLLOW BAND -->
-  <section class="follow-band">
-    <div class="wrap">
-      <p class="section-label reveal">Stay In The Loop</p>
-      <h2 class="reveal">Keep Up With Jacob</h2>
-      <a href="calendar.html" class="btn-outline reveal">Upcoming Gigs</a>
-      <div class="follow-links reveal">
-        <a class="accent" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.instagram.com/jbsmithmusic" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">Venmo</a>
-        <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
   </section>
