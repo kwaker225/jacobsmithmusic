@@ -95,6 +95,15 @@
       rgba(10,10,10,0.94) 100%);
     z-index:1;
   }
+  @media(max-width:640px){
+    .hero::after{
+      background: radial-gradient(circle at 50% 32%,
+        rgba(196,32,60,0.6) 0%,
+        rgba(122,15,32,0.68) 22%,
+        rgba(10,10,10,0.8) 48%,
+        rgba(10,10,10,0.94) 78%);
+    }
+  }
   .rosette{
     position:absolute; top:50%; left:50%;
     transform:translate(-50%,-46%);
