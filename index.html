@@ -53,8 +53,10 @@
     letter-spacing:0.14em; text-transform:uppercase;
     border:1.5px solid var(--red); color:var(--white); background:var(--bg);
     padding:9px 20px; transition:background .2s ease;
+    white-space:nowrap;
   }
   .nav-cta:hover{background:var(--red);}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
   .menu-toggle{display:none; background:none; border:none; cursor:pointer; color:var(--white); padding:4px;}
   .menu-toggle svg{width:26px; height:26px;}
   .mobile-drawer{
@@ -67,7 +69,12 @@
   .mobile-drawer nav{display:flex; flex-direction:column; gap:28px; margin-top:56px;}
   .mobile-drawer nav a{font-family:'Anton',sans-serif; font-size:2.2rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--white);}
   .mobile-drawer nav a:hover{color:var(--red);}
-  @media(max-width:820px){nav.main-nav,.nav-cta{display:none;} .menu-toggle{display:block;}}
+  @media(max-width:820px){nav.main-nav{display:none;} .menu-toggle{display:block;}}
+  @media(max-width:480px){
+    .logo{font-size:0.8rem; letter-spacing:0.1em; gap:8px;}
+    .nav-cta{padding:8px 14px; font-size:0.66rem; letter-spacing:0.05em;}
+    .nav-actions{gap:10px;}
+  }
 
   /* ── HERO ── */
   .hero{
@@ -540,10 +547,12 @@
       <a href="where-hes-played.html">Played</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a href="book.html" class="nav-cta">Book Jacob</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <div class="nav-actions">
+      <a href="book.html" class="nav-cta">Book Jacob</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
