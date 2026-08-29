@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0A0A0A;--bg-soft:#111111;--bg-soft-2:#1A1A1A;--red:#C4203C;--red-deep:#9A1830;--white:#F5F5F5;--grey:#9A9A9A;--line:rgba(255,255,255,0.12);--green:#4C8C5A;--maxw:1080px;}
+  :root{--bg:#0A0A0A;--bg-soft:#111111;--bg-soft-2:#1A1A1A;--red:#C4203C;--red-deep:#9A1830;--white:#F5F5F5;--grey:#9A9A9A;--line:rgba(255,255,255,0.12);--green:#4C8C5A;--amber:#C98A2E;--maxw:1080px;}
   *{box-sizing:border-box;}
   html{background:#0A0A0A;}
   body{margin:0;background:#0A0A0A;color:var(--white);font-family:'Arimo',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
@@ -60,14 +60,18 @@
   .avail-day.past{opacity:0.3;}
   .avail-day.available{cursor:pointer;transition:background .15s;}
   .avail-day.available:hover{background:rgba(76,140,90,0.18);}
+  .avail-day.request{cursor:pointer;transition:background .15s;}
+  .avail-day.request:hover{background:rgba(201,138,46,0.18);}
   .avail-day.booked{color:var(--grey);cursor:not-allowed;}
   .avail-day .dot{width:5px;height:5px;border-radius:50%;}
   .avail-day.available .dot{background:var(--green);}
+  .avail-day.request .dot{background:var(--amber);}
   .avail-day.booked .dot{background:var(--red);}
   .avail-legend{display:flex;gap:24px;margin-top:22px;flex-wrap:wrap;}
   .avail-legend span{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--grey);}
   .avail-legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
   .avail-legend .dot.avail{background:var(--green);}
+  .avail-legend .dot.request{background:var(--amber);}
   .avail-legend .dot.booked{background:var(--red);}
   .avail-note{margin-top:20px;font-size:0.8rem;color:var(--grey);}
 
@@ -320,7 +324,7 @@
     <div class="wrap">
       <p class="section-label">Check Your Date</p>
       <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">See If Jacob's Free</h2>
-      <p class="avail-intro">Browse the calendar below - dates with a show already on the books are marked. Tap an open date to drop it into the request form.</p>
+      <p class="avail-intro">Browse the calendar below - dates with a show already on the books are marked. Jacob's regular availability is Friday through Sunday; weeknight dates (Monday-Thursday) are open by request. Tap a date to drop it into the request form.</p>
       <div class="avail-card">
         <div class="avail-nav">
           <button class="avail-nav-btn" id="avail-prev" type="button" aria-label="Previous month">
@@ -333,10 +337,11 @@
         </div>
         <div class="avail-grid" id="avail-grid"></div>
         <div class="avail-legend">
-          <span><i class="dot avail"></i> Appears open</span>
+          <span><i class="dot avail"></i> Weekend - appears open</span>
+          <span><i class="dot request"></i> Weeknight - by request</span>
           <span><i class="dot booked"></i> Already booked</span>
         </div>
-        <p class="avail-note">This reflects Jacob's booked shows, pulled from the same calendar as the <a href="calendar.html" style="color:var(--red);border-bottom:1px solid var(--red);">shows page</a> - it's a good starting point, not a guarantee. He'll confirm when he replies.</p>
+        <p class="avail-note">This reflects Jacob's booked shows, pulled from the same calendar as the <a href="calendar.html" style="color:var(--red);border-bottom:1px solid var(--red);">shows page</a> - it's a good starting point, not a guarantee. He'll confirm when he replies. Weeknight dates aren't off the table, just reach out directly and he'll let you know if it can work.</p>
       </div>
     </div>
   </section>
@@ -626,6 +631,10 @@
           <p>Jacob is based in Milford, MI and typically travels up to about 90 miles. Something further out? Just mention it in your request - he's happy to talk through it.</p>
         </details>
         <details class="faq-item">
+          <summary>Does Jacob play weeknights?</summary>
+          <p>Weekends (Friday through Sunday) are his regular availability. Weeknight shows - Monday through Thursday - are open by request, so reach out directly with your date and he'll let you know if he can make it work.</p>
+        </details>
+        <details class="faq-item">
           <summary>When is a date officially booked?</summary>
           <p>A form submission or message isn't a reservation on its own. Once you and Jacob agree on the details over the phone, text, email, or the form above, he'll confirm it directly with you.</p>
         </details>
@@ -693,21 +702,26 @@
       var gridStart = new Date(calYear, calMonth, 1 - startOffset);
       var html = WEEKDAY_LABELS.map(function(w){ return '<div class="avail-weekday">'+w+'</div>'; }).join('');
 
+      var WEEKEND_DAYS = [0,5,6]; // Sun, Fri, Sat - Jacob's regular availability
+
       for(var i=0;i<42;i++){
         var cellDate = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate()+i);
         var dateStr = ymd(cellDate);
         var inMonth = cellDate.getMonth()===calMonth;
         var isPast = cellDate < today;
         var isBooked = !!bookedDates[dateStr];
+        var isWeekend = WEEKEND_DAYS.indexOf(cellDate.getDay())!==-1;
         var classes = ['avail-day'];
-        var isAvailable = inMonth && !isPast && !isBooked;
+        var isOpen = inMonth && !isPast && !isBooked;
         if(!inMonth){ classes.push('pad'); }
         else if(isPast){ classes.push('past'); }
         else if(isBooked){ classes.push('booked'); }
-        else{ classes.push('available'); }
+        else if(isWeekend){ classes.push('available'); }
+        else{ classes.push('request'); }
 
-        var dot = (inMonth && !isPast) ? '<span class="dot '+(isBooked?'booked':'avail')+'"></span>' : '';
-        var tag = isAvailable ? 'button' : 'div';
+        var dotClass = isBooked ? 'booked' : (isWeekend ? 'avail' : 'request');
+        var dot = (inMonth && !isPast) ? '<span class="dot '+dotClass+'"></span>' : '';
+        var tag = isOpen ? 'button' : 'div';
         html += '<'+tag+' class="'+classes.join(' ')+'" data-date="'+dateStr+'"'+(tag==='button'?' type="button"':'')+'>'+cellDate.getDate()+dot+'</'+tag+'>';
       }
       availGrid.innerHTML = html;
@@ -724,7 +738,7 @@
     document.getElementById('avail-next').addEventListener('click', function(){ changeMonth(1); });
 
     availGrid.addEventListener('click', function(e){
-      var cell = e.target.closest('.avail-day.available');
+      var cell = e.target.closest('.avail-day.available, .avail-day.request');
       if(!cell) return;
       var input = document.getElementById('preferredDateInput');
       if(input) input.value = cell.dataset.date;
