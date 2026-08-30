@@ -140,9 +140,14 @@
   }
   .hero-sub{
     font-family:'Arimo',sans-serif; font-size:1rem; letter-spacing:0.06em;
-    text-transform:uppercase; color:var(--grey); margin-bottom:36px;
+    text-transform:uppercase; color:var(--grey); margin-bottom:20px;
     max-width:520px;
   }
+  .hero-bio{
+    font-family:'Arimo',sans-serif; font-size:1.02rem; line-height:1.75;
+    color:var(--grey); max-width:640px; margin:0;
+  }
+  @media(max-width:640px){.hero-bio{font-size:0.95rem;}}
 
   /* ── FRAMED PHOTO (polaroid-style, reused per-section) ── */
   .framed-photo{
@@ -206,7 +211,7 @@
   .watch-section{padding:88px 0; background:#111111; border-top:1px solid var(--line);}
   @media(max-width:640px){
     section{padding:52px 0;}
-    .follow-band{padding:48px 0 !important;}
+    .follow-band{padding:32px 0 !important;}
     .gallery-section{padding:0 0 52px !important;}
     .watch-section{padding:52px 0 !important;}
   }
@@ -351,11 +356,18 @@
   /* ── WATCH & FOLLOW ── */
   .watch-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; max-width:820px; margin:0 auto;}
   @media(max-width:760px){.watch-grid{grid-template-columns:1fr; max-width:400px;}}
-  .fb-embed-wrap{display:flex; justify-content:center; max-width:340px; margin:0 auto; overflow:hidden; border:1px solid var(--line);}
-  .yt-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-  @media(max-width:480px){.yt-grid{grid-template-columns:1fr; max-width:220px; margin:0 auto;}}
-  .short-frame{position:relative; aspect-ratio:9/16; background:#000; max-height:400px; border:1px solid var(--line);}
+  .watch-card{
+    width:100%; max-width:340px; min-height:460px; margin:0 auto;
+    border:1px solid var(--line); background:var(--bg-soft-2);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .yt-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; padding:8px;}
+  .short-frame{position:relative; aspect-ratio:9/16; background:#000;}
   .short-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  @media(max-width:480px){
+    .watch-card{min-height:auto;}
+    .yt-grid{grid-template-columns:1fr; max-width:220px; margin:0 auto;}
+  }
 
   /* ── FAQ ── */
   .faq-section{background:var(--bg-soft); border-top:1px solid var(--line);}
@@ -402,8 +414,8 @@
   .tip-arrow{color:var(--red); font-size:1rem; flex-shrink:0;}
 
   /* ── FOLLOW BAND ── */
-  .follow-band{background:var(--bg-soft); padding:72px 0; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .follow-band h2{color:var(--white); margin-bottom:32px;}
+  .follow-band{background:var(--bg-soft); padding:44px 0; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .follow-band h2{color:var(--white); margin-bottom:20px;}
   @keyframes gig-rock{
     0%, 78%, 100%{transform:translateY(0) rotate(0deg);}
     82%{transform:translateY(-5px) rotate(-4deg);}
@@ -576,6 +588,7 @@
       <p class="hero-label">Milford, Michigan</p>
       <h1>Jacob<br>Smith</h1>
       <p class="hero-sub">Live Acoustic Music: Rock, Country, Folk &amp; Everything In Between</p>
+      <p class="hero-bio">Hi, I'm Jacob. I play acoustic covers spanning classic rock, 90s favorites, country, indie, and modern hits, all delivered with a gritty voice and a guitar. My goal is simple: keep people singing along, tapping their feet, and having a better time than they were before I showed up. Whether I'm providing the soundtrack for a packed brewery, a private party, or a community event, I bring professional sound, a wide-ranging setlist, and just enough jokes to keep things interesting. If you're looking for live music that feels familiar, fun, and authentic, I'd love to play your event.</p>
     </div>
   </section>
 
@@ -601,6 +614,7 @@
     <div class="wrap">
       <p class="section-label reveal">Get In Touch</p>
       <h2 class="section-title reveal">Book Jacob</h2>
+      <p class="reveal" style="color:var(--grey); font-size:1.05rem; max-width:560px; margin:-24px auto 40px; text-align:center;">Interested in hiring Jacob? Have a gig or event coming up? Click below to check his availability and get the ball rolling.</p>
 
       <div class="book-cta reveal">
         <a href="book.html#request" class="btn btn-primary">Fill Out the Booking Form</a>
@@ -608,14 +622,10 @@
       </div>
 
       <div class="reveal" style="max-width:280px; margin:0 auto; text-align:center;">
-        <figure class="framed-photo" style="max-width:280px; margin:0 auto 24px;">
+        <figure class="framed-photo" style="max-width:280px; margin:0 auto;">
           <span class="tag">Book Him</span>
           <img src="images/jacob-deck-show.jpg" alt="Jacob Smith performing acoustic guitar on a backyard deck under string lights" loading="lazy" width="779" height="1124">
         </figure>
-        <a class="tip-row" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
-          <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo - @jbsmith2198</span></span>
-          <span class="tip-arrow">→</span>
-        </a>
       </div>
     </div>
   </section>
@@ -712,7 +722,7 @@
           <p class="section-label" style="justify-content:center;">Latest Updates</p>
           <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem); color:var(--white); margin-bottom:24px;">Follow on Facebook</h2>
           <div id="fb-root"></div>
-          <div class="fb-embed-wrap">
+          <div class="watch-card">
             <div class="fb-page" data-href="https://www.facebook.com/jacobsmithmusic" data-tabs="timeline" data-width="340" data-height="460" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
               <blockquote cite="https://www.facebook.com/jacobsmithmusic" class="fb-xfbml-parse-ignore">
                 <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Jacob Smith Music</a>
@@ -729,12 +739,14 @@
         <div class="reveal" style="text-align:center;">
           <p class="section-label" style="justify-content:center;">Watch</p>
           <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem); color:var(--white); margin-bottom:24px;">Latest From YouTube</h2>
-          <div class="yt-grid">
-            <div class="short-frame">
-              <iframe src="https://www.youtube.com/embed/RszS1Pvjybc" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <div class="short-frame">
-              <iframe src="https://www.youtube.com/embed/xnbv6eQiKSU" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <div class="watch-card">
+            <div class="yt-grid">
+              <div class="short-frame">
+                <iframe src="https://www.youtube.com/embed/RszS1Pvjybc" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+              </div>
+              <div class="short-frame">
+                <iframe src="https://www.youtube.com/embed/xnbv6eQiKSU" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+              </div>
             </div>
           </div>
           <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; display:flex; gap:8px; margin-top:20px;">
