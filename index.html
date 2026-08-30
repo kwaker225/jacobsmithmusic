@@ -351,19 +351,11 @@
   /* ── WATCH & FOLLOW ── */
   .watch-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; max-width:820px; margin:0 auto;}
   @media(max-width:760px){.watch-grid{grid-template-columns:1fr; max-width:400px;}}
-
-  /* ── SHORTS SLIDER ── */
-  .shorts-slider{position:relative; overflow:hidden;}
-  .shorts-track{display:flex; transition:transform .35s ease;}
-  .short-slide{min-width:100%; padding:0;}
-  .short-frame{position:relative; aspect-ratio:9/16; background:#000; max-height:520px;}
+  .fb-embed-wrap{display:flex; justify-content:center; max-width:340px; margin:0 auto; overflow:hidden; border:1px solid var(--line);}
+  .yt-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media(max-width:480px){.yt-grid{grid-template-columns:1fr; max-width:220px; margin:0 auto;}}
+  .short-frame{position:relative; aspect-ratio:9/16; background:#000; max-height:400px; border:1px solid var(--line);}
   .short-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
-  .shorts-dots{display:flex; justify-content:center; gap:8px; margin-top:14px;}
-  .short-dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.25); cursor:pointer; transition:background .2s;}
-  .short-dot.active{background:var(--red);}
-  .shorts-nav{display:flex; justify-content:space-between; margin-top:12px;}
-  .short-prev,.short-next{background:var(--bg-soft-2); border:1.5px solid var(--line); color:var(--white); padding:10px 20px; cursor:pointer; font-family:'Arimo',sans-serif; font-weight:700; font-size:1rem; transition:border-color .2s, background .2s;}
-  .short-prev:hover,.short-next:hover{border-color:var(--red); background:rgba(196,32,60,0.12);}
 
   /* ── FAQ ── */
   .faq-section{background:var(--bg-soft); border-top:1px solid var(--line);}
@@ -411,7 +403,6 @@
 
   /* ── FOLLOW BAND ── */
   .follow-band{background:var(--bg-soft); padding:72px 0; text-align:center; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .follow-band .section-label{justify-content:center;}
   .follow-band h2{color:var(--white); margin-bottom:32px;}
   @keyframes gig-rock{
     0%, 78%, 100%{transform:translateY(0) rotate(0deg);}
@@ -424,11 +415,11 @@
     display:inline-flex; align-items:center; gap:8px;
     font-family:'Arimo',sans-serif; font-size:0.82rem; font-weight:700;
     letter-spacing:0.14em; text-transform:uppercase; color:var(--white);
-    border:1.5px solid var(--red); padding:14px 30px; margin-bottom:40px;
+    border:1.5px solid var(--red); padding:14px 30px;
     transition:background .2s ease;
     animation:gig-rock 3.6s ease-in-out infinite;
   }
-  .follow-band .btn-outline:hover{background:var(--red); animation-play-state:paused;}
+  .follow-band .btn-outline:hover{background:var(--red); color:var(--white); animation-play-state:paused;}
   @media(prefers-reduced-motion: reduce){
     .follow-band .btn-outline{animation:none;}
   }
@@ -591,17 +582,16 @@
   <!-- FOLLOW BAND -->
   <section class="follow-band">
     <div class="wrap">
-      <p class="section-label reveal">Stay In The Loop</p>
       <h2 class="reveal">Keep Up With Jacob</h2>
-      <a href="calendar.html" class="btn-outline reveal">Upcoming Gigs</a>
       <div class="follow-links reveal">
+        <a href="calendar.html" class="btn-outline">Upcoming Gigs</a>
         <a class="accent" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Facebook</a>
         <a href="https://www.instagram.com/jbsmithmusic" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
         <div class="venmo-item">
           <a class="venmo-link" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener"><span class="venmo-dollar">$</span> Venmo</a>
-          <span class="venmo-note">Leave Jacob a tip</span>
+          <span class="venmo-note">Leave Jacob a tip &middot; @jbsmith2198</span>
         </div>
-        <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube</a>
       </div>
     </div>
   </section>
@@ -617,62 +607,15 @@
         <p>Check availability and send your event details. Jacob responds fast.</p>
       </div>
 
-      <div class="contact-grid">
-        <div class="reveal">
-          <ul class="contact-list">
-            <li>
-              <a href="tel:+18104230319">
-                <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.97.36 1.92.68 2.83a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.86.55 2.83.68A2 2 0 0 1 22 16.92z"/></svg></span>
-                <span><span class="c-label">Phone / Text</span>(810) 423-0319</span>
-              </a>
-            </li>
-            <li>
-              <a href="mailto:jbsmithmusic98@gmail.com">
-                <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg></span>
-                <span><span class="c-label">Email</span>jbsmithmusic98@gmail.com</span>
-              </a>
-            </li>
-            <li>
-              <span>
-                <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-                <span><span class="c-label">Based In</span>Milford, MI</span>
-              </span>
-            </li>
-          </ul>
-          <div class="socials">
-            <a class="social-btn" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.88h-2.34v7A10 10 0 0 0 22 12z"/></svg>
-            </a>
-            <a class="social-btn" href="https://www.instagram.com/jbsmithmusic" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
-            </a>
-            <a class="social-btn" href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 8.5s-.2-1.6-.85-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5h0s-4.9 0-7.55.2c-.4.1-1.3.1-2.1 1-.65.7-.85 2.3-.85 2.3S1.3 10.4 1.3 12.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.85 2.3c.8.9 1.85.87 2.32.97C6.3 21 12 21 12 21s4.9 0 7.55-.2c.4-.1 1.3-.1 2.1-1 .65-.7.85-2.3.85-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8z"/><path d="M10 9.5v6l5-3z" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a class="social-btn" href="https://linktr.ee/jbsmith2198" target="_blank" rel="noopener" aria-label="Linktree">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12M12 12 5 7M12 12l7-5M12 12 5 17M12 12l7 5M12 2v3"/></svg>
-            </a>
-            <a class="social-btn gigsalad-btn" href="https://www.gigsalad.com/jacob_smith_music_milford" target="_blank" rel="noopener" aria-label="GigSalad">
-              <img src="https://www.gigsalad.com/favicon.ico" alt="GigSalad" width="18" height="18" style="border-radius:2px;">
-            </a>
-          </div>
-        </div>
-        <div class="reveal">
-          <figure class="framed-photo" style="max-width:280px; margin-bottom:32px;">
-            <span class="tag">Book Him</span>
-            <img src="images/jacob-deck-show.jpg" alt="Jacob Smith performing acoustic guitar on a backyard deck under string lights" loading="lazy" width="779" height="1124">
-          </figure>
-          <div class="booking-card">
-            <h3>Have a room that needs a guitar?</h3>
-            <p>Breweries, taprooms, restaurants, private events: Jacob plays well with noise, low light, and last-minute song requests, backed by professional sound and stage lighting from Uptown Light &amp; Sound. Fill out the booking form to check availability.</p>
-            <a href="book.html#request" class="btn btn-primary" style="display:inline-flex;">Fill Out Booking Form</a>
-            <a href="tel:+18104230319" class="btn-secondary-link">Or call/text (810) 423-0319</a>
-          </div>
-          <a class="tip-row" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
-            <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo - @jbsmith2198</span></span>
-            <span class="tip-arrow">→</span>
-          </a>
-        </div>
+      <div class="reveal" style="max-width:280px; margin:0 auto; text-align:center;">
+        <figure class="framed-photo" style="max-width:280px; margin:0 auto 24px;">
+          <span class="tag">Book Him</span>
+          <img src="images/jacob-deck-show.jpg" alt="Jacob Smith performing acoustic guitar on a backyard deck under string lights" loading="lazy" width="779" height="1124">
+        </figure>
+        <a class="tip-row" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
+          <span><span class="lab">Enjoyed a show?</span><span class="sub">Send a tip on Venmo - @jbsmith2198</span></span>
+          <span class="tip-arrow">→</span>
+        </a>
       </div>
     </div>
   </section>
@@ -718,7 +661,7 @@
       <p class="section-label reveal">On Stage</p>
       <h2 class="section-title reveal">Around The Room</h2>
       <figure class="framed-photo framed-photo-wide reveal" style="max-width:560px;">
-        <span class="tag">On Stage</span>
+        <span class="tag">Live Shot</span>
         <img src="images/jacob-willowbrook-wide.jpg" alt="Jacob Smith performing at Willow Brook Golf Course under colorful stage lighting" loading="lazy" width="1000" height="485">
       </figure>
     </div>
@@ -768,13 +711,15 @@
         <div class="reveal" style="text-align:center;">
           <p class="section-label" style="justify-content:center;">Latest Updates</p>
           <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem); color:var(--white); margin-bottom:24px;">Follow on Facebook</h2>
-          <figure class="framed-photo tilt-right" style="max-width:280px; margin:0 auto 24px;">
-            <span class="tag">Follow Along</span>
-            <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">
-              <img src="images/jacob-neon-taproom.jpg" alt="Jacob Smith performing at a taproom with a neon sign backdrop" loading="lazy">
-            </a>
-          </figure>
-          <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; display:flex; gap:8px;">
+          <div id="fb-root"></div>
+          <div class="fb-embed-wrap">
+            <div class="fb-page" data-href="https://www.facebook.com/jacobsmithmusic" data-tabs="timeline" data-width="340" data-height="460" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
+              <blockquote cite="https://www.facebook.com/jacobsmithmusic" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Jacob Smith Music</a>
+              </blockquote>
+            </div>
+          </div>
+          <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; display:flex; gap:8px; margin-top:20px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.88h-2.34v7A10 10 0 0 0 22 12z"/></svg>
             Follow on Facebook
           </a>
@@ -784,29 +729,15 @@
         <div class="reveal" style="text-align:center;">
           <p class="section-label" style="justify-content:center;">Watch</p>
           <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem); color:var(--white); margin-bottom:24px;">Latest From YouTube</h2>
-          <div class="shorts-slider" id="shortsSlider">
-            <div class="shorts-track" id="shortsTrack">
-              <div class="short-slide">
-                <div class="short-frame">
-                  <iframe src="https://www.youtube.com/embed/RszS1Pvjybc" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                </div>
-              </div>
-              <div class="short-slide">
-                <div class="short-frame">
-                  <iframe src="https://www.youtube.com/embed/xnbv6eQiKSU" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                </div>
-              </div>
+          <div class="yt-grid">
+            <div class="short-frame">
+              <iframe src="https://www.youtube.com/embed/RszS1Pvjybc" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
-            <div class="shorts-dots">
-              <span class="short-dot active" data-idx="0"></span>
-              <span class="short-dot" data-idx="1"></span>
-            </div>
-            <div class="shorts-nav">
-              <button class="short-prev" aria-label="Previous">&#8592;</button>
-              <button class="short-next" aria-label="Next">&#8594;</button>
+            <div class="short-frame">
+              <iframe src="https://www.youtube.com/embed/xnbv6eQiKSU" title="Jacob Smith - YouTube Short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
             </div>
           </div>
-          <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; display:flex; gap:8px; margin-top:16px;">
+          <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; display:flex; gap:8px; margin-top:20px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.5 8.5s-.2-1.6-.85-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5s-4.9 0-7.55.2c-.4.1-1.3.1-2.1 1-.65.7-.85 2.3-.85 2.3S1.3 10.4 1.3 12.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.85 2.3c.8.9 1.85.87 2.32.97C6.3 21 12 21 12 21s4.9 0 7.55-.2c.4-.1 1.3-.1 2.1-1 .65-.7.85-2.3.85-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8z"/><path d="M10 9.5v6l5-3z" fill="currentColor" stroke="none"/></svg>
             Follow on YouTube
           </a>
@@ -815,6 +746,7 @@
       </div>
     </div>
   </section>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"></script>
 
   <!-- FAQ -->
   <section class="faq-section">
@@ -875,7 +807,7 @@
 
 <footer>
   <div class="wrap">
-    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="where-hes-played.html">Where He's Played</a> &nbsp;·&nbsp; © <span id="yr"></span>
+    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="tel:+18104230319">(810) 423-0319</a> &nbsp;·&nbsp; <a href="mailto:jbsmithmusic98@gmail.com">jbsmithmusic98@gmail.com</a> &nbsp;·&nbsp; <a href="where-hes-played.html">Where He's Played</a> &nbsp;·&nbsp; © <span id="yr"></span>
   </div>
 </footer>
 
@@ -895,19 +827,6 @@
     entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);} });
   }, {threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // Shorts slider
-  const track = document.getElementById('shortsTrack');
-  const dots = document.querySelectorAll('.short-dot');
-  let cur = 0;
-  function goTo(idx){
-    cur = idx;
-    track.style.transform = `translateX(-${cur * 100}%)`;
-    dots.forEach((d,i) => d.classList.toggle('active', i===cur));
-  }
-  document.querySelector('.short-next')?.addEventListener('click', () => goTo((cur+1) % dots.length));
-  document.querySelector('.short-prev')?.addEventListener('click', () => goTo((cur-1+dots.length) % dots.length));
-  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
 
   // Facebook photo carousel
   const fbCarousel = document.getElementById('fbCarousel');
