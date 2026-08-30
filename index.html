@@ -211,11 +211,15 @@
     .watch-section{padding:52px 0 !important;}
   }
   .section-label{
-    font-family:'Arimo',sans-serif; font-size:0.78rem; font-weight:700;
-    letter-spacing:0.22em; text-transform:uppercase; color:var(--red);
-    display:flex; align-items:center; gap:10px; margin-bottom:12px;
+    display:inline-flex; align-items:center;
+    font-family:'Arimo',sans-serif; font-size:0.7rem; font-weight:800;
+    letter-spacing:0.14em; text-transform:uppercase; color:#fff;
+    background:var(--red);
+    padding:6px 14px;
+    transform:rotate(-2deg);
+    margin-bottom:20px;
+    box-shadow:3px 3px 0 rgba(0,0,0,0.4);
   }
-  .section-label::before{content:""; width:20px; height:2px; background:var(--red); display:inline-block; flex-shrink:0;}
   .section-title{font-size:clamp(2.4rem,6vw,4.2rem); color:var(--white); margin-bottom:48px;}
 
   .reveal{opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease;}
