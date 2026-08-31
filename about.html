@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About - Jacob Smith Music</title>
-<meta name="description" content="Learn about Jacob Smith, solo acoustic musician based in Milford, Michigan.">
+<meta name="description" content="Learn about Jacob Smith, solo acoustic musician based in Milford, Michigan, playing classic rock, 90s favorites, country, indie, and modern hits.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,8 +25,9 @@
   nav.main-nav{display:flex;gap:32px;}
   nav.main-nav a{font-family:'Arimo',sans-serif;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);transition:color .2s;}
   nav.main-nav a:hover,nav.main-nav a.active{color:var(--white);}
-  .nav-cta{font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--bg);padding:9px 20px;transition:background .2s;}
+  .nav-cta{font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--bg);padding:9px 20px;transition:background .2s;white-space:nowrap;}
   .nav-cta:hover{background:var(--red);}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
   .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:4px;}
   .menu-toggle svg{width:26px;height:26px;}
   .mobile-drawer{position:fixed;inset:0;background:var(--bg);z-index:150;display:flex;flex-direction:column;padding:28px;transform:translateX(100%);transition:transform .3s ease;}
@@ -35,11 +36,11 @@
   .mobile-drawer nav{display:flex;flex-direction:column;gap:28px;margin-top:56px;}
   .mobile-drawer nav a{font-family:'Anton',sans-serif;font-size:2.2rem;text-transform:uppercase;letter-spacing:0.04em;}
   .mobile-drawer nav a:hover{color:var(--red);}
-  @media(max-width:820px){nav.main-nav,.nav-cta{display:none;}.menu-toggle{display:block;}}
+  @media(max-width:820px){nav.main-nav{display:none;}.menu-toggle{display:block;}}
+  @media(max-width:480px){.logo{font-size:0.8rem;letter-spacing:0.1em;gap:8px;}.nav-cta{padding:8px 14px;font-size:0.66rem;letter-spacing:0.05em;}.nav-actions{gap:10px;}}
 
   .page-hero{padding:160px 0 80px;border-bottom:1px solid var(--line);background:#0A0A0A;}
-  .section-label{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-  .section-label::before{content:"";width:20px;height:2px;background:var(--red);display:inline-block;flex-shrink:0;}
+  .section-label{display:inline-flex;align-items:center;font-family:'Arimo',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#fff;background:var(--red);padding:6px 14px;transform:rotate(-2deg);margin-bottom:18px;box-shadow:3px 3px 0 rgba(0,0,0,0.4);}
   .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:24px;}
   .page-hero p.lead{font-size:1.2rem;color:var(--grey);max-width:580px;line-height:1.7;}
 
@@ -156,10 +157,12 @@
       <a href="where-hes-played.html">Played</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a href="book.html" class="nav-cta">Book Jacob</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <div class="nav-actions">
+      <a href="book.html" class="nav-cta">Book Jacob</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -184,7 +187,7 @@
     <div class="wrap">
       <p class="section-label">The Artist</p>
       <h1>Just Him &amp;<br>The Guitar</h1>
-      <p class="lead">Solo acoustic musician based in Milford, Michigan - playing original songs and covers across rock, country, folk, and everything in between.</p>
+      <p class="lead">Solo acoustic musician based in Milford, Michigan, blending originals with covers spanning classic rock, 90s favorites, country, indie, and modern hits.</p>
     </div>
   </section>
 
@@ -192,12 +195,12 @@
     <div class="wrap">
       <div class="bio-grid">
         <div>
-          <p>Jacob Smith grew up in Byron, MI - a small town where music had a way of finding people early. He picked up a guitar and never really put it down. Now based in Milford, Michigan, he plays entirely acoustic - no backing tracks, no band, just a guitar and a room full of people.</p>
-          <p>His live performances are built for the rooms he plays - breweries, taprooms, golf courses, restaurants - spaces where people gather and music is the backdrop that ties it all together. He reads a room instinctively, shifting between crowd favorites and deep cuts, originals and covers, keeping energy up without ever losing the thread.</p>
-          <p>Growing up surrounded by classic rock, country, and folk gave him a wide range to pull from - and he pulls from all of it. If you've got a space and a crowd, he's got a guitar and a setlist.</p>
+          <p>Jacob Smith grew up in Byron, MI, a small town where music had a way of finding people early. He picked up a guitar and never really put it down. Now based in Milford, Michigan, he plays entirely acoustic: no backing tracks, no band, just a guitar, a gritty voice, and a room full of people.</p>
+          <p>His sets blend originals with covers spanning classic rock, 90s favorites, country, indie, and modern hits, built for the rooms he plays: breweries, taprooms, private parties, and community events. His goal every time is simple: keep people singing along, tapping their feet, and having a better time than before he walked in.</p>
+          <p>Every show comes with professional sound and stage lighting from Uptown Light &amp; Sound, a wide-ranging setlist that takes requests, and just enough jokes between songs to keep things interesting. If you're looking for live music that feels familiar, fun, and authentic, he'd love to play your event.</p>
           <div class="tag-list">
             <span class="tag">Originals &amp; Covers</span>
-            <span class="tag">Rock / Country / Folk</span>
+            <span class="tag">Rock, 90s, Country &amp; Indie</span>
             <span class="tag">100% Acoustic</span>
             <span class="tag">Solo Act</span>
             <span class="tag">Milford, MI</span>
@@ -206,7 +209,7 @@
         <div>
           <img src="images/jacob-deck-show.jpg" alt="Jacob Smith performing acoustic guitar on a backyard deck under string lights" style="width:100%;height:auto;display:block;margin-bottom:28px;border:1px solid var(--line);border-top:3px solid var(--red);" loading="lazy" width="779" height="1124">
           <div class="pull-quote">
-            Solo acoustic - one guitar.
+            Solo acoustic, one guitar.
             <cite>- Jacob Smith</cite>
           </div>
           <div style="display:flex;gap:14px;flex-wrap:wrap;">
@@ -226,7 +229,7 @@
 
 <footer>
   <div class="wrap">
-    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; © <span id="yr"></span>
+    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="tel:+18104230319">(810) 423-0319</a> &nbsp;·&nbsp; <a href="mailto:jbsmithmusic98@gmail.com">jbsmithmusic98@gmail.com</a> &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; © <span id="yr"></span>
   </div>
 </footer>
 <script>

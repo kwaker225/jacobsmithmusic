@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book a Show - Jacob Smith Music</title>
-<meta name="description" content="Book Jacob Smith for your venue - breweries, restaurants, private events, and more across mid-Michigan.">
+<meta name="description" content="Book Jacob Smith for your venue: breweries, restaurants, private events, and more across mid-Michigan.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0A0A0A;--bg-soft:#111111;--bg-soft-2:#1A1A1A;--red:#C4203C;--red-deep:#9A1830;--white:#F5F5F5;--grey:#9A9A9A;--line:rgba(255,255,255,0.12);--green:#4C8C5A;--maxw:1080px;}
+  :root{--bg:#0A0A0A;--bg-soft:#111111;--bg-soft-2:#1A1A1A;--red:#C4203C;--red-deep:#9A1830;--white:#F5F5F5;--grey:#9A9A9A;--line:rgba(255,255,255,0.12);--green:#4C8C5A;--amber:#C98A2E;--maxw:1080px;}
   *{box-sizing:border-box;}
   html{background:#0A0A0A;}
   body{margin:0;background:#0A0A0A;color:var(--white);font-family:'Arimo',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
@@ -25,7 +25,8 @@
   nav.main-nav{display:flex;gap:32px;}
   nav.main-nav a{font-family:'Arimo',sans-serif;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--grey);transition:color .2s;}
   nav.main-nav a:hover{color:var(--white);}
-  .nav-cta{font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--red);padding:9px 20px;}
+  .nav-cta{font-family:'Arimo',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;border:1.5px solid var(--red);color:var(--white);background:var(--red);padding:9px 20px;white-space:nowrap;}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
   .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--white);padding:4px;}
   .menu-toggle svg{width:26px;height:26px;}
   .mobile-drawer{position:fixed;inset:0;background:var(--bg);z-index:150;display:flex;flex-direction:column;padding:28px;transform:translateX(100%);transition:transform .3s ease;}
@@ -34,11 +35,11 @@
   .mobile-drawer nav{display:flex;flex-direction:column;gap:28px;margin-top:56px;}
   .mobile-drawer nav a{font-family:'Anton',sans-serif;font-size:2.2rem;text-transform:uppercase;letter-spacing:0.04em;}
   .mobile-drawer nav a:hover{color:var(--red);}
-  @media(max-width:820px){nav.main-nav,.nav-cta{display:none;}.menu-toggle{display:block;}}
+  @media(max-width:820px){nav.main-nav{display:none;}.menu-toggle{display:block;}}
+  @media(max-width:480px){.logo{font-size:0.8rem;letter-spacing:0.1em;gap:8px;}.nav-cta{padding:8px 14px;font-size:0.66rem;letter-spacing:0.05em;}.nav-actions{gap:10px;}}
 
   .page-hero{padding:160px 0 80px;border-bottom:1px solid var(--line);background:#0A0A0A;}
-  .section-label{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-  .section-label::before{content:"";width:20px;height:2px;background:var(--red);display:inline-block;flex-shrink:0;}
+  .section-label{display:inline-flex;align-items:center;font-family:'Arimo',sans-serif;font-size:0.7rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#fff;background:var(--red);padding:6px 14px;transform:rotate(-2deg);margin-bottom:18px;box-shadow:3px 3px 0 rgba(0,0,0,0.4);}
   .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:24px;}
   .page-hero p.lead{font-size:1.2rem;color:var(--grey);max-width:580px;}
 
@@ -58,14 +59,18 @@
   .avail-day.past{opacity:0.3;}
   .avail-day.available{cursor:pointer;transition:background .15s;}
   .avail-day.available:hover{background:rgba(76,140,90,0.18);}
+  .avail-day.request{cursor:pointer;transition:background .15s;}
+  .avail-day.request:hover{background:rgba(201,138,46,0.18);}
   .avail-day.booked{color:var(--grey);cursor:not-allowed;}
   .avail-day .dot{width:5px;height:5px;border-radius:50%;}
   .avail-day.available .dot{background:var(--green);}
+  .avail-day.request .dot{background:var(--amber);}
   .avail-day.booked .dot{background:var(--red);}
   .avail-legend{display:flex;gap:24px;margin-top:22px;flex-wrap:wrap;}
   .avail-legend span{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--grey);}
   .avail-legend .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
   .avail-legend .dot.avail{background:var(--green);}
+  .avail-legend .dot.request{background:var(--amber);}
   .avail-legend .dot.booked{background:var(--red);}
   .avail-note{margin-top:20px;font-size:0.8rem;color:var(--grey);}
 
@@ -279,10 +284,12 @@
       <a href="where-hes-played.html">Played</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <a href="book.html" class="nav-cta">Book Jacob</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <div class="nav-actions">
+      <a href="book.html" class="nav-cta">Book Jacob</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -316,7 +323,7 @@
     <div class="wrap">
       <p class="section-label">Check Your Date</p>
       <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">See If Jacob's Free</h2>
-      <p class="avail-intro">Browse the calendar below - dates with a show already on the books are marked. Tap an open date to drop it into the request form.</p>
+      <p class="avail-intro">Browse the calendar below. Dates with a show already on the books are marked, and Jacob's regular availability is Friday through Sunday; weeknight dates (Monday-Thursday) are open by request. Tap a date to drop it into the request form.</p>
       <div class="avail-card">
         <div class="avail-nav">
           <button class="avail-nav-btn" id="avail-prev" type="button" aria-label="Previous month">
@@ -329,10 +336,11 @@
         </div>
         <div class="avail-grid" id="avail-grid"></div>
         <div class="avail-legend">
-          <span><i class="dot avail"></i> Appears open</span>
+          <span><i class="dot avail"></i> Weekend (open)</span>
+          <span><i class="dot request"></i> Weeknight (by request)</span>
           <span><i class="dot booked"></i> Already booked</span>
         </div>
-        <p class="avail-note">This reflects Jacob's booked shows, pulled from the same calendar as the <a href="calendar.html" style="color:var(--red);border-bottom:1px solid var(--red);">shows page</a> - it's a good starting point, not a guarantee. He'll confirm when he replies.</p>
+        <p class="avail-note">This reflects Jacob's booked shows, pulled from the same calendar as the <a href="calendar.html" style="color:var(--red);border-bottom:1px solid var(--red);">shows page</a> - it's a good starting point, not a guarantee. He'll confirm when he replies. Weeknight dates aren't off the table, just reach out directly and he'll let you know if it can work.</p>
       </div>
     </div>
   </section>
@@ -362,7 +370,7 @@
 
         <label>How many performances are you considering?*
           <span class="radio-group">
-            <label class="radio-option"><input type="radio" name="performance_count" value="One performance" checked> One performance - added dates are alternatives</label>
+            <label class="radio-option"><input type="radio" name="performance_count" value="One performance" checked> One performance (added dates are alternatives)</label>
             <label class="radio-option"><input type="radio" name="performance_count" value="More than one performance"> More than one performance</label>
           </span>
         </label>
@@ -436,7 +444,7 @@
         </label>
 
         <label>Choose the vibe
-          <span style="display:block;font-weight:400;text-transform:none;letter-spacing:normal;font-size:0.85rem;color:var(--grey);margin-top:4px;margin-bottom:4px;">Optional - check all that fit. Jacob can read the room from there.</span>
+          <span style="display:block;font-weight:400;text-transform:none;letter-spacing:normal;font-size:0.85rem;color:var(--grey);margin-top:4px;margin-bottom:4px;">Optional: check all that fit, and Jacob can read the room from there.</span>
           <span class="vibe-grid">
             <label class="vibe-option">
               <input type="checkbox" name="vibe" value="Background & Chill">
@@ -458,16 +466,16 @@
         </label>
 
         <label>Anything else Jacob should know?
-          <textarea name="message" rows="4" placeholder="Set length, budget, special requests - whatever's useful. (Optional)"></textarea>
+          <textarea name="message" rows="4" placeholder="Set length, budget, special requests, or anything else useful. (Optional)"></textarea>
         </label>
 
         <button type="submit" class="btn btn-primary">Send My Date Request</button>
-        <p class="form-disclaimer">A request does not reserve a date. Jacob will confirm availability and next steps when he replies - usually within 24 hours.</p>
+        <p class="form-disclaimer">A request does not reserve a date. Jacob will confirm availability and next steps when he replies, usually within 24 hours.</p>
       </form>
 
       <div class="form-success" id="formSuccess" style="display:none;">
         <h3>Got it!</h3>
-        <p>Thanks - Jacob will review your date and get back to you within 24 hours.</p>
+        <p>Thanks! Jacob will review your date and get back to you within 24 hours.</p>
       </div>
     </div>
   </section>
@@ -480,23 +488,23 @@
           <ul class="what-list">
             <li class="what-item">
               <span class="what-dot"></span>
-              <div><h3>100% Acoustic</h3><p>No backing tracks, no band rider. Just Jacob and his guitar - self-contained and easy to host.</p></div>
+              <div><h3>100% Acoustic</h3><p>No backing tracks, no band rider: just Jacob and his guitar, self-contained and easy to host.</p></div>
             </li>
             <li class="what-item">
               <span class="what-dot"></span>
-              <div><h3>Pro Sound &amp; Lighting</h3><p>Every show comes with professional sound and stage lighting from Uptown Light &amp; Sound - full production, no extra rentals needed.</p></div>
+              <div><h3>Pro Sound &amp; Lighting</h3><p>Every show comes with professional sound and stage lighting from Uptown Light &amp; Sound, for full production with no extra rentals needed.</p></div>
             </li>
             <li class="what-item">
               <span class="what-dot"></span>
-              <div><h3>Originals &amp; Covers</h3><p>Rock, country, folk, and alternative - deep cuts and crowd favorites mixed with his own original songs.</p></div>
+              <div><h3>Originals &amp; Covers</h3><p>Rock, country, folk, and alternative: deep cuts and crowd favorites mixed with his own original songs.</p></div>
             </li>
             <li class="what-item">
               <span class="what-dot"></span>
-              <div><h3>Flexible Sets</h3><p>Background ambiance or full-room energy - Jacob reads the crowd and adjusts. Perfect for events of any size.</p></div>
+              <div><h3>Flexible Sets</h3><p>Background ambiance or full-room energy: Jacob reads the crowd and adjusts to fit events of any size.</p></div>
             </li>
             <li class="what-item">
               <span class="what-dot"></span>
-              <div><h3>Great for Any Venue</h3><p>Breweries, taprooms, restaurants, golf clubhouses, private parties, corporate events - he's played them all.</p></div>
+              <div><h3>Great for Any Venue</h3><p>Breweries, taprooms, restaurants, golf clubhouses, private parties, corporate events: he's played them all.</p></div>
             </li>
             <li class="what-item">
               <span class="what-dot"></span>
@@ -508,7 +516,7 @@
         <div>
           <div class="contact-card">
             <h2>Prefer to Talk Directly?</h2>
-            <p class="sub">Skip the form and reach out straight away - Jacob responds fast.</p>
+            <p class="sub">Skip the form and reach out straight away. Jacob responds fast.</p>
 
             <a class="cta-link" href="tel:+18104230319">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.97.36 1.92.68 2.83a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.86.55 2.83.68A2 2 0 0 1 22 16.92z"/></svg>
@@ -539,15 +547,15 @@
       <div class="steps-list">
         <div class="step">
           <span class="step-num">1</span>
-          <div><h3>Reach Out</h3><p>Call, text, message, or use the form above with your venue, date, and what you're looking for - background music or a full-room set.</p></div>
+          <div><h3>Reach Out</h3><p>Call, text, message, or use the form above with your venue, date, and what you're looking for, whether that's background music or a full-room set.</p></div>
         </div>
         <div class="step">
           <span class="step-num">2</span>
-          <div><h3>Jacob Responds</h3><p>He personally checks the date and replies within 24 hours with availability and next steps - no forms sitting unread, no runaround.</p></div>
+          <div><h3>Jacob Responds</h3><p>He personally checks the date and replies within 24 hours with availability and next steps. No forms sitting unread, no runaround.</p></div>
         </div>
         <div class="step">
           <span class="step-num">3</span>
-          <div><h3>Show Up &amp; Play</h3><p>Just Jacob, his guitar, and his own pro sound and lighting - no band rider, no setup headaches. He shows up ready to play.</p></div>
+          <div><h3>Show Up &amp; Play</h3><p>Just Jacob, his guitar, and his own pro sound and lighting. No band rider, no setup headaches: he shows up ready to play.</p></div>
         </div>
       </div>
     </div>
@@ -574,7 +582,7 @@
           <div class="gs-stat"><div class="gs-stat-val">4</div><div class="gs-stat-lab">Services Listed</div></div>
         </div>
 
-        <p class="gs-bio">Hi, I'm Jacob! I play acoustic covers spanning classic rock, 90s favorites, country, indie, and modern hits - all delivered with a gritty voice and a guitar. My goal is simple: keep people singing along, tapping their feet, and having a better time than they were before I showed up. Whether providing the soundtrack for a packed brewery, a private party, or a community event, I bring professional sound, a wide-ranging setlist, and just enough humor to keep things interesting.</p>
+        <p class="gs-bio">Hi, I'm Jacob! I play acoustic covers spanning classic rock, 90s favorites, country, indie, and modern hits, all delivered with a gritty voice and a guitar. My goal is simple: keep people singing along, tapping their feet, and having a better time than they were before I showed up. Whether providing the soundtrack for a packed brewery, a private party, or a community event, I bring professional sound, a wide-ranging setlist, and just enough humor to keep things interesting.</p>
 
         <div class="gs-tags">
           <span class="gs-tag">Singing Guitarist</span>
@@ -615,11 +623,15 @@
       <div class="faq-list">
         <details class="faq-item">
           <summary>What does a booking include?</summary>
-          <p>Just Jacob and his guitar - fully acoustic, no backing tracks, no band - plus professional sound and stage lighting provided by Uptown Light &amp; Sound. He sings, plays, and reads the room, mixing originals with a wide range of covers spanning rock, country, and folk.</p>
+          <p>Just Jacob and his guitar, fully acoustic with no backing tracks and no band, plus professional sound and stage lighting provided by Uptown Light &amp; Sound. He sings, plays, and reads the room, mixing originals with a wide range of covers spanning classic rock, 90s favorites, country, indie, and modern hits.</p>
         </details>
         <details class="faq-item">
           <summary>How is travel handled?</summary>
-          <p>Jacob is based in Milford, MI and typically travels up to about 90 miles. Something further out? Just mention it in your request - he's happy to talk through it.</p>
+          <p>Jacob is based in Milford, MI and typically travels up to about 90 miles. Something further out? Just mention it in your request, and he's happy to talk it through.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does Jacob play weeknights?</summary>
+          <p>Weekends (Friday through Sunday) are his regular availability. Weeknight shows, Monday through Thursday, are open by request, so reach out directly with your date and he'll let you know if he can make it work.</p>
         </details>
         <details class="faq-item">
           <summary>When is a date officially booked?</summary>
@@ -627,31 +639,31 @@
         </details>
         <details class="faq-item">
           <summary>Do you play recurring venue dates?</summary>
-          <p>Yes - Jacob holds regular slots at several venues (see <a href="where-hes-played.html" style="color:var(--red);border-bottom:1px solid var(--red);">Where He's Played</a>) and can set up a recurring booking at yours too.</p>
+          <p>Yes, Jacob holds regular slots at several venues (see <a href="where-hes-played.html" style="color:var(--red);border-bottom:1px solid var(--red);">Where He's Played</a>) and can set up a recurring booking at yours too.</p>
         </details>
         <details class="faq-item">
           <summary>Can Jacob play outdoors?</summary>
-          <p>Absolutely. He's fully acoustic and doesn't need a stage or elaborate setup, so patios, decks, and outdoor events all work well - just let him know the setting when you reach out.</p>
+          <p>Absolutely. He's fully acoustic and doesn't need a stage or elaborate setup, so patios, decks, and outdoor events all work well. Just let him know the setting when you reach out.</p>
         </details>
         <details class="faq-item">
           <summary>Can we request songs?</summary>
-          <p>Yes, always. Jacob takes requests and builds sets that blend his originals with crowd-favorite covers - tell him what your crowd likes and he'll work it in.</p>
+          <p>Yes, always. Jacob takes requests and builds sets that blend his originals with crowd-favorite covers. Tell him what your crowd likes and he'll work it in.</p>
         </details>
         <details class="faq-item">
           <summary>Does Jacob provide sound equipment?</summary>
-          <p>Yes - every show comes with professional sound and stage lighting, provided by Uptown Light &amp; Sound and dialed in for the room, whether it's an intimate patio or a packed taproom.</p>
+          <p>Yes, every show comes with professional sound and stage lighting, provided by Uptown Light &amp; Sound and dialed in for the room, whether it's an intimate patio or a packed taproom.</p>
         </details>
         <details class="faq-item">
           <summary>How much space and power does Jacob need?</summary>
-          <p>Just enough room for one performer plus his sound and lighting setup, and a couple of nearby outlets - no stage, no band rider.</p>
+          <p>Just enough room for one performer plus his sound and lighting setup, and a couple of nearby outlets. No stage, no band rider.</p>
         </details>
         <details class="faq-item">
           <summary>What happens after I send a booking request?</summary>
-          <p>Jacob personally reviews it - he doesn't have a booking agent or assistant screening requests - and replies within 24 hours with availability and next steps.</p>
+          <p>Jacob personally reviews every request himself (no booking agent or assistant screening it) and replies within 24 hours with availability and next steps.</p>
         </details>
         <details class="faq-item">
           <summary>Can Jacob coordinate with our venue or event planner?</summary>
-          <p>Of course - happy to work directly with whoever's running point on your event to sort out timing and logistics.</p>
+          <p>Of course! He's happy to work directly with whoever's running point on your event to sort out timing and logistics.</p>
         </details>
       </div>
     </div>
@@ -661,7 +673,7 @@
 
 <footer>
   <div class="wrap">
-    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; © <span id="yr"></span>
+    <span class="fname">Jacob Smith Music</span> &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; <a href="tel:+18104230319">(810) 423-0319</a> &nbsp;·&nbsp; <a href="mailto:jbsmithmusic98@gmail.com">jbsmithmusic98@gmail.com</a> &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; © <span id="yr"></span>
   </div>
 </footer>
 <script>
@@ -689,21 +701,26 @@
       var gridStart = new Date(calYear, calMonth, 1 - startOffset);
       var html = WEEKDAY_LABELS.map(function(w){ return '<div class="avail-weekday">'+w+'</div>'; }).join('');
 
+      var WEEKEND_DAYS = [0,5,6]; // Sun, Fri, Sat - Jacob's regular availability
+
       for(var i=0;i<42;i++){
         var cellDate = new Date(gridStart.getFullYear(), gridStart.getMonth(), gridStart.getDate()+i);
         var dateStr = ymd(cellDate);
         var inMonth = cellDate.getMonth()===calMonth;
         var isPast = cellDate < today;
         var isBooked = !!bookedDates[dateStr];
+        var isWeekend = WEEKEND_DAYS.indexOf(cellDate.getDay())!==-1;
         var classes = ['avail-day'];
-        var isAvailable = inMonth && !isPast && !isBooked;
+        var isOpen = inMonth && !isPast && !isBooked;
         if(!inMonth){ classes.push('pad'); }
         else if(isPast){ classes.push('past'); }
         else if(isBooked){ classes.push('booked'); }
-        else{ classes.push('available'); }
+        else if(isWeekend){ classes.push('available'); }
+        else{ classes.push('request'); }
 
-        var dot = (inMonth && !isPast) ? '<span class="dot '+(isBooked?'booked':'avail')+'"></span>' : '';
-        var tag = isAvailable ? 'button' : 'div';
+        var dotClass = isBooked ? 'booked' : (isWeekend ? 'avail' : 'request');
+        var dot = (inMonth && !isPast) ? '<span class="dot '+dotClass+'"></span>' : '';
+        var tag = isOpen ? 'button' : 'div';
         html += '<'+tag+' class="'+classes.join(' ')+'" data-date="'+dateStr+'"'+(tag==='button'?' type="button"':'')+'>'+cellDate.getDate()+dot+'</'+tag+'>';
       }
       availGrid.innerHTML = html;
@@ -720,7 +737,7 @@
     document.getElementById('avail-next').addEventListener('click', function(){ changeMonth(1); });
 
     availGrid.addEventListener('click', function(e){
-      var cell = e.target.closest('.avail-day.available');
+      var cell = e.target.closest('.avail-day.available, .avail-day.request');
       if(!cell) return;
       var input = document.getElementById('preferredDateInput');
       if(input) input.value = cell.dataset.date;
@@ -803,7 +820,7 @@
         success.style.display='block';
         success.scrollIntoView({ behavior:'smooth', block:'start' });
       }).catch(function(){
-        alert("Something went wrong sending that - call or text Jacob directly instead: (810) 423-0319");
+        alert("Something went wrong sending that. Call or text Jacob directly instead: (810) 423-0319");
       });
     });
   })();
