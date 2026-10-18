@@ -43,6 +43,53 @@
   .page-hero h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--white);line-height:0.9;margin-bottom:24px;}
   .page-hero p.lead{font-size:1.2rem;color:var(--grey);max-width:580px;}
 
+  /* ── WATCH HIM LIVE ── */
+  .live-section{padding:88px 0;background:#0A0A0A;}
+  .live-intro{color:var(--grey);max-width:600px;margin:0 0 36px;font-size:1rem;}
+  .live-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media(max-width:900px){.live-grid{grid-template-columns:repeat(2,1fr);}}
+  .live-clip{margin:0;}
+  .live-frame{position:relative;aspect-ratio:9/16;background:#000;overflow:hidden;border:1px solid var(--line);}
+  .live-frame button{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:#000;cursor:pointer;}
+  .live-frame img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.85;transition:opacity .2s,transform .4s;}
+  .live-frame button:hover img{opacity:1;transform:scale(1.03);}
+  .live-play{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,0.5);}
+  .live-play svg{width:22px;height:22px;margin-left:4px;fill:#fff;}
+  .live-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .live-clip figcaption{margin-top:12px;}
+  .live-song{display:block;font-family:'Arimo',sans-serif;font-weight:700;font-size:0.9rem;color:var(--white);}
+  .live-note{display:block;font-size:0.8rem;color:var(--grey);}
+  .live-more{margin-top:32px;font-size:0.9rem;color:var(--grey);}
+  .live-more a{color:var(--red);border-bottom:1px solid var(--red);}
+
+  /* ── PACKAGES ── */
+  .pkg-section{padding:0 0 96px;background:#0A0A0A;}
+  .pkg-intro{color:var(--grey);max-width:620px;margin:0 0 40px;font-size:1rem;}
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;}
+  @media(max-width:900px){.pkg-grid{grid-template-columns:1fr;}}
+  .pkg-card{position:relative;background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);padding:34px 30px;display:flex;flex-direction:column;}
+  .pkg-card.featured{background:#161011;border-color:rgba(196,32,60,0.5);}
+  .pkg-flag{position:absolute;top:-14px;right:20px;font-size:0.66rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;background:var(--white);color:#0A0A0A;padding:5px 12px;transform:rotate(2deg);}
+  .pkg-tier{font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin:0 0 8px;}
+  .pkg-card h3{font-size:2rem;line-height:1;color:var(--white);margin-bottom:14px;}
+  .pkg-price{font-family:'Anton',sans-serif;font-size:2.6rem;line-height:1;color:var(--white);margin:0;}
+  .pkg-price small{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);margin-right:6px;vertical-align:middle;}
+  .pkg-length{font-size:0.85rem;color:var(--grey);margin:8px 0 20px;}
+  .pkg-best{font-size:0.9rem;color:var(--white);margin:0 0 18px;padding-bottom:18px;border-bottom:1px solid var(--line);}
+  .pkg-list{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .pkg-list li{position:relative;padding-left:22px;font-size:0.9rem;color:var(--grey);line-height:1.55;}
+  .pkg-list li::before{content:"";position:absolute;left:0;top:7px;width:10px;height:10px;background:var(--red);clip-path:polygon(0 50%,40% 100%,100% 0,40% 70%);}
+  .pkg-card .btn{margin-top:auto;}
+  .btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.3);cursor:pointer;}
+  .btn-ghost:hover{border-color:var(--red);background:rgba(196,32,60,0.1);}
+  .pkg-card .btn-primary{cursor:pointer;}
+  .addons{margin-top:28px;border:1px dashed rgba(255,255,255,0.22);padding:26px 30px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;}
+  @media(max-width:700px){.addons{grid-template-columns:1fr;gap:14px;}}
+  .addons h3{font-size:1.4rem;color:var(--white);}
+  .addons ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;}
+  .addons li{font-size:0.82rem;font-weight:700;letter-spacing:0.04em;color:var(--white);border:1.5px solid var(--line);padding:8px 14px;}
+  .pkg-fine{margin-top:18px;font-size:0.8rem;color:var(--grey);}
+
   /* ── CHECK YOUR DATE ── */
   .avail-section{padding:0 0 88px;background:#0A0A0A;}
   .avail-intro{color:var(--grey);max-width:580px;margin-bottom:28px;font-size:1rem;}
@@ -314,7 +361,123 @@
     <div class="wrap">
       <p class="section-label">Booking</p>
       <h1>Book a<br>Show</h1>
-      <p class="lead">Jacob plays breweries, taprooms, restaurants, golf courses, and private events across mid-Michigan. Check the calendar below, send a request, or reach out directly.</p>
+      <p class="lead">Jacob plays breweries, taprooms, restaurants, golf courses, and private events across mid-Michigan. Watch a few clips, pick the package that fits, and check your date.</p>
+    </div>
+  </section>
+
+  <!-- WATCH HIM LIVE -->
+  <section class="live-section" id="live">
+    <div class="wrap">
+      <p class="section-label">See Him Live</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">Hear It Before You Book It</h2>
+      <p class="live-intro">Real clips from real gigs. One guitar, one voice, and a room that sings along. Tap any clip to play it right here.</p>
+
+      <div class="live-grid">
+        <figure class="live-clip">
+          <div class="live-frame">
+            <button type="button" data-yt="BOzViV3QpVs" aria-label="Play: Downtown Detroit gig preview">
+              <img src="https://i.ytimg.com/vi/BOzViV3QpVs/hqdefault.jpg" alt="Jacob performing in downtown Detroit" loading="lazy">
+              <span class="live-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+            </button>
+          </div>
+          <figcaption><span class="live-song">Downtown Detroit</span><span class="live-note">Gig preview</span></figcaption>
+        </figure>
+        <figure class="live-clip">
+          <div class="live-frame">
+            <button type="button" data-yt="PgOpbVqErPQ" aria-label="Play: How to Save a Life cover">
+              <img src="https://i.ytimg.com/vi/PgOpbVqErPQ/hqdefault.jpg" alt="Jacob covering How to Save a Life" loading="lazy">
+              <span class="live-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+            </button>
+          </div>
+          <figcaption><span class="live-song">How to Save a Life</span><span class="live-note">The Fray, acoustic cover</span></figcaption>
+        </figure>
+        <figure class="live-clip">
+          <div class="live-frame">
+            <button type="button" data-yt="pTZhISI6ZPw" aria-label="Play: The Weight cover">
+              <img src="https://i.ytimg.com/vi/pTZhISI6ZPw/hqdefault.jpg" alt="Jacob playing The Weight live" loading="lazy">
+              <span class="live-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+            </button>
+          </div>
+          <figcaption><span class="live-song">The Weight</span><span class="live-note">The Band, with his own twist</span></figcaption>
+        </figure>
+        <figure class="live-clip">
+          <div class="live-frame">
+            <button type="button" data-yt="F95q1LON7cA" aria-label="Play: Knockin' on Heaven's Door cover">
+              <img src="https://i.ytimg.com/vi/F95q1LON7cA/hqdefault.jpg" alt="Jacob covering Knockin' on Heaven's Door" loading="lazy">
+              <span class="live-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+            </button>
+          </div>
+          <figcaption><span class="live-song">Knockin' on Heaven's Door</span><span class="live-note">Bob Dylan, live cover</span></figcaption>
+        </figure>
+      </div>
+      <p class="live-more">Want more? There's plenty on his <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube channel</a>.</p>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="pkg-section" id="packages">
+    <div class="wrap">
+      <p class="section-label">Packages</p>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">Pick Your Show</h2>
+      <p class="pkg-intro">Every package includes Jacob's own professional sound and lighting, so there's nothing for you to rent or set up. Pick a starting point and he'll tailor it to your event.</p>
+
+      <div class="pkg-grid">
+        <article class="pkg-card">
+          <p class="pkg-tier">01</p>
+          <h3>Taproom Set</h3>
+          <p class="pkg-price"><small>From</small>$450</p>
+          <p class="pkg-length">2 hours of live music</p>
+          <p class="pkg-best">Best for breweries, restaurants, and patios.</p>
+          <ul class="pkg-list">
+            <li>Acoustic covers and originals</li>
+            <li>Pro sound and lighting included</li>
+            <li>Reads the room, from dinner music to sing-alongs</li>
+            <li>Song requests welcome during the set</li>
+          </ul>
+          <button type="button" class="btn btn-ghost" data-package="Taproom Set (from $450)">Choose Taproom Set</button>
+        </article>
+
+        <article class="pkg-card featured">
+          <span class="pkg-flag">Recommended</span>
+          <p class="pkg-tier">02</p>
+          <h3>Full Evening</h3>
+          <p class="pkg-price"><small>From</small>$750</p>
+          <p class="pkg-length">3 to 4 hours, with breaks</p>
+          <p class="pkg-best">Best for golf outings, bars, and bigger venues.</p>
+          <ul class="pkg-list">
+            <li>Everything in the Taproom Set</li>
+            <li>Custom request list sent ahead of the show</li>
+            <li>Longer sets that carry the whole night</li>
+            <li>Break music between sets</li>
+          </ul>
+          <button type="button" class="btn btn-primary" data-package="Full Evening (from $750)">Choose Full Evening</button>
+        </article>
+
+        <article class="pkg-card">
+          <p class="pkg-tier">03</p>
+          <h3>Private Event</h3>
+          <p class="pkg-price"><small>From</small>$1,200</p>
+          <p class="pkg-length">Built around your event</p>
+          <p class="pkg-best">Best for weddings, parties, and corporate events.</p>
+          <ul class="pkg-list">
+            <li>Ceremony or cocktail-hour music</li>
+            <li>A special first-dance or custom song</li>
+            <li>MC-style announcements</li>
+            <li>Planning call before the big day</li>
+          </ul>
+          <button type="button" class="btn btn-ghost" data-package="Private Event (from $1,200)">Choose Private Event</button>
+        </article>
+      </div>
+
+      <div class="addons">
+        <h3>Add-Ons</h3>
+        <ul>
+          <li>Extra hour of music</li>
+          <li>Learn a new song for your event</li>
+          <li>Travel beyond 90 miles</li>
+        </ul>
+      </div>
+      <p class="pkg-fine">Prices are starting points. Final quotes depend on date, location, and set length, and Jacob will confirm everything when he replies.</p>
     </div>
   </section>
 
@@ -365,6 +528,15 @@
             <option>Private Party</option>
             <option>Corporate Event</option>
             <option>Other</option>
+          </select>
+        </label>
+
+        <label>Which package are you interested in?
+          <select name="package" id="packageSelect">
+            <option value="">Not sure yet</option>
+            <option>Taproom Set (from $450)</option>
+            <option>Full Evening (from $750)</option>
+            <option>Private Event (from $1,200)</option>
           </select>
         </label>
 
@@ -680,6 +852,29 @@
   document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.add('open'));
   document.getElementById('drawerClose').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.remove('open'));
   document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // ── Live clips: load the YouTube player only when tapped ──
+  document.querySelectorAll('.live-frame button[data-yt]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-yt');
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+      f.title = btn.getAttribute('aria-label');
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      btn.replaceWith(f);
+    });
+  });
+
+  // ── Package buttons: preselect in the form and jump to it ──
+  document.querySelectorAll('[data-package]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var sel = document.getElementById('packageSelect');
+      if(sel) sel.value = btn.getAttribute('data-package');
+      var request = document.getElementById('request');
+      if(request) request.scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
 
   // ── Check Your Date - availability calendar ──
   (function(){
