@@ -909,7 +909,7 @@
 
     function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
     function cleanTitle(t){
-      t = (t||'').replace(/#[\w-]+/g,'').replace(/\s{2,}/g,' ').trim();
+      t = (t||'').replace(/#[\w-]+/g,'').replace(/\s+([!?.,])/g,'$1').replace(/\s{2,}/g,' ').trim();
       return t.length > 60 ? t.slice(0,57).trim()+'...' : (t || 'Live clip');
     }
     function clipHTML(c){
