@@ -193,6 +193,12 @@
   .book-section{padding:88px 0;background:#0A0A0A;}
 
   /* ── GIGSALAD SECTION ── */
+  .gs-strip{display:flex;align-items:center;gap:22px;border:1px solid var(--line);background:#111111;padding:24px 28px;}
+  .gs-strip-text{flex:1;}
+  .gs-strip-text h3{font-size:1.3rem;color:var(--white);margin-bottom:4px;}
+  .gs-strip-text p{margin:0;font-size:0.9rem;color:var(--grey);}
+  .gs-strip .gs-strip-btn{width:auto;flex-shrink:0;}
+  @media(max-width:700px){.gs-strip{flex-direction:column;align-items:flex-start;}.gs-strip .gs-strip-btn{width:100%;}}
   .gs-section{padding:0 0 96px;background:#0A0A0A;}
   .gs-card{
     border:1px solid var(--line); border-top:3px solid var(--red);
@@ -800,53 +806,13 @@
   <!-- GIGSALAD -->
   <section class="gs-section">
     <div class="wrap">
-      <p class="section-label">Also on GigSalad</p>
-      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:32px;">Book via GigSalad</h2>
-
-      <div class="gs-card">
-        <div class="gs-head">
-          <div class="gs-logo">JS</div>
-          <div class="gs-head-text">
-            <h3>Jacob Smith Music</h3>
-            <p>Singing Guitarist &nbsp;·&nbsp; Milford, MI &nbsp;·&nbsp; Travels up to 90 miles</p>
-          </div>
+      <div class="gs-strip">
+        <div class="gs-logo">JS</div>
+        <div class="gs-strip-text">
+          <h3>Prefer to Book Through GigSalad?</h3>
+          <p>Jacob is listed there too. Request a quote and handle the booking right on GigSalad if that's easier for you.</p>
         </div>
-
-        <div class="gs-stats">
-          <div class="gs-stat"><div class="gs-stat-val">$400–1500</div><div class="gs-stat-lab">Price Range</div></div>
-          <div class="gs-stat"><div class="gs-stat-val">90 mi</div><div class="gs-stat-lab">Travel Radius</div></div>
-          <div class="gs-stat"><div class="gs-stat-val">4</div><div class="gs-stat-lab">Services Listed</div></div>
-        </div>
-
-        <p class="gs-bio">Hi, I'm Jacob! I play acoustic covers spanning classic rock, 90s favorites, country, indie, and modern hits, all delivered with a gritty voice and a guitar. My goal is simple: keep people singing along, tapping their feet, and having a better time than they were before I showed up. Whether providing the soundtrack for a packed brewery, a private party, or a community event, I bring professional sound, a wide-ranging setlist, and just enough humor to keep things interesting.</p>
-
-        <div class="gs-tags">
-          <span class="gs-tag">Singing Guitarist</span>
-          <span class="gs-tag">Guitarist</span>
-          <span class="gs-tag">Singer / Songwriter</span>
-          <span class="gs-tag">Acoustic</span>
-          <span class="gs-tag">Power Required Only</span>
-        </div>
-
-        <div class="gs-videos">
-          <div>
-            <div class="gs-video-wrap">
-              <iframe src="https://www.youtube.com/embed/xnbv6eQiKSU" title="Turn the Page - Bob Seger (Jacob Smith)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <p class="gs-video-label">Turn the Page - Bob Seger</p>
-          </div>
-          <div>
-            <div class="gs-video-wrap">
-              <iframe src="https://www.youtube.com/embed/RszS1Pvjybc" title="Rockstar - Nickelback (Jacob Smith)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <p class="gs-video-label">Rockstar - Nickelback (requested)</p>
-          </div>
-        </div>
-
-        <div class="gs-cta">
-          <a href="https://www.gigsalad.com/jacob_smith_music_milford/contact" target="_blank" rel="noopener" class="btn btn-primary">Get a Free Quote on GigSalad</a>
-          <a href="https://www.gigsalad.com/jacob_smith_music_milford" target="_blank" rel="noopener" class="btn" style="border:1.5px solid rgba(255,255,255,0.3);color:var(--white);background:transparent;">View Full Profile →</a>
-        </div>
+        <a href="https://www.gigsalad.com/jacob_smith_music_milford/contact" target="_blank" rel="noopener" class="btn btn-ghost gs-strip-btn">Quote on GigSalad &rarr;</a>
       </div>
     </div>
   </section>
