@@ -62,6 +62,18 @@
   .live-more{margin-top:32px;font-size:0.9rem;color:var(--grey);}
   .live-more a{color:var(--red);border-bottom:1px solid var(--red);}
 
+  .live-more-btn{width:auto;margin:32px auto 0;display:flex;padding:14px 32px;}
+  .live-more-btn[hidden]{display:none;}
+
+  /* ── FACEBOOK FEED ── */
+  .fb-section{padding:0 0 96px;background:#0A0A0A;}
+  .fb-layout{display:grid;grid-template-columns:1fr minmax(0,500px);gap:56px;align-items:start;}
+  @media(max-width:900px){.fb-layout{grid-template-columns:1fr;gap:28px;}}
+  .fb-copy p{color:var(--grey);font-size:1rem;max-width:460px;margin:0 0 24px;}
+  .fb-copy .btn{width:auto;}
+  .fb-frame{width:100%;max-width:500px;background:#fff;border-top:3px solid var(--red);min-height:300px;}
+  .fb-frame iframe{display:block;border:0;width:100%;}
+
   /* ── PACKAGES ── */
   .pkg-section{padding:0 0 96px;background:#0A0A0A;}
   .pkg-intro{color:var(--grey);max-width:620px;margin:0 0 40px;font-size:1rem;}
@@ -377,9 +389,9 @@
     <div class="wrap">
       <p class="section-label">See Him Live</p>
       <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">Hear It Before You Book It</h2>
-      <p class="live-intro">Real clips from real gigs. One guitar, one voice, and a room that sings along. Tap any clip to play it right here.</p>
+      <p class="live-intro">Real clips from real gigs, pulled straight from his YouTube channel. One guitar, one voice, and a room that sings along. Tap any clip to play it right here.</p>
 
-      <div class="live-grid">
+      <div class="live-grid" id="liveGrid">
         <figure class="live-clip">
           <div class="live-frame">
             <button type="button" data-yt="BOzViV3QpVs" aria-label="Play: Downtown Detroit gig preview">
@@ -417,6 +429,7 @@
           <figcaption><span class="live-song">Knockin' on Heaven's Door</span><span class="live-note">Bob Dylan, live cover</span></figcaption>
         </figure>
       </div>
+      <button type="button" class="btn btn-ghost live-more-btn" id="liveMoreBtn" hidden>Show More Clips</button>
       <p class="live-more">Want more? There's plenty on his <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube channel</a>.</p>
     </div>
   </section>
@@ -752,6 +765,21 @@
     </div>
   </section>
 
+  <!-- FACEBOOK FEED -->
+  <section class="fb-section" id="facebook">
+    <div class="wrap">
+      <div class="fb-layout">
+        <div class="fb-copy">
+          <p class="section-label">On Facebook</p>
+          <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">What He's Been Up To</h2>
+          <p>Show announcements, crowd shots, and new clips land on his Facebook page first. Scroll the latest posts here, or follow along to catch the next gig.</p>
+          <a class="btn btn-primary" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Follow on Facebook</a>
+        </div>
+        <div class="fb-frame" id="fbFrame"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- GIGSALAD -->
   <section class="gs-section">
     <div class="wrap">
@@ -872,18 +900,80 @@
   document.getElementById('drawerClose').addEventListener('click',()=>document.getElementById('mobileDrawer').classList.remove('open'));
   document.getElementById('yr').textContent=new Date().getFullYear();
 
-  // ── Live clips: load the YouTube player only when tapped ──
-  document.querySelectorAll('.live-frame button[data-yt]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var id = btn.getAttribute('data-yt');
+  // ── Live clips: pull every Short from YouTube, play in place when tapped ──
+  (function(){
+    var grid = document.getElementById('liveGrid');
+    var moreBtn = document.getElementById('liveMoreBtn');
+    if(!grid) return;
+    var PAGE = 8, shown = 0, clips = [];
+
+    function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+    function cleanTitle(t){
+      t = (t||'').replace(/#[\w-]+/g,'').replace(/\s{2,}/g,' ').trim();
+      return t.length > 60 ? t.slice(0,57).trim()+'...' : (t || 'Live clip');
+    }
+    function clipHTML(c){
+      return '<figure class="live-clip"><div class="live-frame">'
+        + '<button type="button" data-yt="'+c.id+'" aria-label="Play: '+esc(cleanTitle(c.title))+'">'
+        + '<img src="https://i.ytimg.com/vi/'+c.id+'/oar2.jpg" data-fallback="https://i.ytimg.com/vi/'+c.id+'/hqdefault.jpg" alt="" loading="lazy">'
+        + '<span class="live-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>'
+        + '</button></div><figcaption><span class="live-song">'+esc(cleanTitle(c.title))+'</span></figcaption></figure>';
+    }
+    function showNext(){
+      var next = clips.slice(shown, shown+PAGE);
+      grid.insertAdjacentHTML('beforeend', next.map(clipHTML).join(''));
+      shown += next.length;
+      moreBtn.hidden = shown >= clips.length;
+    }
+
+    // Thumbnail fallback for clips without a portrait thumbnail
+    grid.addEventListener('error', function(e){
+      var img = e.target;
+      if(img.tagName==='IMG' && img.dataset.fallback && img.src!==img.dataset.fallback){ img.src = img.dataset.fallback; }
+    }, true);
+
+    // Tap to play
+    grid.addEventListener('click', function(e){
+      var btn = e.target.closest('button[data-yt]');
+      if(!btn) return;
       var f = document.createElement('iframe');
-      f.src = 'https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+      f.src = 'https://www.youtube.com/embed/'+btn.getAttribute('data-yt')+'?autoplay=1&rel=0&playsinline=1';
       f.title = btn.getAttribute('aria-label');
       f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       f.allowFullscreen = true;
       btn.replaceWith(f);
     });
-  });
+    if(moreBtn) moreBtn.addEventListener('click', showNext);
+
+    // Swap the four hand-picked clips for the full live list once it loads
+    fetch('/.netlify/functions/get-shorts')
+      .then(function(r){ return r.ok ? r.json() : []; })
+      .then(function(list){
+        if(!Array.isArray(list) || !list.length) return;
+        clips = list;
+        grid.innerHTML = '';
+        showNext();
+      })
+      .catch(function(){});
+  })();
+
+  // ── Facebook feed: sized to fit its column (Facebook caps it at 500px) ──
+  (function(){
+    var box = document.getElementById('fbFrame');
+    if(!box) return;
+    var w = Math.max(280, Math.min(500, Math.floor(box.clientWidth || 500)));
+    var h = 640;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.facebook.com/plugins/page.php?href='+encodeURIComponent('https://www.facebook.com/jacobsmithmusic')
+      + '&tabs=timeline&width='+w+'&height='+h+'&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true';
+    f.width = w; f.height = h;
+    f.style.height = h+'px';
+    f.title = 'Jacob Smith Music on Facebook';
+    f.loading = 'lazy';
+    f.setAttribute('scrolling','no');
+    f.allow = 'encrypted-media; clipboard-write; picture-in-picture; web-share';
+    box.appendChild(f);
+  })();
 
   // ── Package buttons: preselect in the form and jump to it ──
   document.querySelectorAll('[data-package]').forEach(function(btn){
