@@ -90,7 +90,7 @@
   .pkg-card h3{font-size:2rem;line-height:1;color:var(--white);margin-bottom:14px;}
   .pkg-price{font-family:'Anton',sans-serif;font-size:1.9rem;letter-spacing:0.02em;text-transform:uppercase;line-height:1;color:var(--white);margin:0;}
   .pkg-price small{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);margin-right:6px;vertical-align:middle;}
-  .pkg-length{font-size:0.85rem;color:var(--grey);margin:8px 0 20px;}
+  .pkg-length{font-size:0.85rem;color:var(--grey);margin:0 0 20px;}
   .pkg-best{font-size:0.9rem;color:var(--white);margin:0 0 18px;padding-bottom:18px;border-bottom:1px solid var(--line);}
   .pkg-list{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:10px;flex:1;}
   .pkg-list li{position:relative;padding-left:22px;font-size:0.9rem;color:var(--grey);line-height:1.55;}
@@ -181,7 +181,7 @@
   .form-success h3{font-size:1.6rem;margin-bottom:10px;}
   .form-success p{color:var(--grey);margin:0;}
 
-  .book-section{padding:88px 0;background:#0A0A0A;}
+  .book-section{padding:0 0 88px;background:#0A0A0A;}
 
   /* ── GIGSALAD SECTION ── */
   .gs-strip{display:flex;align-items:center;gap:22px;border:1px solid var(--line);background:#111111;padding:24px 28px;}
@@ -239,7 +239,15 @@
   .step h3{font-family:'Arimo',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:6px;}
   .step p{color:var(--grey);font-size:0.95rem;line-height:1.7;max-width:520px;margin:0;}
 
-  .contact-card{background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);padding:40px;position:sticky;top:100px;}
+  .contact-card{background:var(--bg-soft);border:1px solid var(--line);border-top:3px solid var(--red);padding:40px;}
+  .contact-strip{display:grid;grid-template-columns:1fr;gap:24px;}
+  .contact-strip h2{margin-bottom:6px;}
+  .contact-strip .sub{margin-bottom:0;}
+  .contact-strip-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+  .contact-strip-links .cta-link{margin-bottom:0;}
+  .contact-strip .cl-val{font-size:0.95rem;overflow-wrap:anywhere;}
+  @media(max-width:900px){.contact-strip-links{grid-template-columns:1fr;}}
+  @media(max-width:480px){.contact-strip.contact-card{padding:26px 18px;}.contact-strip .cta-link{padding:16px 14px;gap:12px;}.contact-strip .cl-val{font-size:0.9rem;}}
   .contact-card h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:8px;}
   .contact-card .sub{color:var(--grey);font-size:0.92rem;margin-bottom:32px;}
   .cta-link{
@@ -459,7 +467,6 @@
         <article class="pkg-card">
           <p class="pkg-tier">01</p>
           <h3>Taproom Set</h3>
-          <p class="pkg-price">Custom Quote</p>
           <p class="pkg-length">3 hours of live music</p>
           <p class="pkg-best">Best for breweries, restaurants, and patios.</p>
           <ul class="pkg-list">
@@ -475,7 +482,6 @@
           <span class="pkg-flag">Recommended</span>
           <p class="pkg-tier">02</p>
           <h3>Full Evening</h3>
-          <p class="pkg-price">Custom Quote</p>
           <p class="pkg-length">4 hours or more, with breaks</p>
           <p class="pkg-best">Best for golf outings, bars, and bigger venues.</p>
           <ul class="pkg-list">
@@ -490,7 +496,6 @@
         <article class="pkg-card">
           <p class="pkg-tier">03</p>
           <h3>Private Event</h3>
-          <p class="pkg-price">Custom Quote</p>
           <p class="pkg-length">Built around your event</p>
           <p class="pkg-best">Best for weddings, parties, and corporate events.</p>
           <ul class="pkg-list">
@@ -522,7 +527,7 @@
           <li>Travel beyond 90 miles</li>
         </ul>
       </div>
-      <p class="pkg-fine">Every show is quoted for your date, location, and set length. Send a request and Jacob will reply with pricing, usually within 24 hours.</p>
+      <p class="pkg-fine">Every show is quoted for your date, location, and set length. Send a request and Jacob will reply with pricing.</p>
     </div>
   </section>
 
@@ -688,7 +693,7 @@
         </label>
 
         <button type="submit" class="btn btn-primary">Send My Date Request</button>
-        <p class="form-disclaimer">A request does not reserve a date. Jacob will confirm availability and next steps when he replies, usually within 24 hours.</p>
+        <p class="form-disclaimer">A request does not reserve a date. Jacob will confirm availability and next steps when he replies.</p>
       </form>
 
       <div class="form-success" id="formSuccess" style="display:none;">
@@ -700,58 +705,24 @@
 
   <section class="book-section">
     <div class="wrap">
-      <div class="book-grid">
-        <div>
-          <p class="section-label">What to expect</p>
-          <ul class="what-list">
-            <li class="what-item">
-              <span class="what-dot"></span>
-              <div><h3>100% Acoustic</h3><p>No backing tracks, no band rider: just Jacob and his guitar, self-contained and easy to host.</p></div>
-            </li>
-            <li class="what-item">
-              <span class="what-dot"></span>
-              <div><h3>Pro Sound &amp; Lighting</h3><p>Every show comes with professional sound and stage lighting from Uptown Light &amp; Sound, for full production with no extra rentals needed.</p></div>
-            </li>
-            <li class="what-item">
-              <span class="what-dot"></span>
-              <div><h3>Originals &amp; Covers</h3><p>Rock, country, folk, and alternative: deep cuts and crowd favorites mixed with his own original songs.</p></div>
-            </li>
-            <li class="what-item">
-              <span class="what-dot"></span>
-              <div><h3>Flexible Sets</h3><p>Background ambiance or full-room energy: Jacob reads the crowd and adjusts to fit events of any size.</p></div>
-            </li>
-            <li class="what-item">
-              <span class="what-dot"></span>
-              <div><h3>Great for Any Venue</h3><p>Breweries, taprooms, restaurants, golf clubhouses, private parties, corporate events: he's played them all.</p></div>
-            </li>
-            <li class="what-item">
-              <span class="what-dot"></span>
-              <div><h3>Based in Milford, MI</h3><p>Available throughout mid-Michigan. Reach out to check dates and discuss travel for further bookings.</p></div>
-            </li>
-          </ul>
+      <div class="contact-card contact-strip">
+        <div class="contact-strip-head">
+          <h2>Prefer to Talk Directly?</h2>
+          <p class="sub">Skip the form. Call, text, or email and Jacob will get right back to you.</p>
         </div>
-
-        <div>
-          <div class="contact-card">
-            <h2>Prefer to Talk Directly?</h2>
-            <p class="sub">Skip the form and reach out straight away. Jacob responds fast.</p>
-
-            <a class="cta-link" href="tel:+18104230319">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.97.36 1.92.68 2.83a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.86.55 2.83.68A2 2 0 0 1 22 16.92z"/></svg>
-              <span><span class="cl-label">Call or Text</span><span class="cl-val">(810) 423-0319</span></span>
-            </a>
-
-            <a class="cta-link" href="mailto:jbsmithmusic98@gmail.com">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg>
-              <span><span class="cl-label">Email</span><span class="cl-val">jbsmithmusic98@gmail.com</span></span>
-            </a>
-
-            <div class="divider">or reach out on</div>
-
-            <a class="btn btn-primary" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">
-              Message on Facebook
-            </a>
-          </div>
+        <div class="contact-strip-links">
+          <a class="cta-link" href="tel:+18104230319">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.97.36 1.92.68 2.83a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.86.55 2.83.68A2 2 0 0 1 22 16.92z"/></svg>
+            <span><span class="cl-label">Call or Text</span><span class="cl-val">(810) 423-0319</span></span>
+          </a>
+          <a class="cta-link" href="mailto:jbsmithmusic98@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg>
+            <span><span class="cl-label">Email</span><span class="cl-val">jbsmithmusic98@gmail.com</span></span>
+          </a>
+          <a class="cta-link" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.88h-2.34v7A10 10 0 0 0 22 12z"/></svg>
+            <span><span class="cl-label">Message</span><span class="cl-val">On Facebook</span></span>
+          </a>
         </div>
       </div>
     </div>
@@ -769,7 +740,7 @@
         </div>
         <div class="step">
           <span class="step-num">2</span>
-          <div><h3>Jacob Responds</h3><p>He personally checks the date and replies within 24 hours with availability and next steps. No forms sitting unread, no runaround.</p></div>
+          <div><h3>Jacob Responds</h3><p>He personally checks the date and gets back to you with availability, pricing, and next steps. No booking agent, no runaround.</p></div>
         </div>
         <div class="step">
           <span class="step-num">3</span>
@@ -797,23 +768,11 @@
   <section class="faq-section">
     <div class="wrap">
       <p class="section-label">Frequently Asked Questions</p>
-      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);">Straight Answers Before You Reach Out</h2>
+      <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);">A Few Quick Answers</h2>
       <div class="faq-list">
-        <details class="faq-item">
-          <summary>What does a booking include?</summary>
-          <p>Just Jacob and his guitar, fully acoustic with no backing tracks and no band, plus professional sound and stage lighting provided by Uptown Light &amp; Sound. He sings, plays, and reads the room, mixing originals with a wide range of covers spanning classic rock, 90s favorites, country, indie, and modern hits.</p>
-        </details>
         <details class="faq-item">
           <summary>How is travel handled?</summary>
           <p>Jacob is based in Milford, MI and typically travels up to about 90 miles. Something further out? Just mention it in your request, and he's happy to talk it through.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Does Jacob play weeknights?</summary>
-          <p>Weekends (Friday through Sunday) are his regular availability. Weeknight shows, Monday through Thursday, are open by request, so reach out directly with your date and he'll let you know if he can make it work.</p>
-        </details>
-        <details class="faq-item">
-          <summary>When is a date officially booked?</summary>
-          <p>A form submission or message isn't a reservation on its own. Once you and Jacob agree on the details over the phone, text, email, or the form above, he'll confirm it directly with you.</p>
         </details>
         <details class="faq-item">
           <summary>Do you play recurring venue dates?</summary>
@@ -828,16 +787,8 @@
           <p>Yes, always. Jacob takes requests and builds sets that blend his originals with crowd-favorite covers. Tell him what your crowd likes and he'll work it in.</p>
         </details>
         <details class="faq-item">
-          <summary>Does Jacob provide sound equipment?</summary>
-          <p>Yes, every show comes with professional sound and stage lighting, provided by Uptown Light &amp; Sound and dialed in for the room, whether it's an intimate patio or a packed taproom.</p>
-        </details>
-        <details class="faq-item">
           <summary>How much space and power does Jacob need?</summary>
           <p>Just enough room for one performer plus his sound and lighting setup, and a couple of nearby outlets. No stage, no band rider.</p>
-        </details>
-        <details class="faq-item">
-          <summary>What happens after I send a booking request?</summary>
-          <p>Jacob personally reviews every request himself (no booking agent or assistant screening it) and replies within 24 hours with availability and next steps.</p>
         </details>
         <details class="faq-item">
           <summary>Can Jacob coordinate with our venue or event planner?</summary>
