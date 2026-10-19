@@ -84,7 +84,7 @@
   .pkg-flag{position:absolute;top:-14px;right:20px;font-size:0.66rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;background:var(--white);color:#0A0A0A;padding:5px 12px;transform:rotate(2deg);}
   .pkg-tier{font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin:0 0 8px;}
   .pkg-card h3{font-size:2rem;line-height:1;color:var(--white);margin-bottom:14px;}
-  .pkg-price{font-family:'Anton',sans-serif;font-size:2.6rem;line-height:1;color:var(--white);margin:0;}
+  .pkg-price{font-family:'Anton',sans-serif;font-size:1.9rem;letter-spacing:0.02em;text-transform:uppercase;line-height:1;color:var(--white);margin:0;}
   .pkg-price small{font-family:'Arimo',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);margin-right:6px;vertical-align:middle;}
   .pkg-length{font-size:0.85rem;color:var(--grey);margin:8px 0 20px;}
   .pkg-best{font-size:0.9rem;color:var(--white);margin:0 0 18px;padding-bottom:18px;border-bottom:1px solid var(--line);}
@@ -445,7 +445,7 @@
         <article class="pkg-card">
           <p class="pkg-tier">01</p>
           <h3>Taproom Set</h3>
-          <p class="pkg-price"><small>From</small>$450</p>
+          <p class="pkg-price">Custom Quote</p>
           <p class="pkg-length">3 hours of live music</p>
           <p class="pkg-best">Best for breweries, restaurants, and patios.</p>
           <ul class="pkg-list">
@@ -454,14 +454,14 @@
             <li>Reads the room, from dinner music to sing-alongs</li>
             <li>Song requests welcome during the set</li>
           </ul>
-          <button type="button" class="btn btn-ghost" data-package="Taproom Set (from $450)">Choose Taproom Set</button>
+          <button type="button" class="btn btn-ghost" data-package="Taproom Set">Choose Taproom Set</button>
         </article>
 
         <article class="pkg-card featured">
           <span class="pkg-flag">Recommended</span>
           <p class="pkg-tier">02</p>
           <h3>Full Evening</h3>
-          <p class="pkg-price"><small>From</small>$750</p>
+          <p class="pkg-price">Custom Quote</p>
           <p class="pkg-length">4 hours or more, with breaks</p>
           <p class="pkg-best">Best for golf outings, bars, and bigger venues.</p>
           <ul class="pkg-list">
@@ -470,13 +470,13 @@
             <li>Longer sets that carry the whole night</li>
             <li>Break music between sets</li>
           </ul>
-          <button type="button" class="btn btn-primary" data-package="Full Evening (from $750)">Choose Full Evening</button>
+          <button type="button" class="btn btn-primary" data-package="Full Evening">Choose Full Evening</button>
         </article>
 
         <article class="pkg-card">
           <p class="pkg-tier">03</p>
           <h3>Private Event</h3>
-          <p class="pkg-price"><small>From</small>$1,200</p>
+          <p class="pkg-price">Custom Quote</p>
           <p class="pkg-length">Built around your event</p>
           <p class="pkg-best">Best for weddings, parties, and corporate events.</p>
           <ul class="pkg-list">
@@ -485,7 +485,7 @@
             <li>MC-style announcements</li>
             <li>Planning call before the big day</li>
           </ul>
-          <button type="button" class="btn btn-ghost" data-package="Private Event (from $1,200)">Choose Private Event</button>
+          <button type="button" class="btn btn-ghost" data-package="Private Event">Choose Private Event</button>
         </article>
       </div>
 
@@ -508,7 +508,7 @@
           <li>Travel beyond 90 miles</li>
         </ul>
       </div>
-      <p class="pkg-fine">Prices are starting points. Final quotes depend on date, location, and set length, and Jacob will confirm everything when he replies.</p>
+      <p class="pkg-fine">Every show is quoted for your date, location, and set length. Send a request and Jacob will reply with pricing, usually within 24 hours.</p>
     </div>
   </section>
 
@@ -565,9 +565,9 @@
         <label>Which package are you interested in?
           <select name="package" id="packageSelect">
             <option value="">Not sure yet</option>
-            <option>Taproom Set (from $450)</option>
-            <option>Full Evening (from $750)</option>
-            <option>Private Event (from $1,200)</option>
+            <option>Taproom Set</option>
+            <option>Full Evening</option>
+            <option>Private Event</option>
             <option>Something else (talk to Jacob)</option>
           </select>
         </label>
