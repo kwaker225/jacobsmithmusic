@@ -83,6 +83,13 @@
   .btn-ghost{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.3);cursor:pointer;}
   .btn-ghost:hover{border-color:var(--red);background:rgba(196,32,60,0.1);}
   .pkg-card .btn-primary{cursor:pointer;}
+  .pkg-custom{margin-top:20px;background:var(--bg-soft);border:1px solid var(--line);border-left:3px solid var(--red);padding:28px 30px;display:flex;gap:28px;align-items:center;justify-content:space-between;}
+  .pkg-custom h3{font-size:1.5rem;color:var(--white);margin-bottom:6px;}
+  .pkg-custom p{margin:0;color:var(--grey);font-size:0.92rem;max-width:560px;}
+  .pkg-custom-actions{display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0;min-width:220px;}
+  .pkg-custom-call{font-size:0.82rem;color:var(--grey);border-bottom:1px solid var(--line);}
+  .pkg-custom-call:hover{color:var(--white);}
+  @media(max-width:700px){.pkg-custom{flex-direction:column;align-items:stretch;}.pkg-custom-actions{min-width:0;}}
   .addons{margin-top:28px;border:1px dashed rgba(255,255,255,0.22);padding:26px 30px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;}
   @media(max-width:700px){.addons{grid-template-columns:1fr;gap:14px;}}
   .addons h3{font-size:1.4rem;color:var(--white);}
@@ -426,7 +433,7 @@
           <p class="pkg-tier">01</p>
           <h3>Taproom Set</h3>
           <p class="pkg-price"><small>From</small>$450</p>
-          <p class="pkg-length">2 hours of live music</p>
+          <p class="pkg-length">3 hours of live music</p>
           <p class="pkg-best">Best for breweries, restaurants, and patios.</p>
           <ul class="pkg-list">
             <li>Acoustic covers and originals</li>
@@ -442,7 +449,7 @@
           <p class="pkg-tier">02</p>
           <h3>Full Evening</h3>
           <p class="pkg-price"><small>From</small>$750</p>
-          <p class="pkg-length">3 to 4 hours, with breaks</p>
+          <p class="pkg-length">4 hours or more, with breaks</p>
           <p class="pkg-best">Best for golf outings, bars, and bigger venues.</p>
           <ul class="pkg-list">
             <li>Everything in the Taproom Set</li>
@@ -467,6 +474,17 @@
           </ul>
           <button type="button" class="btn btn-ghost" data-package="Private Event (from $1,200)">Choose Private Event</button>
         </article>
+      </div>
+
+      <div class="pkg-custom">
+        <div>
+          <h3>Something Else in Mind?</h3>
+          <p>A shorter set, a recurring weekly slot, a fundraiser, or an idea that doesn't fit a box. Tell Jacob what you're picturing and he'll put together a quote.</p>
+        </div>
+        <div class="pkg-custom-actions">
+          <button type="button" class="btn btn-ghost" data-package="Something else (talk to Jacob)">Talk to Jacob</button>
+          <a class="pkg-custom-call" href="tel:+18104230319">or call/text (810) 423-0319</a>
+        </div>
       </div>
 
       <div class="addons">
@@ -537,6 +555,7 @@
             <option>Taproom Set (from $450)</option>
             <option>Full Evening (from $750)</option>
             <option>Private Event (from $1,200)</option>
+            <option>Something else (talk to Jacob)</option>
           </select>
         </label>
 
