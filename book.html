@@ -46,12 +46,27 @@
   /* ── WATCH HIM LIVE ── */
   .live-section{padding:88px 0;background:#0A0A0A;}
   .live-intro{color:var(--grey);max-width:600px;margin:0 0 36px;font-size:1rem;}
-  .live-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-  @media(max-width:900px){.live-grid{grid-template-columns:repeat(2,1fr);}}
-  .live-clip{margin:0;}
+  .live-carousel{position:relative;}
+  .live-grid{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;}
+  .live-grid::-webkit-scrollbar{display:none;}
+  .live-clip{margin:0;flex:0 0 calc((100% - 64px) / 5);scroll-snap-align:start;min-width:0;}
+  @media(max-width:1000px){.live-clip{flex-basis:calc((100% - 48px) / 4);}}
+  @media(max-width:760px){.live-clip{flex-basis:calc((100% - 32px) / 2.6);}}
+  @media(max-width:480px){.live-clip{flex-basis:42%;}}
+  .live-arrow{position:absolute;top:calc(50% - 30px);width:44px;height:44px;margin-top:-22px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.35);background:rgba(10,10,10,0.88);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2;transition:background .2s,border-color .2s,opacity .2s;}
+  .live-arrow:hover{background:var(--red);border-color:var(--red);}
+  .live-arrow svg{width:18px;height:18px;}
+  .live-arrow.prev{left:-22px;}
+  .live-arrow.next{right:-22px;}
+  .live-arrow[disabled]{opacity:0;pointer-events:none;}
+  @media(max-width:760px){.live-arrow{display:none;}}
+  .live-count{margin-top:18px;font-size:0.82rem;color:var(--grey);}
+  .live-count .hint-touch{display:none;}
+  @media(max-width:760px){.live-count .hint-touch{display:inline;}.live-count .hint-mouse{display:none;}}
   .live-frame{position:relative;aspect-ratio:9/16;background:#000;overflow:hidden;border:1px solid var(--line);}
   .live-frame button{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:#000;cursor:pointer;}
   .live-frame img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.85;transition:opacity .2s,transform .4s;}
+  .live-song{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
   .live-frame button:hover img{opacity:1;transform:scale(1.03);}
   .live-play{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,0.5);}
   .live-play svg{width:22px;height:22px;margin-left:4px;fill:#fff;}
@@ -62,8 +77,6 @@
   .live-more{margin-top:32px;font-size:0.9rem;color:var(--grey);}
   .live-more a{color:var(--red);border-bottom:1px solid var(--red);}
 
-  .live-more-btn{width:auto;margin:32px auto 0;display:flex;padding:14px 32px;}
-  .live-more-btn[hidden]{display:none;}
 
   /* ── FACEBOOK FEED ── */
   .fb-section{padding:0 0 96px;background:#0A0A0A;}
@@ -391,6 +404,9 @@
       <h2 style="font-size:clamp(1.8rem,4vw,2.6rem);color:var(--white);margin-bottom:16px;">Hear It Before You Book It</h2>
       <p class="live-intro">Real clips from real gigs, pulled straight from his YouTube channel. One guitar, one voice, and a room that sings along. Tap any clip to play it right here.</p>
 
+      <div class="live-carousel">
+        <button type="button" class="live-arrow prev" id="livePrev" aria-label="Previous clips" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button type="button" class="live-arrow next" id="liveNext" aria-label="More clips"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
       <div class="live-grid" id="liveGrid">
         <figure class="live-clip">
           <div class="live-frame">
@@ -429,7 +445,8 @@
           <figcaption><span class="live-song">Knockin' on Heaven's Door</span><span class="live-note">Bob Dylan, live cover</span></figcaption>
         </figure>
       </div>
-      <button type="button" class="btn btn-ghost live-more-btn" id="liveMoreBtn" hidden>Show More Clips</button>
+      </div>
+      <p class="live-count" id="liveCount"><span class="hint-touch">Swipe to see more.</span><span class="hint-mouse">Use the arrows to see more.</span></p>
       <p class="live-more">Want more? There's plenty on his <a href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">YouTube channel</a>.</p>
     </div>
   </section>
@@ -903,9 +920,9 @@
   // ── Live clips: pull every Short from YouTube, play in place when tapped ──
   (function(){
     var grid = document.getElementById('liveGrid');
-    var moreBtn = document.getElementById('liveMoreBtn');
+    var prevBtn = document.getElementById('livePrev'), nextBtn = document.getElementById('liveNext'), countEl = document.getElementById('liveCount');
     if(!grid) return;
-    var PAGE = 8, shown = 0, clips = [];
+    var clips = [];
 
     function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
     function cleanTitle(t){
@@ -919,12 +936,22 @@
         + '<span class="live-play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>'
         + '</button></div><figcaption><span class="live-song">'+esc(cleanTitle(c.title))+'</span></figcaption></figure>';
     }
-    function showNext(){
-      var next = clips.slice(shown, shown+PAGE);
-      grid.insertAdjacentHTML('beforeend', next.map(clipHTML).join(''));
-      shown += next.length;
-      moreBtn.hidden = shown >= clips.length;
+    function updateArrows(){
+      var max = grid.scrollWidth - grid.clientWidth - 2;
+      prevBtn.disabled = grid.scrollLeft <= 2;
+      nextBtn.disabled = grid.scrollLeft >= max;
     }
+    function step(dir){
+      var clip = grid.querySelector('.live-clip');
+      var w = clip ? clip.getBoundingClientRect().width + 16 : grid.clientWidth;
+      var per = Math.max(1, Math.floor((grid.clientWidth + 16) / w));
+      grid.scrollBy({ left: dir * per * w, behavior: 'smooth' });
+    }
+    prevBtn.addEventListener('click', function(){ step(-1); });
+    nextBtn.addEventListener('click', function(){ step(1); });
+    grid.addEventListener('scroll', updateArrows, { passive:true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
 
     // Thumbnail fallback for clips without a portrait thumbnail
     grid.addEventListener('error', function(e){
@@ -943,7 +970,6 @@
       f.allowFullscreen = true;
       btn.replaceWith(f);
     });
-    if(moreBtn) moreBtn.addEventListener('click', showNext);
 
     // Swap the four hand-picked clips for the full live list once it loads
     fetch('/.netlify/functions/get-shorts')
@@ -952,7 +978,10 @@
         if(!Array.isArray(list) || !list.length) return;
         clips = list;
         grid.innerHTML = '';
-        showNext();
+        grid.innerHTML = clips.map(clipHTML).join('');
+        grid.scrollLeft = 0;
+        if(countEl) countEl.innerHTML = clips.length + ' clips. <span class="hint-touch">Swipe to see more.</span><span class="hint-mouse">Use the arrows to see more.</span>';
+        updateArrows();
       })
       .catch(function(){});
   })();
