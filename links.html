@@ -7,7 +7,7 @@
 <meta name="description" content="Tip Jake, see his next shows, and follow Jacob Smith: live acoustic music across Michigan.">
 <meta property="og:title" content="Jacob Smith Music">
 <meta property="og:description" content="Tip Jake, catch a show, follow along.">
-<meta property="og:image" content="https://jacobsmithmusic.live/images/jacob-tent-side.jpg">
+<meta property="og:image" content="https://jacobsmithmusic.live/images/jacob-overlook.jpg">
 <meta property="og:url" content="https://jacobsmithmusic.live/links">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230A0A0A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%23C4203C'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%230A0A0A'/%3E%3C/svg%3E">
@@ -34,16 +34,16 @@
 
   /* Photo banner */
   .photo{
-    position:relative; margin:0 -16px; height:min(78vw, 360px); overflow:hidden;
+    position:relative; margin:0 -16px; aspect-ratio:4/3; max-height:380px; overflow:hidden;
   }
-  .photo img{width:100%; height:100%; object-fit:cover; object-position:50% 20%;}
+  .photo img{width:100%; height:100%; object-fit:cover; object-position:0% 60%;}
   .photo::after{
     content:""; position:absolute; inset:0;
-    background:linear-gradient(to bottom, rgba(10,10,10,0) 45%, rgba(10,10,10,0.85) 85%, var(--bg) 100%);
+    background:linear-gradient(to bottom, rgba(10,10,10,0) 80%, var(--bg) 100%);
   }
   @media(min-width:481px){ .photo{margin:0; border-radius:0 0 4px 4px;} }
 
-  .intro{position:relative; margin-top:-84px; z-index:1;}
+  .intro{position:relative; margin-top:8px; z-index:1;}
   .kicker{
     display:flex; align-items:center; gap:10px;
     font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--grey);
@@ -131,7 +131,7 @@
 <main class="page">
 
   <div class="photo">
-    <img src="images/jacob-tent-side.jpg" alt="Jacob Smith singing and playing acoustic guitar at an outdoor show">
+    <img src="images/jacob-overlook.jpg" alt="Jacob Smith playing acoustic guitar at a scenic overlook with red autumn leaves">
   </div>
 
   <section class="intro">
