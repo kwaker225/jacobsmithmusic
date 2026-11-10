@@ -282,19 +282,19 @@
     c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
     var n = Math.round(w * h / 1100); stars = [];
     for(var i=0;i<n;i++){
-      var big = Math.random() < 0.14;
-      stars.push({x:Math.random()*w, y:Math.random()*h, r: big ? 1.3 + Math.random()*0.9 : 0.5 + Math.random()*0.7, glow: big,
-        a: 0.55 + Math.random()*0.45, s: 0.4 + Math.random()*1.4, p: Math.random()*6.28,
+      var big = Math.random() < 0.06;
+      stars.push({x:Math.random()*w, y:Math.random()*h, r: big ? 1.0 + Math.random()*0.6 : 0.4 + Math.random()*0.5, glow: big,
+        a: 0.25 + Math.random()*0.35, s: 0.3 + Math.random()*0.8, p: Math.random()*6.28,
         warm: Math.random() < 0.12});
     }
   }
   function draw(t){
     ctx.clearRect(0,0,c.width,c.height);
     for(var i=0;i<stars.length;i++){
-      var st = stars[i], tw = still ? 1 : 0.6 + 0.4*Math.sin(t/1000*st.s + st.p);
+      var st = stars[i], tw = still ? 1 : 0.8 + 0.2*Math.sin(t/1000*st.s + st.p);
       ctx.globalAlpha = st.a * tw;
       ctx.fillStyle = st.warm ? '#ffd9c2' : '#ffffff';
-      ctx.shadowBlur = st.glow ? 6 : 0; ctx.shadowColor = '#cfe0ff';
+      ctx.shadowBlur = st.glow ? 3 : 0; ctx.shadowColor = '#cfe0ff';
       ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.2832); ctx.fill();
     }
     ctx.globalAlpha = 1;
