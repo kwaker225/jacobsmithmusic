@@ -17,8 +17,8 @@
 <style>
   :root{
     --bg:#0A0A0A;
-    --card:#151515;
-    --card-hover:#1E1E1E;
+    --card:rgba(22,22,26,0.82);
+    --card-hover:rgba(34,34,40,0.92);
     --red:#C4203C;
     --red-deep:#9A1830;
     --white:#F5F5F5;
@@ -30,6 +30,12 @@
   a{color:inherit; text-decoration:none;}
   button{font:inherit; color:inherit;}
   img{display:block; max-width:100%;}
+
+  /* ── Starry night background ── */
+  html,body{background:var(--bg);}
+  body{background:radial-gradient(ellipse at 50% 0%, #121a2b 0%, #0b0d14 45%, var(--bg) 100%) fixed;}
+  #stars{position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;}
+  .page{position:relative; z-index:1;}
 
   /* ── Next-show banner (sticky, slides in once the calendar loads) ── */
   .gig-bar{
@@ -56,7 +62,7 @@
   /* ── Cover photo ── */
   .photo{position:relative; margin:0 -16px; aspect-ratio:4/3; max-height:380px; overflow:hidden;}
   .photo img{width:100%; height:100%; object-fit:cover; object-position:0% 60%;}
-  .photo::after{content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,10,10,0) 70%, var(--bg) 100%);}
+  .photo img{-webkit-mask-image:linear-gradient(to bottom, #000 68%, transparent 100%); mask-image:linear-gradient(to bottom, #000 68%, transparent 100%);}
   @media(min-width:481px){ .photo{margin:0;} }
 
   .intro{text-align:center; margin-top:4px;}
@@ -138,6 +144,7 @@
 </style>
 </head>
 <body>
+<canvas id="stars" aria-hidden="true"></canvas>
 
 <button class="gig-bar" id="gigBar" type="button" aria-haspopup="dialog" aria-controls="sheet">
   <span class="gig-bar-inner">
@@ -263,6 +270,38 @@
       if(next.url){ link.href = next.url; } else { link.style.display = 'none'; }
     })
     .catch(function(){ /* calendar unavailable: banner stays hidden, "See all upcoming shows" button still works */ });
+})();
+</script>
+<script>
+(function(){
+  var c = document.getElementById('stars'); if(!c || !c.getContext) return;
+  var ctx = c.getContext('2d'), stars = [], dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function build(){
+    var w = window.innerWidth, h = window.innerHeight;
+    c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n = Math.round(w * h / 1100); stars = [];
+    for(var i=0;i<n;i++){
+      var big = Math.random() < 0.06;
+      stars.push({x:Math.random()*w, y:Math.random()*h, r: big ? 1.0 + Math.random()*0.6 : 0.4 + Math.random()*0.5, glow: big,
+        a: 0.25 + Math.random()*0.35, s: 0.3 + Math.random()*0.8, p: Math.random()*6.28,
+        warm: Math.random() < 0.12});
+    }
+  }
+  function draw(t){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(var i=0;i<stars.length;i++){
+      var st = stars[i], tw = still ? 1 : 0.8 + 0.2*Math.sin(t/1000*st.s + st.p);
+      ctx.globalAlpha = st.a * tw;
+      ctx.fillStyle = st.warm ? '#ffd9c2' : '#ffffff';
+      ctx.shadowBlur = st.glow ? 3 : 0; ctx.shadowColor = '#cfe0ff';
+      ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if(!still) requestAnimationFrame(draw);
+  }
+  build(); window.addEventListener('resize', function(){ build(); if(still) draw(0); });
+  if(still) draw(0); else requestAnimationFrame(draw);
 })();
 </script>
 </body>
