@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jacob Smith Music - Links</title>
-<meta name="description" content="Tip Jake, see his next shows, and follow Jacob Smith: live acoustic music across Michigan.">
+<meta name="description" content="Tip Jake, catch his next show, and follow Jacob Smith: live acoustic music across Michigan.">
 <meta property="og:title" content="Jacob Smith Music">
 <meta property="og:description" content="Tip Jake, catch a show, follow along.">
 <meta property="og:image" content="https://jacobsmithmusic.live/images/jacob-overlook.jpg">
@@ -17,117 +17,120 @@
 <style>
   :root{
     --bg:#0A0A0A;
-    --card:#141414;
-    --card-hover:#1C1C1C;
+    --card:#151515;
+    --card-hover:#1E1E1E;
     --red:#C4203C;
     --red-deep:#9A1830;
     --white:#F5F5F5;
     --grey:#9A9A9A;
-    --line:rgba(255,255,255,0.12);
+    --line:rgba(255,255,255,0.14);
   }
   *{box-sizing:border-box;}
   html,body{margin:0; background:var(--bg); color:var(--white); font-family:'Arimo',sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased;}
   a{color:inherit; text-decoration:none;}
+  button{font:inherit; color:inherit;}
   img{display:block; max-width:100%;}
 
-  .page{max-width:480px; margin:0 auto; padding:0 16px 40px;}
-
-  /* Photo banner */
-  .photo{
-    position:relative; margin:0 -16px; aspect-ratio:4/3; max-height:380px; overflow:hidden;
+  /* ── Next-show banner (sticky, slides in once the calendar loads) ── */
+  .gig-bar{
+    position:sticky; top:0; z-index:20;
+    display:none; width:100%; border:0; cursor:pointer; text-align:left;
+    background:var(--red); padding:11px 16px;
+    box-shadow:0 4px 18px rgba(0,0,0,0.45);
+    animation:drop .45s ease-out both;
   }
+  .gig-bar.show{display:block;}
+  @keyframes drop{from{transform:translateY(-100%);} to{transform:none;}}
+  .gig-bar-inner{max-width:480px; margin:0 auto; display:flex; align-items:center; gap:10px;}
+  .pulse{
+    flex-shrink:0; width:9px; height:9px; border-radius:50%; background:var(--white);
+    box-shadow:0 0 0 0 rgba(255,255,255,0.7); animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(255,255,255,0);} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}}
+  .gig-bar-text{flex:1; min-width:0; font-size:0.86rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .gig-bar-text b{font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-right:6px;}
+  .gig-bar-cta{flex-shrink:0; font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; border-bottom:1.5px solid rgba(255,255,255,0.7);}
+
+  .page{max-width:480px; margin:0 auto; padding:0 16px 44px;}
+
+  /* ── Cover photo ── */
+  .photo{position:relative; margin:0 -16px; aspect-ratio:4/3; max-height:380px; overflow:hidden;}
   .photo img{width:100%; height:100%; object-fit:cover; object-position:0% 60%;}
-  .photo::after{
-    content:""; position:absolute; inset:0;
-    background:linear-gradient(to bottom, rgba(10,10,10,0) 80%, var(--bg) 100%);
-  }
-  @media(min-width:481px){ .photo{margin:0; border-radius:0 0 4px 4px;} }
+  .photo::after{content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,10,10,0) 70%, var(--bg) 100%);}
+  @media(min-width:481px){ .photo{margin:0;} }
 
-  .intro{position:relative; margin-top:8px; z-index:1;}
-  .kicker{
-    display:flex; align-items:center; gap:10px;
-    font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--grey);
-  }
-  .kicker::before{content:""; width:3px; height:16px; background:var(--red);}
-  h1{
-    font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase;
-    font-size:3.4rem; line-height:0.95; letter-spacing:0.01em; margin:8px 0 10px;
-  }
-  .tagline{color:var(--grey); font-size:0.95rem; margin:0;}
+  .intro{text-align:center; margin-top:4px;}
+  h1{font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase; font-size:2.9rem; line-height:1; letter-spacing:0.02em; margin:0;}
+  .tagline{color:var(--grey); font-size:0.9rem; margin:6px 0 0; letter-spacing:0.04em;}
 
-  /* Tip button */
+  /* ── Tip button ── */
   .tip{
-    display:flex; align-items:center; gap:16px;
-    margin-top:24px; padding:18px 20px;
-    background:var(--red); border-radius:4px;
-    box-shadow:0 10px 28px rgba(196,32,60,0.35);
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    margin-top:22px; padding:18px 20px;
+    background:var(--red); border-radius:14px;
+    box-shadow:0 10px 30px rgba(196,32,60,0.4);
     transition:background .2s ease, transform .2s ease;
+    animation:glow 2.6s ease-in-out infinite;
   }
+  @keyframes glow{50%{box-shadow:0 10px 38px rgba(196,32,60,0.7);}}
   .tip:hover,.tip:focus-visible{background:var(--red-deep); transform:translateY(-2px);}
   .tip-badge{
-    flex-shrink:0; width:46px; height:46px; border-radius:50%;
+    flex-shrink:0; width:44px; height:44px; border-radius:50%;
     background:var(--white); color:var(--red);
-    display:grid; place-items:center;
-    font-family:'Anton',sans-serif; font-size:1.6rem;
+    display:grid; place-items:center; font-family:'Anton',sans-serif; font-size:1.5rem;
   }
-  .tip-text{flex:1; min-width:0;}
-  .tip-text strong{display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.55rem; text-transform:uppercase; letter-spacing:0.02em; line-height:1.1;}
+  .tip-text strong{display:block; font-family:'Anton',sans-serif; font-weight:400; font-size:1.6rem; text-transform:uppercase; letter-spacing:0.03em; line-height:1.1;}
   .tip-text span{font-size:0.85rem; opacity:0.9;}
-  .arrow{flex-shrink:0; font-size:1.2rem;}
 
-  /* Social icon row */
-  .socials{display:flex; justify-content:center; gap:18px; margin-top:22px;}
-  .social{
-    width:56px; height:56px; border-radius:50%;
-    display:grid; place-items:center;
-    background:var(--card); border:1px solid var(--line); color:var(--white);
+  /* ── Big link buttons ── */
+  .links{display:grid; gap:12px; margin-top:22px;}
+  .btn{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    min-height:62px; padding:14px 56px; border-radius:14px;
+    background:var(--card); border:1px solid var(--line);
+    font-weight:700; font-size:1.02rem; text-align:center;
     transition:background .2s ease, border-color .2s ease, transform .2s ease;
   }
-  .social:hover,.social:focus-visible{border-color:var(--red); background:var(--card-hover); transform:translateY(-2px);}
-  .social svg{width:24px; height:24px;}
+  .btn:hover,.btn:focus-visible{background:var(--card-hover); border-color:var(--red); transform:translateY(-2px);}
+  .btn svg{position:absolute; left:18px; top:50%; transform:translateY(-50%); width:26px; height:26px;}
 
-  /* Section labels */
-  .label{
-    margin:32px 0 12px; font-size:0.72rem; font-weight:700;
-    letter-spacing:0.22em; text-transform:uppercase; color:var(--grey);
+  /* ── Pop-up sheet for the next show ── */
+  .sheet-backdrop{position:fixed; inset:0; z-index:40; background:rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition:opacity .25s ease;}
+  .sheet{
+    position:fixed; left:0; right:0; bottom:0; z-index:50;
+    max-width:480px; margin:0 auto; padding:22px 20px 28px;
+    background:#121212; border-top:3px solid var(--red); border-radius:18px 18px 0 0;
+    transform:translateY(105%); visibility:hidden;
+    transition:transform .3s ease, visibility 0s linear .3s;
   }
+  .sheet-open .sheet-backdrop{opacity:1; pointer-events:auto;}
+  .sheet-open .sheet{transform:none; visibility:visible; transition:transform .3s ease, visibility 0s;}
+  .sheet-close{position:absolute; top:12px; right:12px; width:36px; height:36px; border:0; border-radius:50%; background:var(--card); cursor:pointer; font-size:1.2rem;}
+  .sheet-kicker{font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--red); margin:0;}
+  .sheet-date{font-family:'Anton',sans-serif; text-transform:uppercase; font-size:2.4rem; line-height:1.05; margin:6px 0 4px;}
+  .sheet-venue{font-size:1.15rem; font-weight:700; margin:0;}
+  .sheet-meta{color:var(--grey); margin:2px 0 18px;}
+  .sheet .btn{min-height:54px; padding:12px 20px;}
+  .sheet .btn.primary{background:var(--red); border-color:var(--red);}
+  .sheet .btn.primary:hover{background:var(--red-deep);}
+  .sheet-links{display:grid; gap:10px;}
 
-  /* Next shows */
-  .shows{border-top:1px solid var(--line);}
-  .show{
-    display:flex; gap:16px; align-items:center;
-    padding:14px 2px; border-bottom:1px solid var(--line);
+  @media (prefers-reduced-motion: reduce){
+    .gig-bar,.pulse,.tip{animation:none;}
+    .sheet,.sheet-backdrop{transition:none;}
   }
-  .show-date{
-    flex-shrink:0; width:56px; text-align:center;
-    font-family:'Anton',sans-serif; text-transform:uppercase; line-height:1.05;
-  }
-  .show-date small{display:block; font-family:'Arimo',sans-serif; font-weight:700; font-size:0.62rem; letter-spacing:0.14em; color:var(--red);}
-  .show-date b{font-weight:400; font-size:1.25rem;}
-  .show-info{min-width:0;}
-  .show-info strong{display:block; font-size:0.98rem;}
-  .show-info span{font-size:0.82rem; color:var(--grey);}
-  .shows-note{padding:14px 2px; color:var(--grey); font-size:0.9rem; border-bottom:1px solid var(--line); margin:0;}
-  .all-shows{display:inline-block; margin-top:12px; font-size:0.85rem; font-weight:700; color:var(--white); border-bottom:1.5px solid var(--red); padding-bottom:2px;}
-
-  /* Link list */
-  .links{display:grid; gap:10px;}
-  .link{
-    display:flex; align-items:center; gap:14px;
-    padding:15px 16px; background:var(--card);
-    border:1px solid var(--line); border-radius:4px;
-    transition:background .2s ease, border-color .2s ease;
-  }
-  .link:hover,.link:focus-visible{background:var(--card-hover); border-color:var(--red);}
-  .link svg{width:22px; height:22px; flex-shrink:0;}
-  .link-text{flex:1; min-width:0;}
-  .link-text strong{display:block; font-size:0.98rem;}
-  .link-text span{font-size:0.8rem; color:var(--grey);}
-  .link .arrow{color:var(--red);}
-
 </style>
 </head>
 <body>
+
+<button class="gig-bar" id="gigBar" type="button" aria-haspopup="dialog" aria-controls="sheet">
+  <span class="gig-bar-inner">
+    <span class="pulse" aria-hidden="true"></span>
+    <span class="gig-bar-text" id="gigBarText"></span>
+    <span class="gig-bar-cta">Details</span>
+  </span>
+</button>
+
 <main class="page">
 
   <div class="photo">
@@ -135,85 +138,110 @@
   </div>
 
   <section class="intro">
-    <p class="kicker">Live acoustic &middot; Michigan</p>
-    <h1>Jacob<br>Smith</h1>
-    <p class="tagline">Classic rock, 90s favorites, country and modern hits. Thanks for coming out!</p>
-
-    <a class="tip" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
-      <span class="tip-badge" aria-hidden="true">$</span>
-      <span class="tip-text">
-        <strong>Tip Jake</strong>
-        <span>Venmo @jbsmith2198</span>
-      </span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
-    </a>
-
-    <nav class="socials" aria-label="Follow Jacob">
-      <a class="social" href="https://www.instagram.com/jbsmith_music" target="_blank" rel="noopener" aria-label="Instagram @jbsmith_music">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
-      </a>
-      <a class="social" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" aria-label="Facebook @jacobsmithmusic">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.88h-2.34v7A10 10 0 0 0 22 12z"/></svg>
-      </a>
-      <a class="social" href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener" aria-label="YouTube @JacobSmithMusicLive">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.5 8.5s-.2-1.6-.85-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5s-4.9 0-7.55.2c-.4.1-1.3.1-2.1 1-.65.7-.85 2.3-.85 2.3S1.3 10.4 1.3 12.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.85 2.3c.8.9 1.85.87 2.32.97C6.3 21 12 21 12 21s4.9 0 7.55-.2c.4-.1 1.3-.1 2.1-1 .65-.7.85-2.3.85-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8z"/><path d="M10 9.5v6l5-3z" fill="currentColor" stroke="none"/></svg>
-      </a>
-    </nav>
-
+    <h1>Jacob Smith</h1>
+    <p class="tagline">Live acoustic music &middot; Michigan</p>
   </section>
 
-  <h2 class="label">Next shows</h2>
-  <div class="shows" id="shows">
-    <p class="shows-note">Loading upcoming shows...</p>
-  </div>
-  <a class="all-shows" href="calendar.html">See the full gig calendar &rarr;</a>
+  <a class="tip" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
+    <span class="tip-badge" aria-hidden="true">$</span>
+    <span class="tip-text">
+      <strong>Tip Jake</strong>
+      <span>Venmo @jbsmith2198</span>
+    </span>
+  </a>
 
-  <h2 class="label">Hire Jake</h2>
-  <nav class="links" aria-label="Booking and website">
-    <a class="link" href="mailto:jbsmithmusic98@gmail.com?subject=Booking%20inquiry">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-      <span class="link-text"><strong>Book Jake for your event</strong><span>Email jbsmithmusic98@gmail.com</span></span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
+  <nav class="links" aria-label="Follow Jacob">
+    <a class="btn" href="https://www.instagram.com/jbsmith_music" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+      Follow me on Instagram
     </a>
-    <a class="link" href="index.html">
+    <a class="btn" href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.88h-2.34v7A10 10 0 0 0 22 12z"/></svg>
+      Follow me on Facebook
+    </a>
+    <a class="btn" href="https://www.youtube.com/@JacobSmithMusicLive" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.5 8.5s-.2-1.6-.85-2.3c-.8-.9-1.7-.9-2.1-1C16.9 5 12 5 12 5s-4.9 0-7.55.2c-.4.1-1.3.1-2.1 1-.65.7-.85 2.3-.85 2.3S1.3 10.4 1.3 12.3v1.4c0 1.9.2 3.8.2 3.8s.2 1.6.85 2.3c.8.9 1.85.87 2.32.97C6.3 21 12 21 12 21s4.9 0 7.55-.2c.4-.1 1.3-.1 2.1-1 .65-.7.85-2.3.85-2.3s.2-1.9.2-3.8v-1.4c0-1.9-.2-3.8-.2-3.8z"/><path d="M10 9.5v6l5-3z" fill="currentColor" stroke="none"/></svg>
+      Follow me on YouTube
+    </a>
+    <a class="btn" href="index.html">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
-      <span class="link-text"><strong>Full website</strong><span>jacobsmithmusic.live</span></span>
-      <span class="arrow" aria-hidden="true">&rarr;</span>
+      Check out my website
+    </a>
+    <a class="btn" href="calendar.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      See all upcoming shows
     </a>
   </nav>
 
 </main>
 
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetVenue" aria-hidden="true">
+  <button class="sheet-close" id="sheetClose" type="button" aria-label="Close">&times;</button>
+  <p class="sheet-kicker" id="sheetKicker">Next show</p>
+  <p class="sheet-date" id="sheetDate"></p>
+  <p class="sheet-venue" id="sheetVenue"></p>
+  <p class="sheet-meta" id="sheetMeta"></p>
+  <div class="sheet-links">
+    <a class="btn primary" id="sheetVenueLink" href="#" target="_blank" rel="noopener">Venue info &amp; directions</a>
+    <a class="btn" href="calendar.html">See all upcoming shows</a>
+  </div>
+</div>
+
 <script>
 (function(){
-  var box = document.getElementById('shows');
+  var bar = document.getElementById('gigBar');
+  var barText = document.getElementById('gigBarText');
   function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function note(msg){box.innerHTML = '<p class="shows-note">'+msg+'</p>';}
+  function startTime(t){ return (t && t !== 'TBD') ? t.split(/[–-]/)[0].trim() : ''; }
+
+  function openSheet(){
+    document.body.classList.add('sheet-open');
+    document.getElementById('sheet').setAttribute('aria-hidden','false');
+    document.getElementById('sheetClose').focus();
+  }
+  function closeSheet(){
+    document.body.classList.remove('sheet-open');
+    document.getElementById('sheet').setAttribute('aria-hidden','true');
+    bar.focus();
+  }
+  bar.addEventListener('click', openSheet);
+  document.getElementById('sheetClose').addEventListener('click', closeSheet);
+  document.getElementById('sheetBackdrop').addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSheet(); });
 
   fetch('/.netlify/functions/get-shows')
     .then(function(r){ if(!r.ok) throw new Error('bad'); return r.json(); })
     .then(function(shows){
-      if(!Array.isArray(shows)) shows = [];
+      if(!Array.isArray(shows)) return;
       var today = new Date(); today.setHours(0,0,0,0);
-      var upcoming = shows.filter(function(s){
+      var next = shows.filter(function(s){
         if(!s.date) return false;
         if(/private/i.test(s.venue||'')) return false; // never advertise private events
         return new Date(s.date+'T00:00:00') >= today;
-      }).slice(0,3);
-      if(!upcoming.length){ note('No public shows on the books right now. Check back soon!'); return; }
-      box.innerHTML = upcoming.map(function(s){
-        var meta = [];
-        if(s.city) meta.push(esc(s.city));
-        meta.push(s.time && s.time !== 'TBD' ? esc(s.time) : 'Time TBD');
-        var dayShort = esc((s.day||'').slice(0,3));
-        var inner = '<div class="show-date"><small>'+dayShort+'</small><b>'+esc(s.display)+'</b></div>'+
-                    '<div class="show-info"><strong>'+esc(s.venue)+'</strong><span>'+meta.join(' &middot; ')+'</span></div>';
-        return s.url
-          ? '<a class="show" href="'+esc(s.url)+'" target="_blank" rel="noopener">'+inner+'</a>'
-          : '<div class="show">'+inner+'</div>';
-      }).join('');
+      })[0];
+      if(!next) return; // no public show: banner stays hidden
+
+      var d = new Date(next.date+'T00:00:00');
+      var days = Math.round((d - today) / 86400000);
+      var when = days === 0 ? 'Tonight' : days === 1 ? 'Tomorrow' : (next.day||'').slice(0,3)+' '+next.display;
+      var t = startTime(next.time);
+      var town = (next.city||'').split(',')[0];
+
+      barText.innerHTML = '<b>'+esc(when)+'</b>'+esc(next.venue)+(town ? ', '+esc(town) : '')+(t ? ' &middot; '+esc(t) : '');
+      bar.classList.add('show');
+
+      document.getElementById('sheetKicker').textContent = days === 0 ? 'Playing tonight' : 'Next show';
+      document.getElementById('sheetDate').textContent = (next.day||'')+', '+next.display;
+      document.getElementById('sheetVenue').textContent = next.venue;
+      var meta = [];
+      if(next.city) meta.push(next.city);
+      meta.push(next.time && next.time !== 'TBD' ? next.time : 'Time TBD');
+      document.getElementById('sheetMeta').textContent = meta.join(' · ');
+      var link = document.getElementById('sheetVenueLink');
+      if(next.url){ link.href = next.url; } else { link.style.display = 'none'; }
     })
-    .catch(function(){ note('Upcoming shows are on the <a class="all-shows" style="margin:0" href="calendar.html">gig calendar</a>.'); });
+    .catch(function(){ /* calendar unavailable: banner stays hidden, "See all upcoming shows" button still works */ });
 })();
 </script>
 </body>
