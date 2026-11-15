@@ -380,8 +380,20 @@
   .short-play{position:absolute; left:50%; top:50%; width:48px; height:48px; margin:-24px 0 0 -24px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,0.5);}
   .short-play svg{width:18px; height:18px; margin-left:3px; fill:#fff;}
   .short-cap{position:absolute; left:0; right:0; bottom:0; padding:22px 8px 8px; font-size:0.72rem; font-weight:700; line-height:1.3; color:#fff; text-align:left; background:linear-gradient(transparent, rgba(0,0,0,0.85));}
+  .fb-feed-card{align-items:stretch; justify-content:flex-start;}
+  .fb-feed{width:100%; max-height:460px; min-height:458px; display:flex; flex-direction:column; overflow-y:auto; text-align:left; scrollbar-width:thin;}
+  .fb-feed-msg{padding:40px 24px; color:var(--grey); text-align:center; font-size:0.95rem; margin:auto;}
+  .fb-feed-msg a{color:var(--white); text-decoration:underline;}
+  .fb-post{display:block; flex-shrink:0; padding:16px; border-bottom:1px solid var(--line); color:inherit; text-decoration:none; transition:background .2s;}
+  .fb-post:last-child{border-bottom:0;}
+  .fb-post:hover{background:rgba(255,255,255,0.04);}
+  .fb-post img{width:100%; aspect-ratio:4/3; object-fit:cover; display:block; margin-bottom:12px; background:#000;}
+  .fb-post-date{display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--red); margin-bottom:6px;}
+  .fb-post-text{font-size:0.9rem; line-height:1.5; color:var(--white); margin:0; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; white-space:pre-line;}
+  .fb-post-more{display:inline-block; margin-top:8px; font-size:0.78rem; color:var(--grey);}
   @media(max-width:480px){
     .watch-card{min-height:auto;}
+    .fb-feed{min-height:200px;}
     .yt-grid .short-frame{flex-basis:calc((100% - 8px) / 2);}
   }
 
@@ -752,12 +764,9 @@
         <div class="reveal" style="text-align:center;">
           <p class="section-label" style="justify-content:center;">Latest Updates</p>
           <h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem); color:var(--white); margin-bottom:24px;">Follow on Facebook</h2>
-          <div id="fb-root"></div>
-          <div class="watch-card">
-            <div class="fb-page" data-href="https://www.facebook.com/jacobsmithmusic" data-tabs="timeline" data-width="340" data-height="460" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false">
-              <blockquote cite="https://www.facebook.com/jacobsmithmusic" class="fb-xfbml-parse-ignore">
-                <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener">Jacob Smith Music</a>
-              </blockquote>
+          <div class="watch-card fb-feed-card">
+            <div class="fb-feed" id="fbFeed" aria-live="polite">
+              <p class="fb-feed-msg">Loading latest posts...</p>
             </div>
           </div>
           <a href="https://www.facebook.com/jacobsmithmusic" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; display:flex; gap:8px; margin-top:20px;">
@@ -794,7 +803,37 @@
       </div>
     </div>
   </section>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"></script>
+  <script>
+  // Latest Facebook posts, pulled from Jacob's Page by a Netlify function
+  (function(){
+    var feed = document.getElementById('fbFeed');
+    if(!feed) return;
+    var FB = 'https://www.facebook.com/jacobsmithmusic';
+    function esc(t){ var d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+    function fallback(){
+      feed.innerHTML = '<p class="fb-feed-msg">See Jacob\'s latest posts and show updates on <a href="'+FB+'" target="_blank" rel="noopener">Facebook</a>.</p>';
+    }
+    function when(iso){
+      var d = new Date(iso); if(isNaN(d)) return '';
+      return d.toLocaleDateString('en-US', { month:'short', day:'numeric', year: d.getFullYear() === new Date().getFullYear() ? undefined : 'numeric' });
+    }
+    fetch('/.netlify/functions/get-fb-posts')
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(list){
+        if(!Array.isArray(list) || !list.length) return fallback();
+        feed.innerHTML = list.map(function(p){
+          var link = /^https:\/\/(www\.|m\.)?facebook\.com\//.test(p.link) ? p.link : FB;
+          var img = /^https:\/\//.test(p.image) ? '<img src="'+esc(p.image)+'" alt="" loading="lazy">' : '';
+          return '<a class="fb-post" href="'+esc(link)+'" target="_blank" rel="noopener">'
+            + img
+            + '<span class="fb-post-date">'+esc(when(p.created))+'</span>'
+            + (p.text ? '<p class="fb-post-text">'+esc(p.text)+'</p>' : '')
+            + '<span class="fb-post-more">View on Facebook</span></a>';
+        }).join('');
+      })
+      .catch(fallback);
+  })();
+  </script>
   <script>
   // Latest YouTube Shorts, pulled live from Jacob's channel (newest first)
   (function(){
