@@ -165,7 +165,7 @@
     <p class="tagline">Live acoustic music &middot; Michigan</p>
   </section>
 
-  <a class="tip" href="https://account.venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
+  <a class="tip venmo-pay" href="https://venmo.com/u/jbsmith2198" target="_blank" rel="noopener">
     <span class="tip-badge" aria-hidden="true">$</span>
     <span class="tip-text">
       <strong>Tip Jake</strong>
@@ -302,6 +302,29 @@
   }
   build(); window.addEventListener('resize', function(){ build(); if(still) draw(0); });
   if(still) draw(0); else requestAnimationFrame(draw);
+})();
+</script>
+<script>
+/* Venmo tip: on phones, open the Venmo app straight to the pay screen for Jake.
+   In-app browsers (Instagram, Facebook) often ignore normal Venmo links and show the
+   web login instead, so we try the app link first and fall back to the web profile. */
+(function(){
+  var ua = navigator.userAgent || '';
+  if(!/iPhone|iPad|iPod|Android/i.test(ua)) return;
+  var app = 'venmo://paycharge?txn=pay&recipients=jbsmith2198&note=' + encodeURIComponent('Tip for Jake \uD83C\uDFB8');
+  document.querySelectorAll('a.venmo-pay').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var web = a.href, left = false;
+      var onHide = function(){ if(document.hidden) left = true; };
+      document.addEventListener('visibilitychange', onHide);
+      window.location.href = app;
+      setTimeout(function(){
+        document.removeEventListener('visibilitychange', onHide);
+        if(!left && !document.hidden) window.location.href = web;
+      }, 1600);
+    });
+  });
 })();
 </script>
 </body>
