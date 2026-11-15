@@ -1024,7 +1024,8 @@
         method:'POST',
         headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
         body: params.join('&')
-      }).then(function(){
+      }).then(function(res){
+        if(!res.ok) throw new Error('Form submit failed: ' + res.status);
         form.style.display='none';
         success.style.display='block';
         success.scrollIntoView({ behavior:'smooth', block:'start' });
